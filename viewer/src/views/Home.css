@@ -1,0 +1,51 @@
+.priority-card {
+  position: relative;
+}
+
+.priority-card__rank {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  margin-bottom: 5px;
+}
+
+.priority-card__title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+  line-height: 1.35;
+}
+
+.priority-card__desc {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+  margin-top: 10px;
+}
+
+.priority-card__why-box {
+  margin-top: 12px;
+  padding: 10px 12px;
+  background: var(--accent-light);
+  border-radius: var(--radius-sm);
+  border-left: 3px solid var(--accent);
+}
+
+.priority-card__why-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--accent);
+  display: block;
+  margin-bottom: 3px;
+}
+
+.priority-card__why-text {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}

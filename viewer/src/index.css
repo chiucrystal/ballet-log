@@ -1,0 +1,220 @@
+:root {
+  --bg: #faf8f5;
+  --surface: #ffffff;
+  --accent: #b07c92;
+  --accent-light: #f5edf1;
+  --text: #2c2928;
+  --text-muted: #7a7270;
+  --border: #e8e4e0;
+  --nav-bg: #ffffff;
+  --nav-height: 64px;
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 14px;
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.07), 0 1px 2px rgba(0, 0, 0, 0.04);
+
+  --badge-teacher-bg: #e8f0f8;
+  --badge-teacher-text: #3a6090;
+  --badge-private-bg: #ede8f5;
+  --badge-private-text: #5a3a90;
+  --badge-physio-bg: #e8f5ee;
+  --badge-physio-text: #2e7050;
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+  width: 100%;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  font-size: 15px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  overscroll-behavior: none;
+}
+
+/* ── Layout ────────────────────────────────────── */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.view-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: var(--bg);
+  border-bottom: 1px solid var(--border);
+  padding: 14px 16px 12px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.view-header h1 {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--text);
+}
+
+.view-header .view-count {
+  font-size: 13px;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.view-scroll {
+  flex: 1;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding-bottom: calc(var(--nav-height) + 16px);
+}
+
+.view-content {
+  padding: 12px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* ── Cards ─────────────────────────────────────── */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  box-shadow: var(--shadow-card);
+}
+
+/* ── Chips ─────────────────────────────────────── */
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 3px 9px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  background: #f0ede9;
+  color: #5c5450;
+}
+
+.chip--accent {
+  background: var(--accent-light);
+  color: var(--accent);
+}
+
+.chip--exercise {
+  background: #f0ede9;
+  color: #5c5450;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.3px;
+}
+
+.chip--pending {
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+/* ── Source badges ──────────────────────────────── */
+
+.source-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.2px;
+  text-transform: uppercase;
+}
+
+.source-badge--teacher  { background: var(--badge-teacher-bg);  color: var(--badge-teacher-text); }
+.source-badge--private  { background: var(--badge-private-bg);  color: var(--badge-private-text); }
+.source-badge--physio   { background: var(--badge-physio-bg);   color: var(--badge-physio-text); }
+
+/* ── Typography helpers ─────────────────────────── */
+
+.root-cause-label {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.section-heading {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  padding: 16px 16px 6px;
+}
+
+.tag-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 8px;
+}
+
+.divider {
+  height: 1px;
+  background: var(--border);
+  margin: 10px 0;
+}
+
+/* ── Criterion block ────────────────────────────── */
+
+.criterion-block {
+  padding: 11px 0;
+  border-top: 1px solid var(--border);
+}
+
+.criterion-block:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.criterion-block__label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+  color: var(--text-muted);
+  margin-bottom: 4px;
+}
+
+.criterion-block__notes {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+/* ── Empty state ────────────────────────────────── */
+
+.empty-state {
+  text-align: center;
+  padding: 48px 24px;
+  color: var(--text-muted);
+  font-size: 14px;
+}

@@ -1,0 +1,6 @@
+/* SessionLog reuses session-card, session-block, and session-block__bullets
+   from ByExercise.css — those are included via the shared index.css
+   (they're actually defined in ByExercise.css which is imported there).
+   We pull in ByExercise.css explicitly here to guarantee the shared styles. */
+
+@import './ByExercise.css';

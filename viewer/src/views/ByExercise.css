@@ -1,0 +1,126 @@
+.exercise-tabs {
+  display: flex;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  background: var(--bg);
+  position: sticky;
+  top: 52px;
+  z-index: 9;
+  padding: 0 16px;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+
+.exercise-tabs::-webkit-scrollbar {
+  display: none;
+}
+
+.exercise-tab {
+  flex: 0 0 auto;
+  padding: 10px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  letter-spacing: 0.3px;
+  color: var(--text-muted);
+  border: none;
+  background: none;
+  border-bottom: 2.5px solid transparent;
+  cursor: pointer;
+  transition: color 0.12s, border-color 0.12s;
+  -webkit-tap-highlight-color: transparent;
+  margin-bottom: -1px;
+}
+
+.exercise-tab--active {
+  color: var(--accent);
+  border-bottom-color: var(--accent);
+}
+
+.exercise-title-block {
+  padding: 16px 16px 4px;
+}
+
+.exercise-title-block__code {
+  font-size: 11px;
+  font-weight: 700;
+  font-family: ui-monospace, 'SF Mono', monospace;
+  color: var(--text-muted);
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 3px;
+}
+
+.exercise-title-block__name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.2px;
+}
+
+.exercise-related-pattern {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.related-pattern__name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* Session card styles (shared with SessionLog) */
+.session-card__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
+}
+
+.session-card__date {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+
+.session-block {
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+}
+
+.session-block:first-of-type {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+.session-block .root-cause-label {
+  margin-bottom: 6px;
+  display: block;
+}
+
+.session-block__bullets {
+  list-style: none;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.session-block__bullets li {
+  font-size: 13.5px;
+  color: var(--text);
+  line-height: 1.5;
+  padding-left: 14px;
+  position: relative;
+}
+
+.session-block__bullets li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-muted);
+}

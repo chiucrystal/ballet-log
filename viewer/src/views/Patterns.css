@@ -1,0 +1,40 @@
+.pattern-card__top {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.pattern-card__count {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--accent);
+}
+
+.pattern-card__since {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+.pattern-card__name {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -0.1px;
+  line-height: 1.35;
+}
+
+.pattern-card__impact-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--text-muted);
+  margin-bottom: 3px;
+}
+
+.pattern-card__impact {
+  font-size: 13px;
+  color: var(--text);
+  line-height: 1.5;
+}
