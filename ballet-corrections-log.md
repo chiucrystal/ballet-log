@@ -1,16 +1,16 @@
 # Ballet Corrections Log
 *RAD Advanced Foundation — Exam: December 2026*
 *Strategy document: priorities, patterns, syllabus mapping, physio notes*
-*Last updated: 23 May 2026*
+*Last updated: 20 June 2026*
 
 ---
 
 ## Current Top 3 Priorities
-*Updated: 23 May 2026*
+*Updated: 20 June 2026*
 
 1. **Outer hip and ankle stability — left side** — drives left winging, left relevé wobble, and will directly compromise pointe work, pirouettes, and arabesque in the exam if unresolved
-2. **Shoulder girdle and épaulement** — traps dominance is suppressing genuine upper back twist; affects Variation 2 performance mark and line across all technique sections
-3. **Weight placement — over the foot** — posterior bias confirmed in parallel and in pointe work; upstream of pirouette axis, pointe work instability, and arabesque compensation
+2. **Supporting hip and glute stability under load** — pelvis tilting in extensions confirmed June 2026; affects posture/weight placement criterion across every barre and centre exercise
+3. **Shoulder girdle and épaulement** — traps dominance is suppressing genuine upper back twist; affects Variation 2 performance mark and line across all technique sections
 
 ---
 
@@ -30,13 +30,31 @@
 | Arabesque shoulder hiking (second shoulder) | Arabesque mechanics | March 2026 | 2 | AF-12 | ⚠️ Line in Technique 3 |
 | Looking down in arabesque | Arabesque mechanics | March 2026 | 2 | AF-12 | ⚠️ Line in Technique 3 |
 | Posterior pelvic tilt mistaken for neutral | Pelvic alignment | Pre-March 2026 | Ongoing | All exercises | ⚠️ Upstream of multiple patterns — posture criterion |
+| Pelvis tilting in fondu extensions — supporting side dropping | Supporting hip and glute stability under load | June 2026 | 1 (private — fast-tracked) | AF-05, AF-01 | ⚠️ Posture/weight placement criterion across barre and centre |
+| End-range passivity — fondu, coup de pied, rond de jambe en l'air | End-range passivity | June 2026 | 1 (private — fast-tracked) | AF-05 | ⚠️ Line and control in Technique 1 and 2 |
+| Thigh-leading in working leg — heel or foot initiating rather than thigh | Working leg initiation | June 2026 | 2+ (recurring confirmed) | AF-05 | ⚠️ Co-ordination and control |
 
 ### Resolved patterns
-*Nothing resolved yet — section ready for use*
+
+| Pattern | Root cause category | First noted | Resolved | Notes |
+|---|---|---|---|---|
+| Fondu coordination — heels arriving together | Working leg initiation | March 2026 | 20 June 2026 | Confirmed fixed in private lesson |
 
 ---
 
 ## Syllabus Corrections
+
+### AF-01: Pliés
+- Grand plié: don't go too low — keep core engaged and shoulders from coming forward. Affects **correct posture and weight placement** *(low priority — noted before, first logged June 2026)*
+
+### AF-05: Battements Fondus and Ronds de Jambe en l'Air
+- Fondu: keep pelvis level in all extensions, not just second and derrière — lock the supporting glute. Affects **correct posture and weight placement**
+- Fondu: lengthen the supporting side, especially in second and derrière. Affects **line**
+- Fondu: thigh leads the working leg — not the heel or foot. Affects **co-ordination** and **control**
+- Fondu: coup de pied must stay low and on top of the ankle. Affects **line**
+- Fondu: drive through to full demi-pointe — right foot not completing the rise, push up and over the toes. Affects **line** and **control**
+- Fondu: get resistance on the way to demi-pointe, don't let it go soft. Affects **control** and **dynamic values**
+- Rond de jambe en l'air: sharper on the way in, more resistance on the extend. Affects **control** and **dynamic values**
 
 ### AF-10: Centre practice and pirouettes
 - Double pirouette en dehors: axis collapses before rotation completes — closing in 3rd not 5th. Affects **control** and **dynamic values**

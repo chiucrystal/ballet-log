@@ -4,6 +4,38 @@
 
 ---
 
+### Private Lesson — 20 June 2026
+**Source:** Private lesson
+**Context:** Barre work (pliés, fondu, rond de jambe en l'air) and floor Pilates (core, back, supporting hip strength)
+
+#### Supporting hip and glute stability under load
+- Fondu: keep pelvis level in all extensions, not just second and derrière — lock the supporting glute (private) [in-class]
+- Fondu: lengthen the supporting side, especially in second and derrière (private) [in-class]
+- Pilates: press up into upper back extension while engaging the glutes, then move arm to low arabesque — engages lats, keep shoulder blades pinned down and back (private) [in-class]
+
+#### Working leg initiation
+- Fondu: thigh leads rather than heel or foot (private) [in-class]
+- Fondu: find where the leg sits directly behind the hip in derrière (private) [in-class]
+
+#### End-range passivity
+- Fondu: keep coup de pied low and on top of the ankle (private) [in-class]
+- Fondu: get resistance on the way to demi-pointe, don't let it go soft (private) [in-class]
+- Fondu: right foot not fully up on demi-pointe — push up and over the toes (private) [in-class]
+- Rond de jambe en l'air: sharper on the way in, show more resistance on the extend (private) [in-class]
+
+#### Trunk and shoulders under load
+- Grand plié: don't go too low, keep core engaged, shoulders not coming forward (private) [in-class] *(low priority — noted before, not previously logged)*
+
+#### Resolved
+- Fondu coordination: heels arriving together — fixed
+
+#### Open questions
+- Is thigh-leading in fondu the same pattern as hips and shoulders not squaring in arabesque? Confirm with teacher next session.
+
+
+---
+
+
 ### Private Lesson — 23 May 2026
 **Source:** Private lesson
 **Context:** Feet, ankles, obliques, shoulder girdle, alignment
