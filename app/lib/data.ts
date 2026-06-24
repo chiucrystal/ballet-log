@@ -1,0 +1,29 @@
+import { promises as fs } from 'fs'
+import path from 'path'
+import type { Session, CorrectionsDoc } from './types'
+
+const dataDir = path.join(process.cwd(), 'data')
+
+export async function getSessions(): Promise<Session[]> {
+  const sessionsDir = path.join(dataDir, 'sessions')
+  const files = await fs.readdir(sessionsDir)
+  const sessions = await Promise.all(
+    files
+      .filter(f => f.endsWith('.json'))
+      .map(async (file) => {
+        const content = await fs.readFile(path.join(sessionsDir, file), 'utf-8')
+        return JSON.parse(content) as Session
+      })
+  )
+  return sessions.sort((a, b) => b.date.localeCompare(a.date))
+}
+
+export async function getCorrections(): Promise<CorrectionsDoc> {
+  const content = await fs.readFile(path.join(dataDir, 'corrections.json'), 'utf-8')
+  return JSON.parse(content) as CorrectionsDoc
+}
+
+export function formatDate(dateStr: string): string {
+  const date = new Date(dateStr + 'T00:00:00')
+  return date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })
+}
