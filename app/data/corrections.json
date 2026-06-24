@@ -1,11 +1,156 @@
 {
-  "lastUpdated": null,
-  "priorities": [],
-  "themes": [],
-  "exercises": [],
+  "lastUpdated": "2026-05-23",
+  "priorities": [
+    {
+      "title": "Outer hip and ankle stability — left side",
+      "detail": "Drives left winging, left relevé wobble, and will directly compromise pointe work, pirouettes, and arabesque in the exam if unresolved"
+    },
+    {
+      "title": "Shoulder girdle and épaulement",
+      "detail": "Traps dominance is suppressing genuine upper back twist; affects Variation 2 performance mark and line across all technique sections"
+    },
+    {
+      "title": "Weight placement — over the foot",
+      "detail": "Posterior bias confirmed in parallel and in pointe work; upstream of pirouette axis, pointe work instability, and arabesque compensation"
+    }
+  ],
+  "themes": [
+    {
+      "name": "Weight placement and balance",
+      "summary": "Posterior weight bias appearing across all contexts — barre, centre, pointe, allegro",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 3,
+      "examImpact": true,
+      "markCriteria": ["correct posture and weight placement"],
+      "exercises": ["AF-10", "AF-11F", "AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Outer hip and ankle stability",
+      "summary": "Left side weaker than right in rises and relevé; ankle winging; foot not firing fast enough in pointe work",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 3,
+      "examImpact": true,
+      "markCriteria": ["control", "line"],
+      "exercises": ["AF-10", "AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Shoulder girdle and épaulement",
+      "summary": "Traps dominance and shoulder blades riding up suppressing genuine épaulement and upper back twist",
+      "firstNoted": "2026-03-12",
+      "sessionCount": 2,
+      "examImpact": true,
+      "markCriteria": ["line", "co-ordination"],
+      "exercises": ["AF-12", "AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Pirouette axis and preparation",
+      "summary": "Axis collapses before pirouette finishes — closing in 3rd; arm-driven rotation rather than hip-initiated",
+      "firstNoted": "2026-03-14",
+      "sessionCount": 2,
+      "examImpact": true,
+      "markCriteria": ["control", "co-ordination"],
+      "exercises": ["AF-10", "AF-11F"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Foot intrinsics and arch",
+      "summary": "Toe gripping and arch collapse under load in rises",
+      "firstNoted": "2026-05-23",
+      "sessionCount": 1,
+      "examImpact": true,
+      "markCriteria": ["correct posture and weight placement", "line"],
+      "exercises": ["AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Arabesque mechanics",
+      "summary": "Second shoulder hiking; eyeline dropping; deep hip rotators releasing too early in fouetté",
+      "firstNoted": "2026-03-14",
+      "sessionCount": 2,
+      "examImpact": true,
+      "markCriteria": ["line", "expression"],
+      "exercises": ["AF-12"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Opposition and length under load",
+      "summary": "Passive on pointe entry; shoulders rising with arms; pirouettes closing short",
+      "firstNoted": "2026-03-12",
+      "sessionCount": 2,
+      "examImpact": false,
+      "markCriteria": ["co-ordination", "dynamic values"],
+      "exercises": ["AF-10", "AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Pelvic alignment",
+      "summary": "Posterior pelvic tilt mistaken for neutral; improving as of May 2026 but proprioceptive sense still unreliable",
+      "firstNoted": "2026-03-12",
+      "sessionCount": 3,
+      "examImpact": true,
+      "markCriteria": ["correct posture and weight placement"],
+      "exercises": [],
+      "resolvedDate": null
+    }
+  ],
+  "exercises": [
+    {
+      "code": "AF-10",
+      "name": "Centre practice and pirouettes",
+      "corrections": [
+        "Double pirouette en dehors: axis collapses before rotation completes — closing in 3rd not 5th",
+        "Double pirouette en dehors: arm-driven rotation rather than hip-initiated",
+        "Pirouette preparation: weight not fully forward in fondu — limited ankle bend restricting depth"
+      ]
+    },
+    {
+      "code": "AF-11F",
+      "name": "Pirouette enchaînement",
+      "corrections": [
+        "Same pirouette axis and preparation issues as AF-10 apply here",
+        "Lame duck (posés pirouettes en dehors): compact fourth under the body, not fifth"
+      ]
+    },
+    {
+      "code": "AF-12",
+      "name": "Adage",
+      "corrections": [
+        "Arabesque: second shoulder hiking — outer hip and side body not stabilising torso",
+        "Arabesque: eyeline down toward floor",
+        "Fouetté en l'air: deep hip rotators releasing too early before arabesque extension",
+        "Arms need continuous movement through adage for fluidity"
+      ]
+    },
+    {
+      "code": "AF-25",
+      "name": "Variation 2",
+      "corrections": [
+        "Poses: posterior weight bias, not getting over the box",
+        "Poses: retiré not getting up fast enough",
+        "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
+        "Eyeline: up and over, not throwing the head back",
+        "Épaulement: more upper back twist needed",
+        "Outer ankle and foot not firing fast enough before weight transfer to pointe"
+      ]
+    }
+  ],
   "physioNotes": {
-    "itemsToRaise": [],
-    "clearanceStatus": "",
-    "restrictions": []
+    "itemsToRaise": [
+      "Plié range gap: right 5cm past toes, left 10cm — gap still significant",
+      "Right ankle stiffer in turnout and through the point",
+      "Left ankle winging worse than right despite right being the injured side",
+      "Left single-leg relevé wobbles at top of range — ask whether left outer ankle weakness is confirmed or another cause"
+    ],
+    "clearanceStatus": "Right ankle grade 2 ligament tear — approx 9 weeks post-injury as of 23 May 2026. Returning to progressively increasing rehab and class participation. Fortnightly physio appointments.",
+    "restrictions": [
+      "Cleared: Theraband inversion/eversion",
+      "Cleared: Bilateral parallel pliés and rises at barre",
+      "Cleared: Static balance",
+      "Cleared: Intrinsic foot exercises",
+      "Cleared: Single-leg static balance (monitor for soreness — flag if it comes on fast)"
+    ]
   }
 }

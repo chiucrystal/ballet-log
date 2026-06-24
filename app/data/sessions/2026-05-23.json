@@ -1,0 +1,89 @@
+{
+  "date": "2026-05-23",
+  "context": "Feet, ankles, obliques, shoulder girdle, alignment",
+  "corrections": [
+    {
+      "text": "Toes gripping instead of staying long and flat — noted in rises",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Arches collapsing under load — noted in rises",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Pelvic alignment improving but arches still compensating — general observation",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Left ankle winging worse than right despite right being the injured side — noted in rises",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Left single-leg relevé wobbles at the top of the rise — weakness drops off before reaching full height. Pause rises on left only, 2-count lower",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Pinky toe must stay in contact with the floor throughout rise and lower",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Match right plié depth on both sides — go only as far as right allows, left has been overloading to compensate",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "2/3 weight forward over the ball of the foot, 1/3 in the heel — established baseline for 'over your feet' in parallel",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Shoulder blades creeping up, sitting into the traps — noted across all work",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Épaulement initiates from the obliques and ribcage, not the shoulder pulling",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    }
+  ],
+  "homeExercises": [
+    {
+      "name": "Side plank",
+      "notes": "Hips level, don't collapse forward. Left side active not passive",
+      "use": "Home + class prep"
+    },
+    {
+      "name": "Side plank with arm to fifth",
+      "notes": "Shoulder blade stays down as arm rises. Obliques initiate, not shoulder",
+      "use": "Home"
+    },
+    {
+      "name": "Clamshell with hips lifted",
+      "notes": "Pelvis stable, don't rock back as leg opens",
+      "use": "Home"
+    },
+    {
+      "name": "Lying shoulder lift with twist to opposite hip",
+      "notes": "Oblique initiates before shoulder moves — this is the épaulement feel",
+      "use": "Home"
+    },
+    {
+      "name": "Slow Russian twists with ball, straight arms",
+      "notes": "Ribcage rotates, shoulders down, no traps at end range",
+      "use": "Home"
+    },
+    {
+      "name": "Ball pass around the back",
+      "notes": "Shoulder blades stay down throughout, don't round the upper back to reach",
+      "use": "Home"
+    }
+  ],
+  "openQuestions": []
+}

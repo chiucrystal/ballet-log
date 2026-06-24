@@ -1,0 +1,84 @@
+{
+  "date": "2026-03-14",
+  "context": "Pilates-integrated session covering centre practice, adage, pirouette enchaînement, Variation 2 on pointe",
+  "corrections": [
+    {
+      "text": "Pirouettes closing in 3rd not 5th — axis collapses before rotation finishes, think length up on the way down",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-10"
+    },
+    {
+      "text": "Shoulders creeping up when arms go up — press down as opposition to the arm rising",
+      "theme": "Opposition and length under load",
+      "exercise": null
+    },
+    {
+      "text": "Pull up before stepping onto pointe — passive foot on entry leads to instability",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-25"
+    },
+    {
+      "text": "Lame duck preparation: small fourth, not fifth under the body before turning",
+      "theme": "Pirouette axis and preparation",
+      "exercise": "AF-11F"
+    },
+    {
+      "text": "Rotation comes from pulling the knee back, not from swinging the arm",
+      "theme": "Pirouette axis and preparation",
+      "exercise": "AF-10"
+    },
+    {
+      "text": "Generate turn from the hip rotators, not the shoulder",
+      "theme": "Pirouette axis and preparation",
+      "exercise": "AF-10"
+    },
+    {
+      "text": "Second shoulder hiking up in arabesque — outer hip and side body not stabilising the torso",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-12"
+    },
+    {
+      "text": "Pull up more on the standing leg for stability in arabesque",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-12"
+    },
+    {
+      "text": "Don't look down toward the floor in arabesque — eyeline up and over the arm",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-12"
+    },
+    {
+      "text": "Hold turnout longer before the leg extends to arabesque in the fouetté — deep hip rotators releasing too early",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-12"
+    },
+    {
+      "text": "Arms need to keep moving for fluidity through adage",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-12"
+    },
+    {
+      "text": "Get onto the block faster on all poses in Variation 2 — outer ankle and foot not firing fast enough before weight transfer",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-25"
+    },
+    {
+      "text": "Controlled rolling down from pointe — don't drop through the demi-pointe",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-25"
+    },
+    {
+      "text": "Press into a deeper fondu before snapping into relevé — limited ankle bend restricting preparation depth",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-10"
+    }
+  ],
+  "homeExercises": [
+    {
+      "name": "Side planks, all fours, supine twist",
+      "notes": "Targeting obliques and side body for pirouette stability",
+      "use": "Home"
+    }
+  ],
+  "openQuestions": []
+}

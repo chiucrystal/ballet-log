@@ -1,0 +1,31 @@
+{
+  "date": "2026-03-09",
+  "context": "Pointe and Discovering Rep class — poses, grand jeté, allegro, brisé",
+  "corrections": [
+    {
+      "text": "Posterior weight bias appearing across poses en arrière, grand jeté landings, allegro beats, retirés",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Left lateral chain weakness noted in relevé lent in second",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Right pointe shoe potentially not getting over the box — equipment fit concern, not purely technique",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    }
+  ],
+  "homeExercises": [
+    {
+      "name": "Leg on barre in second",
+      "notes": "Active hamstring contraction at end range — slow and controlled, no momentum",
+      "use": "Class prep"
+    }
+  ],
+  "openQuestions": [
+    "Right pointe shoe potentially not getting over the box — check shoe fit at next opportunity"
+  ]
+}
