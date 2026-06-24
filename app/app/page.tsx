@@ -8,10 +8,10 @@ export default async function Home() {
 
   return (
     <div className="space-y-10">
-      <h1 className="text-2xl font-semibold">Welcome back, Crystal</h1>
+      <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">Welcome back, Crystal</h1>
 
       <section className="space-y-4">
-        <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
           Current Priorities
         </h2>
         <div className="grid gap-3 sm:grid-cols-3">
@@ -29,7 +29,7 @@ export default async function Home() {
       </section>
 
       <section className="space-y-2">
-        <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+        <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
           Session Timeline
         </h2>
         <AccordionRoot multiple>
@@ -60,7 +60,7 @@ export default async function Home() {
                 )}
                 {session.openQuestions.length > 0 && (
                   <div className="mt-4 pt-4 border-t border-border">
-                    <p className="text-xs font-medium text-muted-foreground mb-2 uppercase tracking-wide">
+                    <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-[0.07em]">
                       Open questions
                     </p>
                     <ul className="space-y-1">

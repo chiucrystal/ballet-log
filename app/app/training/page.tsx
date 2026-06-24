@@ -8,14 +8,14 @@ export default async function TrainingPage() {
 
   return (
     <div className="space-y-8">
-      <h1 className="text-2xl font-semibold">Home Training</h1>
+      <h1 className="font-heading text-[28px] leading-[1.2]">Home Training</h1>
 
       {sessionsWithExercises.length === 0 ? (
         <p className="text-muted-foreground text-sm">No home exercises recorded yet.</p>
       ) : (
         sessionsWithExercises.map((session) => (
           <div key={session.date} className="space-y-3">
-            <h2 className="text-sm font-medium uppercase tracking-wide text-muted-foreground">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
               {formatDate(session.date)}
             </h2>
             <div className="grid gap-3 sm:grid-cols-2">

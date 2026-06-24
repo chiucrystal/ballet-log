@@ -20,7 +20,7 @@ export function Nav() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background">
       <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-4">
-        <Link href="/" className="font-semibold text-sm tracking-tight">
+        <Link href="/" className="font-heading text-xl">
           Ballet Log
         </Link>
 

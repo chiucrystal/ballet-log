@@ -21,7 +21,7 @@ export default async function ThemesPage() {
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">Themes</h1>
+      <h1 className="font-heading text-[28px] leading-[1.2]">Themes</h1>
       <AccordionRoot multiple>
         {corrections.themes.map((theme) => {
           const items = themeCorrections[theme.name] ?? []

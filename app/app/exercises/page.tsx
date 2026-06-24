@@ -15,7 +15,7 @@ export default async function ExercisesPage({
 
   return (
     <div className="space-y-6">
-      <h1 className="text-2xl font-semibold">By Exercise</h1>
+      <h1 className="font-heading text-[28px] leading-[1.2]">By Exercise</h1>
 
       <div className="flex flex-wrap gap-2">
         {corrections.exercises.map((exercise) => (
