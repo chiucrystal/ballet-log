@@ -1,7 +1,7 @@
 'use client'
 
-import { useState } from 'react'
-import { ChevronRight } from 'lucide-react'
+import { useState, useCallback, useEffect } from 'react'
+import { ChevronLeft, ChevronRight } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { Term, Grade } from '@/lib/types'
 
@@ -17,6 +17,21 @@ function shuffle<T>(arr: T[]): T[] {
 function buildQueue(terms: Term[], grade: string): Term[] {
   const deck = grade === 'ALL' ? terms : terms.filter((t) => t.introduced_at_grade === grade)
   return shuffle(deck)
+}
+
+function instantReset(
+  setAnimated: (v: boolean) => void,
+  setIsFlipped: (v: boolean) => void,
+  setQueue: (q: Term[]) => void,
+  setIdx: (i: number) => void,
+  newQueue: Term[],
+  newIdx: number,
+) {
+  setAnimated(false)
+  setIsFlipped(false)
+  setQueue(newQueue)
+  setIdx(newIdx)
+  requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
 }
 
 export default function FlashCardsClient({
@@ -37,20 +52,16 @@ export default function FlashCardsClient({
     ...grades.map((g) => ({ value: g.id, label: g.label })),
   ]
 
-  function instantTo(newQueue: Term[], newIdx: number) {
-    setAnimated(false)
-    setIsFlipped(false)
-    setQueue(newQueue)
-    setIdx(newIdx)
-    requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
-  }
-
   function changeGrade(g: string) {
     setGrade(g)
-    instantTo(buildQueue(terms, g), 0)
+    instantReset(setAnimated, setIsFlipped, setQueue, setIdx, buildQueue(terms, g), 0)
   }
 
-  function next() {
+  const flip = useCallback(() => {
+    setIsFlipped((f) => !f)
+  }, [])
+
+  const next = useCallback(() => {
     const nextIdx = idx + 1
     if (nextIdx >= queue.length) {
       const currentId = queue[idx]?.id
@@ -58,14 +69,35 @@ export default function FlashCardsClient({
       if (newQ[0]?.id === currentId && newQ.length > 1) {
         newQ = [newQ[1], newQ[0], ...newQ.slice(2)]
       }
-      instantTo(newQ, 0)
+      instantReset(setAnimated, setIsFlipped, setQueue, setIdx, newQ, 0)
     } else {
       setAnimated(false)
       setIsFlipped(false)
       setIdx(nextIdx)
       requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
     }
-  }
+  }, [idx, queue, grade, terms])
+
+  const prev = useCallback(() => {
+    if (idx === 0) return
+    setAnimated(false)
+    setIsFlipped(false)
+    setIdx(idx - 1)
+    requestAnimationFrame(() => requestAnimationFrame(() => setAnimated(true)))
+  }, [idx])
+
+  useEffect(() => {
+    function onKey(e: KeyboardEvent) {
+      if (e.key === 'ArrowRight') next()
+      else if (e.key === 'ArrowLeft') prev()
+      else if (e.key === ' ' || e.key === 'Enter') {
+        e.preventDefault()
+        flip()
+      }
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  }, [next, prev, flip])
 
   const card = queue[idx]
   if (!card) {
@@ -101,7 +133,7 @@ export default function FlashCardsClient({
       <div className="max-w-lg">
         <div
           className="[perspective:1200px] cursor-pointer select-none"
-          onClick={() => setIsFlipped((f) => !f)}
+          onClick={flip}
         >
           <div
             className={cn(
@@ -134,15 +166,22 @@ export default function FlashCardsClient({
             <span className="mx-1 opacity-40">/</span>
             {queue.length}
           </p>
-          <button
-            onClick={(e) => {
-              e.stopPropagation()
-              next()
-            }}
-            className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
-          >
-            Next <ChevronRight className="size-4" />
-          </button>
+          <div className="flex items-center gap-2">
+            <button
+              onClick={(e) => { e.stopPropagation(); prev() }}
+              disabled={idx === 0}
+              className="flex items-center justify-center rounded-lg p-2 text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              aria-label="Previous card"
+            >
+              <ChevronLeft className="size-4" />
+            </button>
+            <button
+              onClick={(e) => { e.stopPropagation(); next() }}
+              className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
+            >
+              Next <ChevronRight className="size-4" />
+            </button>
+          </div>
         </div>
       </div>
     </div>

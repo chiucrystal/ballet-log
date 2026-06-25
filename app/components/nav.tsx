@@ -9,8 +9,8 @@ import { cn } from '@/lib/utils'
 const navLinks = [
   { href: '/', label: 'Home', icon: Home, children: undefined as { href: string; label: string }[] | undefined },
   { href: '/themes', label: 'Themes', icon: Layers, children: undefined },
-  { href: '/exercises', label: 'Exercises', icon: ClipboardList, children: undefined },
-  { href: '/training', label: 'Training', icon: Dumbbell, children: undefined },
+  { href: '/exercises', label: 'Syllabus', icon: ClipboardList, children: undefined },
+  { href: '/training', label: 'Home Exercises', icon: Dumbbell, children: undefined },
   {
     href: '/terminology',
     label: 'Terminology',
