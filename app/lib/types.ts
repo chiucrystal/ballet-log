@@ -53,3 +53,30 @@ export interface CorrectionsDoc {
   exercises: Exercise[]
   physioNotes: PhysioNotes
 }
+
+export interface Grade {
+  id: string
+  label: string
+  order: number
+}
+
+export interface Term {
+  id: string
+  term: string
+  french_translation: string
+  category: string
+  free_enchainement_role: string
+  introduced_at_grade: string
+  gender: string
+  description: string
+  open_question?: boolean
+}
+
+export interface TerminologyDoc {
+  meta: {
+    grades: Grade[]
+    last_updated: string
+  }
+  terms: Term[]
+  open_questions: string[]
+}

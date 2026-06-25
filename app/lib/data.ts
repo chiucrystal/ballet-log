@@ -1,6 +1,6 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import type { Session, CorrectionsDoc } from './types'
+import type { Session, CorrectionsDoc, TerminologyDoc } from './types'
 
 const dataDir = path.join(process.cwd(), 'data')
 
@@ -21,6 +21,11 @@ export async function getSessions(): Promise<Session[]> {
 export async function getCorrections(): Promise<CorrectionsDoc> {
   const content = await fs.readFile(path.join(dataDir, 'corrections.json'), 'utf-8')
   return JSON.parse(content) as CorrectionsDoc
+}
+
+export async function getTerminology(): Promise<TerminologyDoc> {
+  const content = await fs.readFile(path.join(dataDir, 'terminology.json'), 'utf-8')
+  return JSON.parse(content) as TerminologyDoc
 }
 
 export function formatDate(dateStr: string): string {

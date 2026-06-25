@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Home, Layers, ClipboardList, Dumbbell, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
+import { Home, Layers, ClipboardList, Dumbbell, BookText, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
@@ -11,6 +11,7 @@ const navLinks = [
   { href: '/themes', label: 'Themes', icon: Layers },
   { href: '/exercises', label: 'Exercises', icon: ClipboardList },
   { href: '/training', label: 'Training', icon: Dumbbell },
+  { href: '/terminology', label: 'Terminology', icon: BookText },
 ]
 
 export function Nav() {
