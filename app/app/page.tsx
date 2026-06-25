@@ -30,7 +30,7 @@ export default async function Home() {
     <div className="space-y-8">
       <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">Welcome back, Crystal</h1>
 
-      <div className="flex gap-10 items-start">
+      <div className="flex flex-col lg:flex-row gap-10 items-start">
         {/* Left — priorities */}
         <div className="flex-1 min-w-0 space-y-4">
           <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
@@ -51,7 +51,7 @@ export default async function Home() {
         </div>
 
         {/* Right — timeline */}
-        <div className="w-80 shrink-0 space-y-2">
+        <div className="w-full lg:w-80 shrink-0 space-y-2">
           <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
             Session Timeline
           </h2>
