@@ -1,7 +1,79 @@
 {
   "date": "2026-06-22",
-  "context": "Private lesson — corrections not preserved in migration",
-  "corrections": [],
+  "context": "Private lesson — barre focus: pliés, fondu, rond en l'air",
+  "corrections": [
+    {
+      "text": "Don't go so low in grand plié",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Shoulders don't come forward in grand plié",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Core engaged, don't collapse in grand plié",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Coupé low on top of ankle — not riding up the leg",
+      "theme": "Retiré and passé mechanics",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Find resistance at the fondu to demi-pointe",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Thigh leads — not heel or foot",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Pelvis level throughout fondu",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Lengthen supporting side in second and derrière",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Leg directly behind hip in derrière",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Sequence: fondu + attitude first, then demi-pointe",
+      "theme": "Retiré and passé mechanics",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Right foot not fully up on demi-pointe",
+      "theme": "Foot intrinsics and arch",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Sharper coming in on rond en l'air",
+      "theme": "Musicality and dynamic values",
+      "exercise": "Barre"
+    },
+    {
+      "text": "More resistance on the extend in rond en l'air",
+      "theme": "Musicality and dynamic values",
+      "exercise": "Barre"
+    }
+  ],
+  "progress": [
+    {
+      "text": "Heels arriving together in coordination exercise — confirmed fixed",
+      "resolved": true
+    }
+  ],
   "homeExercises": [
     {
       "name": "Bird dog — one arm to fifth, second, by the thigh, back to tabletop",
