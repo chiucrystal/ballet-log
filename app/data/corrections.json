@@ -1,117 +1,223 @@
 {
-  "lastUpdated": "2026-05-23",
+  "lastUpdated": "2026-06-23",
   "priorities": [
     {
-      "title": "Outer hip and ankle stability — left side",
-      "detail": "Drives left winging, left relevé wobble, and will directly compromise pointe work, pirouettes, and arabesque in the exam if unresolved"
+      "title": "Weight placement and demi-pointe proprioception",
+      "detail": "Toes leave floor on demi-pointe (bilateral, physio-confirmed), heels gripping to maintain turnout anchors weight backward, sitting back in heels even in fifth. Upstream of pirouette axis, winging, ankle instability, and retiré mechanics. Must be reliable on flat and in slow rises before pointe and jumps can return."
     },
     {
-      "title": "Shoulder girdle and épaulement",
-      "detail": "Traps dominance is suppressing genuine upper back twist; affects Variation 2 performance mark and line across all technique sections"
+      "title": "Left lateral chain / bilateral ankle stability",
+      "detail": "Left lateral chain weakness confirmed at baseline (present on flat, not just under load). Left side carrying 15+ weeks of compensatory load from right ankle recovery. Drives torso collapse, winging, hip hiking, retiré instability, pirouette axis failure. Right ankle plié range still restricted."
     },
     {
-      "title": "Weight placement — over the foot",
-      "detail": "Posterior bias confirmed in parallel and in pointe work; upstream of pirouette axis, pointe work instability, and arabesque compensation"
+      "title": "Barre technique and retiré mechanics",
+      "detail": "Frappés, fondu, grand battement, rond de jambe all showing active corrections across June sessions. Retiré being built foot-up rather than hip-down: glute not activating, knee not lifting, hip rotating forward. Current restrictions are the window to fix this before jumps and pointe return."
     }
   ],
   "themes": [
     {
       "name": "Weight placement and balance",
-      "summary": "Posterior weight bias appearing across all contexts — barre, centre, pointe, allegro",
-      "firstNoted": "2026-03-09",
-      "sessionCount": 3,
+      "summary": "Posterior weight bias in every context — barre, centre, pointe, allegro. Toes can leave floor on demi-pointe. Root cause identified June 2026: forcing turnout from heels anchors weight backward.",
+      "firstNoted": "2026-03-05",
+      "sessionCount": 10,
       "examImpact": true,
       "markCriteria": ["correct posture and weight placement"],
-      "exercises": ["AF-10", "AF-11F", "AF-25"],
+      "exercises": ["AF-01", "AF-05", "AF-08", "AF-09", "AF-10", "AF-11F", "AF-25"],
       "resolvedDate": null
     },
     {
       "name": "Outer hip and ankle stability",
-      "summary": "Left side weaker than right in rises and relevé; ankle winging; foot not firing fast enough in pointe work",
+      "summary": "Left lateral chain weakness confirmed at baseline (present on flat). Bilateral ankle winging on demi-pointe. Left side overloaded from 15+ weeks compensating for right ankle.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 3,
+      "sessionCount": 8,
       "examImpact": true,
       "markCriteria": ["control", "line"],
       "exercises": ["AF-10", "AF-25"],
       "resolvedDate": null
     },
     {
-      "name": "Shoulder girdle and épaulement",
-      "summary": "Traps dominance and shoulder blades riding up suppressing genuine épaulement and upper back twist",
-      "firstNoted": "2026-03-12",
-      "sessionCount": 2,
+      "name": "Retiré and passé mechanics",
+      "summary": "Retiré built foot-up rather than hip-down. Glute not activating to hold knee, knee not lifting, right hip rotating forward, working side pulling back, sickling downstream of all of this.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 5,
       "examImpact": true,
-      "markCriteria": ["line", "co-ordination"],
-      "exercises": ["AF-12", "AF-25"],
+      "markCriteria": ["control", "line", "co-ordination"],
+      "exercises": ["AF-08", "AF-10", "AF-11F", "AF-25"],
       "resolvedDate": null
     },
     {
       "name": "Pirouette axis and preparation",
-      "summary": "Axis collapses before pirouette finishes — closing in 3rd; arm-driven rotation rather than hip-initiated",
-      "firstNoted": "2026-03-14",
-      "sessionCount": 2,
+      "summary": "Axis collapses before pirouette finishes — closing in 3rd; arm-driven rotation; shoulder wind-up; passé dropping at 1.5 turns. Progress: good double May 2026, solid singles June 2026.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 6,
       "examImpact": true,
       "markCriteria": ["control", "co-ordination"],
       "exercises": ["AF-10", "AF-11F"],
       "resolvedDate": null
     },
     {
+      "name": "Shoulder girdle and épaulement",
+      "summary": "Traps dominance and shoulder blades riding up suppressing genuine épaulement and upper back twist. Pilates targeting this from May 2026.",
+      "firstNoted": "2026-03-12",
+      "sessionCount": 5,
+      "examImpact": true,
+      "markCriteria": ["line", "co-ordination"],
+      "exercises": ["AF-12", "AF-25"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Arabesque mechanics",
+      "summary": "Second shoulder hiking; eyeline down; back gripping at end range (hip flexor ceiling, not back strength); deep hip rotators releasing too early in fouetté.",
+      "firstNoted": "2026-03-14",
+      "sessionCount": 4,
+      "examImpact": true,
+      "markCriteria": ["line", "expression", "dynamic values"],
+      "exercises": ["AF-12"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Hip hiking in développés and battement",
+      "summary": "Working hip lifting in développé devant, à la seconde, and grand battement to the side. Connects to pelvic alignment and left lateral chain.",
+      "firstNoted": "2026-06-04",
+      "sessionCount": 2,
+      "examImpact": true,
+      "markCriteria": ["line"],
+      "exercises": ["AF-07", "AF-08"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Pelvic alignment",
+      "summary": "Posterior pelvic tilt mistaken for neutral — improving as of May 2026 but proprioceptive sense still unreliable. Mirror not reliable for assessment.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 8,
+      "examImpact": true,
+      "markCriteria": ["correct posture and weight placement"],
+      "exercises": [],
+      "resolvedDate": null
+    },
+    {
       "name": "Foot intrinsics and arch",
-      "summary": "Toe gripping and arch collapse under load in rises",
+      "summary": "Toe gripping and arch collapse under load in rises. Toes leaving floor on demi-pointe. Bilateral winging confirmed by physio June 2026.",
       "firstNoted": "2026-05-23",
-      "sessionCount": 1,
+      "sessionCount": 3,
       "examImpact": true,
       "markCriteria": ["correct posture and weight placement", "line"],
       "exercises": ["AF-25"],
       "resolvedDate": null
     },
     {
-      "name": "Arabesque mechanics",
-      "summary": "Second shoulder hiking; eyeline dropping; deep hip rotators releasing too early in fouetté",
-      "firstNoted": "2026-03-14",
-      "sessionCount": 2,
-      "examImpact": true,
-      "markCriteria": ["line", "expression"],
-      "exercises": ["AF-12"],
-      "resolvedDate": null
-    },
-    {
-      "name": "Opposition and length under load",
-      "summary": "Passive on pointe entry; shoulders rising with arms; pirouettes closing short",
-      "firstNoted": "2026-03-12",
-      "sessionCount": 2,
-      "examImpact": false,
-      "markCriteria": ["co-ordination", "dynamic values"],
-      "exercises": ["AF-10", "AF-25"],
-      "resolvedDate": null
-    },
-    {
-      "name": "Pelvic alignment",
-      "summary": "Posterior pelvic tilt mistaken for neutral; improving as of May 2026 but proprioceptive sense still unreliable",
-      "firstNoted": "2026-03-12",
+      "name": "Thoracic stiffness and shoulder mobility",
+      "summary": "Thoracic extension restricted — lumbar compensates in arabesques and backbends. Shoulder mobility affecting arms to fifth. Only starting to find back engagement in arms second this year.",
+      "firstNoted": "2026-03-10",
       "sessionCount": 3,
       "examImpact": true,
-      "markCriteria": ["correct posture and weight placement"],
-      "exercises": [],
+      "markCriteria": ["line", "co-ordination"],
+      "exercises": ["AF-09", "AF-12"],
+      "resolvedDate": null
+    },
+    {
+      "name": "Musicality and expression",
+      "summary": "Finishing phrases early at the barre, rushing. DR: projection and looking beyond arms, musicality as the main priority.",
+      "firstNoted": "2026-05-28",
+      "sessionCount": 3,
+      "examImpact": true,
+      "markCriteria": ["responsiveness to music", "expression", "projection"],
+      "exercises": ["AF-09"],
       "resolvedDate": null
     }
   ],
   "exercises": [
     {
+      "code": "AF-01",
+      "name": "Pliés",
+      "corrections": [
+        "Grand plié in first: don't go so low",
+        "Shoulders don't come forward in grand plié",
+        "Core engaged, don't collapse forward",
+        "Weight even in plié in fourth"
+      ]
+    },
+    {
+      "code": "AF-02",
+      "name": "Battements tendus",
+      "corrections": [
+        "Toes stay completely on the floor when returning to fifth — lifting noted"
+      ]
+    },
+    {
+      "code": "AF-05",
+      "name": "Battements fondus / ronds de jambe en l'air",
+      "corrections": [
+        "Fondu: thigh leads rather than heel or foot",
+        "Coupé low and on top of ankle",
+        "Find resistance at the fondu to demi-pointe",
+        "Lengthen supporting side especially in second and derrière",
+        "Leg directly behind hip in derrière",
+        "Sequence: fondu supporting leg + attitude before demi-pointe",
+        "Right foot not fully up on demi-pointe — push up and over the toes",
+        "Rond de jambe jeté: aligned in front and behind; timing too quick",
+        "Rond en l'air: accent and resistance more emphasised; sharper coming in"
+      ]
+    },
+    {
+      "code": "AF-06",
+      "name": "Battements frappés / petits battements",
+      "corrections": [
+        "Losing accent and dynamic on the en dedans",
+        "Accent and hold not sustained en croix",
+        "Memorise the pattern without getting distracted",
+        "Coupé under and over: both feet must point fully"
+      ]
+    },
+    {
+      "code": "AF-08",
+      "name": "Grands battements",
+      "corrections": [
+        "Weight sitting back in devant",
+        "Don't curl toes",
+        "Don't hike working hip to the side",
+        "Don't twist shoulders — square with hips",
+        "Passé sickled — glute not activating, knee not lifting",
+        "Toes scoop and articulate before passé",
+        "Think knee lifting not foot leading"
+      ]
+    },
+    {
+      "code": "AF-09",
+      "name": "Port de bras",
+      "corrections": [
+        "Weight forward on the pivot",
+        "Arms to first then open to fourth faster to get around",
+        "Bottom leg turns out fully",
+        "Glissade: point second foot especially devant; barely elevate but have a sense of lift",
+        "Step-unfold: currently unstable — cause not yet identified",
+        "Eyeline: wider fourth position; follows the hands; more peripheral space",
+        "Back heel down in the back bend",
+        "Move upper body over the toes in derrière",
+        "Don't contract the neck"
+      ]
+    },
+    {
       "code": "AF-10",
       "name": "Centre practice and pirouettes",
       "corrections": [
-        "Double pirouette en dehors: axis collapses before rotation completes — closing in 3rd not 5th",
-        "Double pirouette en dehors: arm-driven rotation rather than hip-initiated",
-        "Pirouette preparation: weight not fully forward in fondu — limited ankle bend restricting depth"
+        "Pirouettes closing in 3rd not 5th — axis collapses before rotation completes",
+        "Arm-driven rotation rather than hip-initiated; shoulder wind-up especially in en dedans",
+        "Pirouette preparation: weight not fully forward in fondu — dorsiflexion restriction is load-dependent, not structural",
+        "Passé dropping at 1.5 turns mid-rotation — anchor failing on transition to second turn",
+        "Heels landing at same time rather than dropping into closed fifth",
+        "Think going up in the turn; lock standing knee and pull up"
       ]
     },
     {
       "code": "AF-11F",
       "name": "Pirouette enchaînement",
       "corrections": [
-        "Same pirouette axis and preparation issues as AF-10 apply here",
-        "Lame duck (posés pirouettes en dehors): compact fourth under the body, not fifth"
+        "Same pirouette axis and arm-compensation issues as AF-10",
+        "Lame duck: compact fourth under the body not fifth; hips to the corner — pelvis rotating with arms not staying square",
+        "Lame ducks: not tight, weight back",
+        "En dedans: back leg not coming in fast enough — passé retiré delay",
+        "Left pose turns too slow"
       ]
     },
     {
@@ -120,37 +226,66 @@
       "corrections": [
         "Arabesque: second shoulder hiking — outer hip and side body not stabilising torso",
         "Arabesque: eyeline down toward floor",
+        "Arabesque: back compresses and grips at end range — hip flexor ceiling, not back strength problem",
         "Fouetté en l'air: deep hip rotators releasing too early before arabesque extension",
-        "Arms need continuous movement through adage for fluidity"
+        "Arms need continuous movement through adage for fluidity",
+        "Pull up on standing leg; lock standing knee for stability"
       ]
     },
     {
       "code": "AF-25",
-      "name": "Variation 2",
+      "name": "Variation 2 (currently restricted — no pointe)",
       "corrections": [
-        "Poses: posterior weight bias, not getting over the box",
+        "Poses: posterior weight bias, not getting over the box; outer ankle not firing before weight transfer",
         "Poses: retiré not getting up fast enough",
         "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
         "Eyeline: up and over, not throwing the head back",
-        "Épaulement: more upper back twist needed",
-        "Outer ankle and foot not firing fast enough before weight transfer to pointe"
+        "Épaulement: more upper back twist"
+      ]
+    },
+    {
+      "code": "DR",
+      "name": "Discovering Repertoire",
+      "corrections": [
+        "Chaînes: half-turn half-turn rhythmic clarity; heels close; don't lean back; spot faster",
+        "Grand jetés: better battement; look up and over not at the ground",
+        "Développé devant: square shoulders and hips",
+        "Musicality is the main priority across the class",
+        "Projection: look beyond the arms and shoulders",
+        "Fourth arms: shoulders straight, not tilted to either side",
+        "Jeté passé: compact and directional, doesn't travel",
+        "À la seconde extension: active flexibility not just passive stretch"
+      ]
+    },
+    {
+      "code": "ALLEGRO",
+      "name": "Allegro (currently restricted — glissades only)",
+      "corrections": [
+        "Sharper beats from top of thighs — turnout collapsing mid-air",
+        "Articulate feet; weight forward at push-off",
+        "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch",
+        "Stamina collapse across allegro sections — conditioning gap, not purely technique"
       ]
     }
   ],
   "physioNotes": {
     "itemsToRaise": [
-      "Plié range gap: right 5cm past toes, left 10cm — gap still significant",
-      "Right ankle stiffer in turnout and through the point",
-      "Left ankle winging worse than right despite right being the injured side",
-      "Left single-leg relevé wobbles at top of range — ask whether left outer ankle weakness is confirmed or another cause"
+      "Right ankle plié range still restricted and not improving — is there an active intervention or is it purely time?",
+      "Request rough clearance timeline for relevés, pointe, and allegro — needed for May/June 2027 exam planning",
+      "Left ankle continuing to overload from right ankle compensation — 15+ weeks of cumulative compensatory load",
+      "Bilateral winging on demi-pointe: correctable with strengthening or structural finding?"
     ],
-    "clearanceStatus": "Right ankle grade 2 ligament tear — approx 9 weeks post-injury as of 23 May 2026. Returning to progressively increasing rehab and class participation. Fortnightly physio appointments.",
+    "clearanceStatus": "Right ankle grade 2 ligament tear — approx 15 weeks post-injury (injured mid-March 2026). Current restrictions: no pointe, no jumps (glissades permitted), no sharp relevés on flat. Returning to class with modified participation.",
     "restrictions": [
+      "No pointe work",
+      "No jumping (glissades permitted)",
+      "No sharp relevés on flat",
       "Cleared: Theraband inversion/eversion",
-      "Cleared: Bilateral parallel pliés and rises at barre",
+      "Cleared: Bilateral parallel pliés and rises at barre (slow, controlled)",
       "Cleared: Static balance",
       "Cleared: Intrinsic foot exercises",
-      "Cleared: Single-leg static balance (monitor for soreness — flag if it comes on fast)"
+      "Cleared: Single-leg static balance (monitor for soreness)",
+      "Cleared: Glissades"
     ]
   }
 }
