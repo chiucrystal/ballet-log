@@ -32,7 +32,7 @@ export default function RootLayout({
         <div className="flex-1 min-w-0 flex flex-col">
           {/* Spacer for mobile fixed top bar */}
           <div className="h-14 shrink-0 md:hidden" />
-          <main className="flex-1 max-w-3xl w-full mx-auto px-6 py-8">
+          <main className="flex-1 max-w-[1200px] w-full mx-auto px-6 py-8">
             {children}
           </main>
         </div>
