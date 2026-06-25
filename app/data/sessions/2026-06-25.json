@@ -1,0 +1,188 @@
+{
+  "date": "2026-06-25",
+  "context": "Regular class — discovering repertoire barre, advanced barre: pliés, jetés, fondus, frappes, adage, grand battement, allegro 1–3",
+  "corrections": [
+    {
+      "text": "Discovering repertoire barre: clearer heads on croix",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire barre: listen to the music, don't rush",
+      "theme": "Musicality and expression",
+      "exercise": null
+    },
+    {
+      "text": "Relevé in fifth: leaning away from the barre and wobbly on demi-pointe",
+      "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Relevé in fifth: back not engaged, shoulder came up",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Batterie preparation: glutes and rotators not engaged — took tucking the pelvis to find neutral",
+      "theme": "Pelvic alignment",
+      "exercise": null
+    },
+    {
+      "text": "Arches more lifted but overall weight still in heels",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Tendus, glissés, grand battement at barre: more floor pressure, articulate through demi-pointe, use all the music",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Plié: arms and legs must arrive together",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Plié: more resistance at the bottom",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Grand plié: lower heels earlier",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Cambré back: engage glutes and hamstrings",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-01"
+    },
+    {
+      "text": "Jetés: more push off the floor and hold at 45 — stronger accent throughout",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-03"
+    },
+    {
+      "text": "Jetés: right elbow drops in second — engage lats and back to keep it placed",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "AF-03"
+    },
+    {
+      "text": "Fondus: gripping the barre during rond en l'air in second on demi-pointe (self-corrected)",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Fondus: more resistance in the fondu extends en croix",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Fondus: back leg more behind and more pulled up (self-corrected — improved)",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Fondus: hand on barre more light outside of rond en l'air (self-corrected — improved)",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-05"
+    },
+    {
+      "text": "Frappés en croix: accent out needs to be stronger",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-06"
+    },
+    {
+      "text": "Frappé exercise: pattern still not fully clear",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-06"
+    },
+    {
+      "text": "Frappé exercise: point second foot in the opening glissade",
+      "theme": "Foot intrinsics and arch",
+      "exercise": "AF-06"
+    },
+    {
+      "text": "Adage: chassé en arrière — keep back heel down",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Adage: posé arabesque en avant — keep shoulders down and square",
+      "theme": "Arabesque mechanics",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Adage: grand rond de jambe — keep working leg at even height from side to back",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Adage: lift up standing side — don't let it collapse or lean onto the barre",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Adage: attitude — thigh higher, angle greater than 90 degrees",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Adage: rotate working side ribcage forward",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "AF-07"
+    },
+    {
+      "text": "Grand battement: highest demi-pointe on retiré",
+      "theme": "Foot intrinsics and arch",
+      "exercise": "AF-08"
+    },
+    {
+      "text": "Grand battement devant: weight forward, don't sit back in the hip",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-08"
+    },
+    {
+      "text": "Grand battement derrière: back leg more square",
+      "theme": "Pelvic alignment",
+      "exercise": "AF-08"
+    },
+    {
+      "text": "Grand battement to second: less lifting of working hip",
+      "theme": "Outer hip and ankle stability",
+      "exercise": "AF-08"
+    },
+    {
+      "text": "Grand battement: more floor pressure and articulate through demi-pointe",
+      "theme": "Foot intrinsics and arch",
+      "exercise": "AF-08"
+    },
+    {
+      "text": "Allegro 1: heels down",
+      "theme": "Weight placement and balance",
+      "exercise": "AF-13"
+    },
+    {
+      "text": "Allegro 2: working on batterie — entrechat trois devant and derrière; need to build stamina when cleared to jump",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-14"
+    },
+    {
+      "text": "Allegro 3: greater sense of going up — use the plié to push upwards",
+      "theme": "Opposition and length under load",
+      "exercise": "AF-15"
+    },
+    {
+      "text": "Allegro 3: point second foot in glissades",
+      "theme": "Foot intrinsics and arch",
+      "exercise": "AF-15"
+    },
+    {
+      "text": "Allegro 3: arms before legs — use arms to gain momentum",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "AF-15"
+    }
+  ],
+  "homeExercises": [],
+  "openQuestions": []
+}
