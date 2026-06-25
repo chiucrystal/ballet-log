@@ -2,75 +2,111 @@
 
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
-import { Menu, X } from 'lucide-react'
+import { Home, Layers, ClipboardList, Dumbbell, ChevronLeft, ChevronRight, Menu, X } from 'lucide-react'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
-  { href: '/', label: 'Home' },
-  { href: '/themes', label: 'Themes' },
-  { href: '/exercises', label: 'Exercises' },
-  { href: '/training', label: 'Training' },
+  { href: '/', label: 'Home', icon: Home },
+  { href: '/themes', label: 'Themes', icon: Layers },
+  { href: '/exercises', label: 'Exercises', icon: ClipboardList },
+  { href: '/training', label: 'Training', icon: Dumbbell },
 ]
 
 export function Nav() {
-  const [open, setOpen] = useState(false)
+  const [collapsed, setCollapsed] = useState(false)
+  const [mobileOpen, setMobileOpen] = useState(false)
   const pathname = usePathname()
 
   return (
-    <header className="sticky top-0 z-50 border-b bg-background">
-      <div className="mx-auto max-w-4xl flex h-14 items-center justify-between px-4">
-        <Link href="/" className="font-heading text-xl">
-          Ballet Log
-        </Link>
+    <>
+      {/* Mobile backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-30 bg-black/20 md:hidden"
+          onClick={() => setMobileOpen(false)}
+        />
+      )}
 
-        <nav className="hidden md:flex items-center gap-1">
-          {navLinks.map((link) => (
+      {/* Sidebar */}
+      <aside
+        className={cn(
+          'fixed inset-y-0 left-0 z-40 flex flex-col bg-background border-r border-border',
+          'transition-transform duration-200 w-64',
+          mobileOpen ? 'translate-x-0' : '-translate-x-full',
+          'md:sticky md:top-0 md:h-screen md:translate-x-0 md:transition-[width] md:duration-200',
+          collapsed ? 'md:w-14' : 'md:w-56',
+        )}
+      >
+        {/* Header */}
+        <div className={cn(
+          'flex h-14 shrink-0 items-center border-b border-border px-3',
+          collapsed ? 'md:justify-center' : 'justify-between'
+        )}>
+          <Link
+            href="/"
+            onClick={() => setMobileOpen(false)}
+            className={cn('font-heading text-xl truncate', collapsed && 'md:hidden')}
+          >
+            Ballet Log
+          </Link>
+
+          {/* Desktop collapse toggle */}
+          <button
+            onClick={() => setCollapsed(!collapsed)}
+            className="hidden md:flex items-center justify-center p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted"
+            aria-label="Toggle sidebar"
+          >
+            {collapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
+          </button>
+
+          {/* Mobile close */}
+          <button
+            onClick={() => setMobileOpen(false)}
+            className="md:hidden p-1 rounded text-muted-foreground hover:text-foreground"
+            aria-label="Close menu"
+          >
+            <X className="size-4" />
+          </button>
+        </div>
+
+        {/* Nav links */}
+        <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
+          {navLinks.map(({ href, label, icon: Icon }) => (
             <Link
-              key={link.href}
-              href={link.href}
+              key={href}
+              href={href}
+              onClick={() => setMobileOpen(false)}
+              title={collapsed ? label : undefined}
               className={cn(
-                'px-3 py-1.5 rounded-md text-sm transition-colors',
-                pathname === link.href
-                  ? 'bg-muted font-medium text-foreground'
+                'flex items-center gap-3 rounded-md text-sm transition-colors',
+                'px-2 py-2',
+                collapsed && 'md:justify-center md:px-0',
+                pathname === href
+                  ? 'bg-muted text-foreground font-medium'
                   : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
               )}
             >
-              {link.label}
+              <Icon className="size-4 shrink-0" />
+              <span className={cn(collapsed && 'md:hidden')}>{label}</span>
             </Link>
           ))}
         </nav>
+      </aside>
 
+      {/* Mobile top bar */}
+      <div className="fixed top-0 left-0 right-0 z-20 h-14 flex items-center gap-3 px-4 bg-background border-b border-border md:hidden">
         <button
-          className="md:hidden p-2 -mr-2 text-muted-foreground hover:text-foreground"
-          onClick={() => setOpen(!open)}
-          aria-label="Toggle menu"
+          onClick={() => setMobileOpen(true)}
+          className="p-1 -ml-1 rounded text-muted-foreground hover:text-foreground"
+          aria-label="Open menu"
         >
-          {open ? <X className="size-5" /> : <Menu className="size-5" />}
+          <Menu className="size-5" />
         </button>
+        <Link href="/" className="font-heading text-xl">
+          Ballet Log
+        </Link>
       </div>
-
-      {open && (
-        <div className="border-t bg-background md:hidden">
-          <nav className="mx-auto max-w-4xl flex flex-col px-4 py-2 gap-1">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                onClick={() => setOpen(false)}
-                className={cn(
-                  'px-3 py-2 rounded-md text-sm transition-colors',
-                  pathname === link.href
-                    ? 'bg-muted font-medium text-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                )}
-              >
-                {link.label}
-              </Link>
-            ))}
-          </nav>
-        </div>
-      )}
-    </header>
+    </>
   )
 }
