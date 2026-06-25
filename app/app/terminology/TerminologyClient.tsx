@@ -151,7 +151,7 @@ export default function TerminologyClient({
 
   const filtered = useMemo(() => {
     const q = query.trim().toLowerCase()
-    return terms.filter((term) => {
+    return [...terms].sort((a, b) => a.term.localeCompare(b.term)).filter((term) => {
       if (q) {
         const match =
           term.term.toLowerCase().includes(q) ||
