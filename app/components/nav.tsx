@@ -7,11 +7,16 @@ import { useState } from 'react'
 import { cn } from '@/lib/utils'
 
 const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/themes', label: 'Themes', icon: Layers },
-  { href: '/exercises', label: 'Exercises', icon: ClipboardList },
-  { href: '/training', label: 'Training', icon: Dumbbell },
-  { href: '/terminology', label: 'Terminology', icon: BookText },
+  { href: '/', label: 'Home', icon: Home, children: undefined as { href: string; label: string }[] | undefined },
+  { href: '/themes', label: 'Themes', icon: Layers, children: undefined },
+  { href: '/exercises', label: 'Exercises', icon: ClipboardList, children: undefined },
+  { href: '/training', label: 'Training', icon: Dumbbell, children: undefined },
+  {
+    href: '/terminology',
+    label: 'Terminology',
+    icon: BookText,
+    children: [{ href: '/terminology/flashcards', label: 'Flash Cards' }],
+  },
 ]
 
 export function Nav() {
@@ -73,25 +78,48 @@ export function Nav() {
 
         {/* Nav links */}
         <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
-          {navLinks.map(({ href, label, icon: Icon }) => (
-            <Link
-              key={href}
-              href={href}
-              onClick={() => setMobileOpen(false)}
-              title={collapsed ? label : undefined}
-              className={cn(
-                'flex items-center gap-3 rounded-md text-sm transition-colors',
-                'px-2 py-2',
-                collapsed && 'md:justify-center md:px-0',
-                pathname === href
-                  ? 'bg-muted text-foreground font-medium'
-                  : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-              )}
-            >
-              <Icon className="size-4 shrink-0" />
-              <span className={cn(collapsed && 'md:hidden')}>{label}</span>
-            </Link>
-          ))}
+          {navLinks.map(({ href, label, icon: Icon, children }) => {
+            const parentActive = pathname === href || (!!children && pathname.startsWith(href + '/'))
+            return (
+              <div key={href}>
+                <Link
+                  href={href}
+                  onClick={() => setMobileOpen(false)}
+                  title={collapsed ? label : undefined}
+                  className={cn(
+                    'flex items-center gap-3 rounded-md text-sm transition-colors',
+                    'px-2 py-2',
+                    collapsed && 'md:justify-center md:px-0',
+                    parentActive
+                      ? 'bg-muted text-foreground font-medium'
+                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                  )}
+                >
+                  <Icon className="size-4 shrink-0" />
+                  <span className={cn(collapsed && 'md:hidden')}>{label}</span>
+                </Link>
+                {children && (
+                  <div className={cn('ml-7 mt-0.5 space-y-0.5', collapsed && 'md:hidden')}>
+                    {children.map((child) => (
+                      <Link
+                        key={child.href}
+                        href={child.href}
+                        onClick={() => setMobileOpen(false)}
+                        className={cn(
+                          'flex items-center rounded-md text-xs px-2 py-1.5 transition-colors',
+                          pathname === child.href
+                            ? 'text-foreground font-medium bg-muted'
+                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                        )}
+                      >
+                        {child.label}
+                      </Link>
+                    ))}
+                  </div>
+                )}
+              </div>
+            )
+          })}
         </nav>
       </aside>
 
