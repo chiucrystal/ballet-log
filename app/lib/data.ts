@@ -1,6 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
 import type { Session, CorrectionsDoc, TerminologyDoc } from './types'
+export { formatDate, formatShortDate } from './format'
 
 const dataDir = path.join(process.cwd(), 'data')
 
@@ -28,7 +29,3 @@ export async function getTerminology(): Promise<TerminologyDoc> {
   return JSON.parse(content) as TerminologyDoc
 }
 
-export function formatDate(dateStr: string): string {
-  const date = new Date(dateStr + 'T00:00:00')
-  return date.toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' })
-}

@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Forum, Spline_Sans } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/nav'
+import { ExNavProvider } from '@/context/exercises-nav'
 
 const forum = Forum({
   weight: '400',
@@ -28,14 +29,16 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${forum.variable} ${splineSans.variable} h-full antialiased`}>
       <body className="min-h-screen flex bg-background text-foreground">
-        <Nav />
-        <div className="flex-1 min-w-0 flex flex-col">
-          {/* Spacer for mobile fixed top bar */}
-          <div className="h-14 shrink-0 md:hidden" />
-          <main className="flex-1 max-w-[1200px] w-full mx-auto px-6 py-8">
-            {children}
-          </main>
-        </div>
+        <ExNavProvider>
+          <Nav />
+          <div className="flex-1 min-w-0 flex flex-col">
+            {/* Spacer for mobile fixed top bar */}
+            <div className="h-14 shrink-0 md:hidden" />
+            <main className="flex-1 max-w-[1200px] w-full mx-auto px-6 py-8">
+              {children}
+            </main>
+          </div>
+        </ExNavProvider>
       </body>
     </html>
   )

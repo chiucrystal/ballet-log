@@ -441,6 +441,121 @@
         "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch",
         "Stamina collapse across allegro sections — conditioning gap, not purely technique"
       ]
+    },
+    {
+      "code": "AF-16",
+      "name": "Allegro 4",
+      "corrections": []
+    },
+    {
+      "code": "AF-19",
+      "name": "Rises",
+      "corrections": []
+    },
+    {
+      "code": "AF-20",
+      "name": "Relevés and posés",
+      "corrections": []
+    },
+    {
+      "code": "AF-21",
+      "name": "Échappés relevés and emboîtés",
+      "corrections": []
+    },
+    {
+      "code": "AF-22",
+      "name": "Courus and posés",
+      "corrections": []
+    },
+    {
+      "code": "AF-23",
+      "name": "Pirouettes",
+      "corrections": []
+    },
+    {
+      "code": "AF-28",
+      "name": "Révérence",
+      "corrections": []
+    },
+    {
+      "code": "DR-B01",
+      "name": "Warm Up",
+      "corrections": []
+    },
+    {
+      "code": "DR-B02",
+      "name": "Pliés",
+      "corrections": []
+    },
+    {
+      "code": "DR-B03",
+      "name": "Tendus",
+      "corrections": []
+    },
+    {
+      "code": "DR-B04",
+      "name": "Jetés",
+      "corrections": []
+    },
+    {
+      "code": "DR-B05",
+      "name": "Ronds de jambe",
+      "corrections": []
+    },
+    {
+      "code": "DR-B06",
+      "name": "Fondus",
+      "corrections": []
+    },
+    {
+      "code": "DR-B07",
+      "name": "Preparation for batterie",
+      "corrections": []
+    },
+    {
+      "code": "DR-B08",
+      "name": "Adage",
+      "corrections": []
+    },
+    {
+      "code": "DR-B09",
+      "name": "Grands battements",
+      "corrections": []
+    },
+    {
+      "code": "DR-C01",
+      "name": "Port de bras",
+      "corrections": []
+    },
+    {
+      "code": "DR-C02",
+      "name": "Centre practice",
+      "corrections": []
+    },
+    {
+      "code": "DR-C03",
+      "name": "Adage",
+      "corrections": []
+    },
+    {
+      "code": "DR-C04",
+      "name": "Allegro 1",
+      "corrections": []
+    },
+    {
+      "code": "DR-C05",
+      "name": "Allegro 2",
+      "corrections": []
+    },
+    {
+      "code": "DR-C06",
+      "name": "Allegro 3",
+      "corrections": []
+    },
+    {
+      "code": "DR-C07",
+      "name": "Révérence",
+      "corrections": []
     }
   ],
   "physioNotes": {
