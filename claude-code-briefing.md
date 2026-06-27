@@ -4,7 +4,7 @@
 
 ## What this project is
 
-Crystal is an adult ballet student (RAD Advanced Foundation level) preparing for a December 2026 exam. She uses a Claude Project to log technique corrections from classes, private lessons, and physio, organized into two markdown files. She now wants a small hosted web app to view/filter that data, built and deployed by Claude Code, with the data itself continuing to be authored in the Claude Project (not in Code, not in the app).
+Crystal is an adult ballet student (RAD Advanced Foundation level) preparing for a June 2027 exam. She uses a Claude Project to log technique corrections from classes, private lessons, and physio, organized into two markdown files. She now wants a small hosted web app to view/filter that data, built and deployed by Claude Code, with the data itself continuing to be authored in the Claude Project (not in Code, not in the app).
 
 ## Division of responsibility — important
 
