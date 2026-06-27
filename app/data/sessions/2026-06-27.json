@@ -1,0 +1,78 @@
+{
+  "date": "2026-06-27",
+  "context": "Discovering Repertoire class — barre: pliés, tendus, ronds de jambe, fondus, preparation for batterie, adage; centre: port de bras, centre practice, adage, allegro 2–3",
+  "corrections": [
+    {
+      "text": "Pliés: musicality is the main priority — use the full phrase",
+      "theme": "Musicality and expression",
+      "exercise": "DR-B02"
+    },
+    {
+      "text": "Tendus: musicality is the main priority — use the full phrase",
+      "theme": "Musicality and expression",
+      "exercise": "DR-B03"
+    },
+    {
+      "text": "Ronds de jambe: listen to the music, don't rush",
+      "theme": "Musicality and expression",
+      "exercise": "DR-B05"
+    },
+    {
+      "text": "Fondus: listen to the music, don't rush",
+      "theme": "Musicality and expression",
+      "exercise": "DR-B06"
+    },
+    {
+      "text": "Preparation for batterie: listen to the music, don't rush",
+      "theme": "Musicality and expression",
+      "exercise": "DR-B07"
+    },
+    {
+      "text": "Adage barre — développé devant: square shoulders and hips",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "DR-B08"
+    },
+    {
+      "text": "Port de bras: projection — look beyond the arms and shoulders",
+      "theme": "Musicality and expression",
+      "exercise": "DR-C01"
+    },
+    {
+      "text": "Port de bras — fourth arms: shoulders straight, not tilted; same applies in développé écarté",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "DR-C01"
+    },
+    {
+      "text": "Centre practice — fourth arms: shoulders straight, not tilted; same applies in développé écarté",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "DR-C02"
+    },
+    {
+      "text": "Adage centre — développé devant: square shoulders and hips",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": "DR-C03"
+    },
+    {
+      "text": "Adage centre: projection — look beyond the arms and shoulders",
+      "theme": "Musicality and expression",
+      "exercise": "DR-C03"
+    },
+    {
+      "text": "Adage centre — à la seconde extension: active flexibility, not just passive stretch",
+      "theme": "Opposition and length under load",
+      "exercise": "DR-C03"
+    },
+    {
+      "text": "Allegro 2 — jeté passé: compact and directional, doesn't travel",
+      "theme": "Opposition and length under load",
+      "exercise": "DR-C05"
+    },
+    {
+      "text": "Allegro 3: projection — look beyond the arms and shoulders",
+      "theme": "Musicality and expression",
+      "exercise": "DR-C06"
+    }
+  ],
+  "homeExercises": [],
+  "openQuestions": []
+}

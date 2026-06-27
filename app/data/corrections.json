@@ -1,17 +1,17 @@
 {
-  "lastUpdated": "2026-06-25",
+  "lastUpdated": "2026-06-27",
   "priorities": [
     {
       "title": "Weight placement and demi-pointe proprioception",
       "detail": "Weight still in heels across all contexts — arches lifting but posterior bias persists. Upstream of pirouette axis, ankle instability, retiré mechanics, and allegro. Must be reliable on flat and in slow rises before pointe and jumps can return."
     },
     {
-      "title": "Outer hip and ankle stability under load",
-      "detail": "Leaning away from barre and wobbling in relevé fifth. Standing side collapsing in adage. Gripping barre in rond en l'air. Left lateral chain still carrying compensatory load from right ankle recovery. Bilateral issue confirmed across barre."
+      "title": "Musicality and projection",
+      "detail": "Teacher-named main priority for DR class June 27. Rushing phrases and not using all the music across barre and centre. Projection and looking outward still developing. Directly assessed in exam: timing, expression, communication, responsiveness."
     },
     {
-      "title": "Dynamic quality and opposition at the barre",
-      "detail": "Accent, resistance, and floor pressure corrections appearing across tendus, glissés, grand battement, frappés, fondus, and allegro. Arms before legs in allegro. Coordination of arms and legs in pliés. The underlying pattern is passivity — not using the full music or full range."
+      "title": "Outer hip and ankle stability under load",
+      "detail": "Leaning away from barre and wobbling in relevé fifth. Standing side collapsing in adage. Gripping barre in rond en l'air. Left lateral chain still carrying compensatory load from right ankle recovery. Bilateral issue confirmed across barre."
     }
   ],
   "themes": [
@@ -95,9 +95,9 @@
     },
     {
       "name": "Shoulder girdle and épaulement",
-      "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro.",
+      "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and during développé écarté.",
       "firstNoted": "2026-03-12",
-      "sessionCount": 6,
+      "sessionCount": 7,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -111,7 +111,11 @@
         "AF-09",
         "AF-15",
         "AF-25",
-        "DR"
+        "DR",
+        "DR-B08",
+        "DR-C01",
+        "DR-C02",
+        "DR-C03"
       ],
       "resolvedDate": null
     },
@@ -134,9 +138,9 @@
     },
     {
       "name": "Opposition and length under load",
-      "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. Not using full music or full range in grand battement and allegro.",
+      "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional.",
       "firstNoted": "2026-06-04",
-      "sessionCount": 3,
+      "sessionCount": 4,
       "examImpact": true,
       "markCriteria": [
         "dynamic values",
@@ -152,7 +156,9 @@
         "AF-10",
         "AF-14",
         "AF-15",
-        "AF-25"
+        "AF-25",
+        "DR-C03",
+        "DR-C05"
       ],
       "resolvedDate": null
     },
@@ -228,9 +234,9 @@
     },
     {
       "name": "Musicality and expression",
-      "summary": "Rushing phrases and not using all the music at the barre. Projection and expression across discovering repertoire. Distinct from dynamic quality (Opposition and length under load) — this is the performing layer: timing, communication outward, responsiveness to the phrase.",
+      "summary": "Teacher-named main priority for DR. Rushing phrases across barre and centre — pliés, tendus, ronds de jambe, fondus, batterie prep. Projection and looking outward still developing in centre. This is the performing layer distinct from dynamic quality: timing, communication outward, responsiveness to the phrase.",
       "firstNoted": "2026-05-28",
-      "sessionCount": 4,
+      "sessionCount": 5,
       "examImpact": true,
       "markCriteria": [
         "responsiveness to music",
@@ -243,7 +249,15 @@
         "AF-05",
         "AF-06",
         "AF-09",
-        "DR"
+        "DR",
+        "DR-B02",
+        "DR-B03",
+        "DR-B05",
+        "DR-B06",
+        "DR-B07",
+        "DR-C01",
+        "DR-C03",
+        "DR-C06"
       ],
       "resolvedDate": null
     }
@@ -427,7 +441,7 @@
         "Développé devant: square shoulders and hips",
         "Musicality is the main priority across the class",
         "Projection: look beyond the arms and shoulders",
-        "Fourth arms: shoulders straight, not tilted to either side",
+        "Fourth arms: shoulders straight, not tilted to either side — including in développé écarté",
         "Jeté passé: compact and directional, doesn't travel",
         "À la seconde extension: active flexibility not just passive stretch"
       ]
@@ -485,12 +499,16 @@
     {
       "code": "DR-B02",
       "name": "Pliés",
-      "corrections": []
+      "corrections": [
+        "Musicality is the main priority — use the full phrase"
+      ]
     },
     {
       "code": "DR-B03",
       "name": "Tendus",
-      "corrections": []
+      "corrections": [
+        "Musicality is the main priority — use the full phrase"
+      ]
     },
     {
       "code": "DR-B04",
@@ -500,22 +518,30 @@
     {
       "code": "DR-B05",
       "name": "Ronds de jambe",
-      "corrections": []
+      "corrections": [
+        "Listen to the music, don't rush"
+      ]
     },
     {
       "code": "DR-B06",
       "name": "Fondus",
-      "corrections": []
+      "corrections": [
+        "Listen to the music, don't rush"
+      ]
     },
     {
       "code": "DR-B07",
       "name": "Preparation for batterie",
-      "corrections": []
+      "corrections": [
+        "Listen to the music, don't rush"
+      ]
     },
     {
       "code": "DR-B08",
       "name": "Adage",
-      "corrections": []
+      "corrections": [
+        "Développé devant: square shoulders and hips"
+      ]
     },
     {
       "code": "DR-B09",
@@ -525,17 +551,26 @@
     {
       "code": "DR-C01",
       "name": "Port de bras",
-      "corrections": []
+      "corrections": [
+        "Projection: look beyond the arms and shoulders",
+        "Fourth arms: shoulders straight, not tilted — same applies in développé écarté"
+      ]
     },
     {
       "code": "DR-C02",
       "name": "Centre practice",
-      "corrections": []
+      "corrections": [
+        "Fourth arms: shoulders straight, not tilted — same applies in développé écarté"
+      ]
     },
     {
       "code": "DR-C03",
       "name": "Adage",
-      "corrections": []
+      "corrections": [
+        "Développé devant: square shoulders and hips",
+        "Projection: look beyond the arms and shoulders",
+        "À la seconde extension: active flexibility, not just passive stretch"
+      ]
     },
     {
       "code": "DR-C04",
@@ -545,12 +580,16 @@
     {
       "code": "DR-C05",
       "name": "Allegro 2",
-      "corrections": []
+      "corrections": [
+        "Jeté passé: compact and directional, doesn't travel"
+      ]
     },
     {
       "code": "DR-C06",
       "name": "Allegro 3",
-      "corrections": []
+      "corrections": [
+        "Projection: look beyond the arms and shoulders"
+      ]
     },
     {
       "code": "DR-C07",
