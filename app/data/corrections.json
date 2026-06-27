@@ -21,8 +21,20 @@
       "firstNoted": "2026-03-05",
       "sessionCount": 11,
       "examImpact": true,
-      "markCriteria": ["correct posture and weight placement"],
-      "exercises": ["AF-01", "AF-03", "AF-05", "AF-07", "AF-08", "AF-09", "AF-10", "AF-13", "AF-25"],
+      "markCriteria": [
+        "correct posture and weight placement"
+      ],
+      "exercises": [
+        "AF-01",
+        "AF-03",
+        "AF-05",
+        "AF-07",
+        "AF-08",
+        "AF-09",
+        "AF-10",
+        "AF-13",
+        "AF-25"
+      ],
       "resolvedDate": null
     },
     {
@@ -31,8 +43,19 @@
       "firstNoted": "2026-03-09",
       "sessionCount": 9,
       "examImpact": true,
-      "markCriteria": ["control", "line"],
-      "exercises": ["AF-01", "AF-05", "AF-07", "AF-08", "AF-10", "AF-12", "AF-25"],
+      "markCriteria": [
+        "control",
+        "line"
+      ],
+      "exercises": [
+        "AF-01",
+        "AF-05",
+        "AF-07",
+        "AF-08",
+        "AF-10",
+        "AF-12",
+        "AF-25"
+      ],
       "resolvedDate": null
     },
     {
@@ -41,8 +64,17 @@
       "firstNoted": "2026-03-09",
       "sessionCount": 4,
       "examImpact": true,
-      "markCriteria": ["control", "line", "co-ordination"],
-      "exercises": ["AF-05", "AF-08", "AF-09", "AF-10"],
+      "markCriteria": [
+        "control",
+        "line",
+        "co-ordination"
+      ],
+      "exercises": [
+        "AF-05",
+        "AF-08",
+        "AF-09",
+        "AF-10"
+      ],
       "resolvedDate": null
     },
     {
@@ -51,8 +83,14 @@
       "firstNoted": "2026-03-09",
       "sessionCount": 4,
       "examImpact": true,
-      "markCriteria": ["control", "co-ordination"],
-      "exercises": ["AF-10", "AF-11F"],
+      "markCriteria": [
+        "control",
+        "co-ordination"
+      ],
+      "exercises": [
+        "AF-10",
+        "AF-11F"
+      ],
       "resolvedDate": null
     },
     {
@@ -61,8 +99,20 @@
       "firstNoted": "2026-03-12",
       "sessionCount": 6,
       "examImpact": true,
-      "markCriteria": ["line", "co-ordination"],
-      "exercises": ["AF-01", "AF-03", "AF-07", "AF-08", "AF-09", "AF-15", "AF-25", "DR"],
+      "markCriteria": [
+        "line",
+        "co-ordination"
+      ],
+      "exercises": [
+        "AF-01",
+        "AF-03",
+        "AF-07",
+        "AF-08",
+        "AF-09",
+        "AF-15",
+        "AF-25",
+        "DR"
+      ],
       "resolvedDate": null
     },
     {
@@ -71,8 +121,15 @@
       "firstNoted": "2026-03-14",
       "sessionCount": 5,
       "examImpact": true,
-      "markCriteria": ["line", "expression", "dynamic values"],
-      "exercises": ["AF-07", "AF-12"],
+      "markCriteria": [
+        "line",
+        "expression",
+        "dynamic values"
+      ],
+      "exercises": [
+        "AF-07",
+        "AF-12"
+      ],
       "resolvedDate": null
     },
     {
@@ -81,8 +138,22 @@
       "firstNoted": "2026-06-04",
       "sessionCount": 3,
       "examImpact": true,
-      "markCriteria": ["dynamic values", "timing", "responsiveness to music", "co-ordination"],
-      "exercises": ["AF-01", "AF-05", "AF-06", "AF-07", "AF-10", "AF-14", "AF-15", "AF-25"],
+      "markCriteria": [
+        "dynamic values",
+        "timing",
+        "responsiveness to music",
+        "co-ordination"
+      ],
+      "exercises": [
+        "AF-01",
+        "AF-05",
+        "AF-06",
+        "AF-07",
+        "AF-10",
+        "AF-14",
+        "AF-15",
+        "AF-25"
+      ],
       "resolvedDate": null
     },
     {
@@ -91,8 +162,14 @@
       "firstNoted": "2026-06-04",
       "sessionCount": 2,
       "examImpact": true,
-      "markCriteria": ["line"],
-      "exercises": ["AF-07", "AF-08", "DR"],
+      "markCriteria": [
+        "line"
+      ],
+      "exercises": [
+        "AF-07",
+        "AF-08",
+        "DR"
+      ],
       "resolvedDate": null
     },
     {
@@ -101,8 +178,15 @@
       "firstNoted": "2026-03-09",
       "sessionCount": 9,
       "examImpact": true,
-      "markCriteria": ["correct posture and weight placement"],
-      "exercises": ["AF-01", "AF-05", "AF-08", "AF-25"],
+      "markCriteria": [
+        "correct posture and weight placement"
+      ],
+      "exercises": [
+        "AF-01",
+        "AF-05",
+        "AF-08",
+        "AF-25"
+      ],
       "resolvedDate": null
     },
     {
@@ -111,8 +195,19 @@
       "firstNoted": "2026-05-23",
       "sessionCount": 7,
       "examImpact": true,
-      "markCriteria": ["correct posture and weight placement", "line"],
-      "exercises": ["AF-02", "AF-05", "AF-06", "AF-08", "AF-09", "AF-15", "ALLEGRO"],
+      "markCriteria": [
+        "correct posture and weight placement",
+        "line"
+      ],
+      "exercises": [
+        "AF-02",
+        "AF-05",
+        "AF-06",
+        "AF-08",
+        "AF-09",
+        "AF-15",
+        "ALLEGRO"
+      ],
       "resolvedDate": null
     },
     {
@@ -121,18 +216,35 @@
       "firstNoted": "2026-03-10",
       "sessionCount": 3,
       "examImpact": true,
-      "markCriteria": ["line", "co-ordination"],
-      "exercises": ["AF-09", "AF-12"],
+      "markCriteria": [
+        "line",
+        "co-ordination"
+      ],
+      "exercises": [
+        "AF-09",
+        "AF-12"
+      ],
       "resolvedDate": null
     },
     {
       "name": "Musicality and expression",
-      "summary": "Rushing in discovering repertoire barre. Floor pressure, accent, and articulation corrections tied to not using full music. Recurring across barre and allegro.",
+      "summary": "Rushing phrases and not using all the music at the barre. Projection and expression across discovering repertoire. Distinct from dynamic quality (Opposition and length under load) — this is the performing layer: timing, communication outward, responsiveness to the phrase.",
       "firstNoted": "2026-05-28",
       "sessionCount": 4,
       "examImpact": true,
-      "markCriteria": ["responsiveness to music", "expression", "projection"],
-      "exercises": ["AF-05", "AF-06", "AF-09", "DR"],
+      "markCriteria": [
+        "responsiveness to music",
+        "timing",
+        "expression",
+        "projection",
+        "communication"
+      ],
+      "exercises": [
+        "AF-05",
+        "AF-06",
+        "AF-09",
+        "DR"
+      ],
       "resolvedDate": null
     }
   ],
