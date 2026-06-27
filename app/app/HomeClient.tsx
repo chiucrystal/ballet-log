@@ -7,6 +7,7 @@ import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { formatDate, formatShortDate } from '@/lib/format'
 import { EXERCISES_TREE } from '@/lib/exercises-tree'
+import { ExerciseTracker } from '@/components/ExerciseTracker'
 import type { Session, Priority } from '@/lib/types'
 
 // Build exercise code → { category, subgroup } lookup from the tree
@@ -267,6 +268,8 @@ export default function HomeClient({
       <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
         Welcome back, Crystal
       </h1>
+
+      <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
 
       {view === 'list' ? (
         <div className="flex gap-10 items-start">
