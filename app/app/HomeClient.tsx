@@ -226,6 +226,7 @@ export default function HomeClient({
 }) {
   const [view, setView] = useState<'list' | 'day'>('list')
   const [sessionIndex, setSessionIndex] = useState(0)
+  const [mobileTab, setMobileTab] = useState<'tracker' | 'priorities' | 'timeline'>('tracker')
 
   const currentSession = sessions[sessionIndex]
 
@@ -263,124 +264,159 @@ export default function HomeClient({
     </div>
   )
 
+  const prioritiesContent = (
+    <div className="space-y-3">
+      {priorities.map((p, i) => (
+        <Card key={i}>
+          <CardHeader>
+            <CardTitle>{i + 1}. {p.title}</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <p className="text-sm text-muted-foreground">{p.detail}</p>
+          </CardContent>
+        </Card>
+      ))}
+    </div>
+  )
+
+  const timelineListContent = (
+    <AccordionRoot multiple>
+      {sessions.map((session) => (
+        <AccordionItem key={session.date} value={session.date}>
+          <AccordionTrigger>
+            <div className="text-left">
+              <div className="font-medium">{formatDate(session.date)}</div>
+              <div className="text-xs text-muted-foreground mt-0.5">{session.context}</div>
+            </div>
+          </AccordionTrigger>
+          <AccordionContent>
+            {session.corrections.length === 0 ? (
+              <p className="text-sm text-muted-foreground italic">
+                No corrections recorded for this session.
+              </p>
+            ) : (
+              <div className="space-y-4">
+                {groupByExercise(session.corrections, exerciseNames).map((group) => (
+                  <div key={group.code ?? 'general'}>
+                    {group.name && (
+                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1.5">
+                        <span className="opacity-50 mr-1.5">{group.code}</span>{group.name}
+                      </p>
+                    )}
+                    <ul className="space-y-1.5">
+                      {group.items.map((text, i) => (
+                        <li key={i} className="text-sm leading-relaxed">{text}</li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            )}
+            {session.openQuestions.length > 0 && (
+              <div className="mt-4 pt-4 border-t border-border">
+                <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-[0.07em]">
+                  Open questions
+                </p>
+                <ul className="space-y-1">
+                  {session.openQuestions.map((q, i) => (
+                    <li key={i} className="text-sm text-muted-foreground">{q}</li>
+                  ))}
+                </ul>
+              </div>
+            )}
+          </AccordionContent>
+        </AccordionItem>
+      ))}
+    </AccordionRoot>
+  )
+
+  const timelineDayContent = currentSession ? (
+    <DayView
+      session={currentSession}
+      exerciseNames={exerciseNames}
+      hasPrev={sessionIndex < sessions.length - 1}
+      hasNext={sessionIndex > 0}
+      onPrev={() => setSessionIndex((i) => i + 1)}
+      onNext={() => setSessionIndex((i) => i - 1)}
+    />
+  ) : (
+    <p className="text-sm text-muted-foreground">No sessions recorded yet.</p>
+  )
+
   return (
     <div className="space-y-8">
       <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
         Welcome back, Crystal
       </h1>
 
-      <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
+      {/* ── Mobile tab layout ── */}
+      <div className="md:hidden space-y-6">
+        <div className="flex border-b border-border">
+          {(['tracker', 'priorities', 'timeline'] as const).map((tab) => (
+            <button
+              key={tab}
+              onClick={() => setMobileTab(tab)}
+              className={cn(
+                'flex-1 pb-2 text-xs font-semibold uppercase tracking-[0.07em] transition-colors',
+                mobileTab === tab
+                  ? 'border-b-2 border-foreground text-foreground -mb-px'
+                  : 'text-muted-foreground hover:text-foreground'
+              )}
+            >
+              {tab === 'tracker' ? 'Tracker' : tab === 'priorities' ? 'Priorities' : 'Timeline'}
+            </button>
+          ))}
+        </div>
+
+        {mobileTab === 'tracker' && (
+          <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
+        )}
+
+        {mobileTab === 'priorities' && prioritiesContent}
+
+        {mobileTab === 'timeline' && (
+          <div className="space-y-2">
+            {timelineHeader}
+            {view === 'list' ? timelineListContent : timelineDayContent}
+          </div>
+        )}
+      </div>
+
+      {/* ── Desktop layout (unchanged) ── */}
+      <div className="hidden md:block">
+        <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
+      </div>
 
       {view === 'list' ? (
-        <div className="flex gap-10 items-start">
+        <div className="hidden md:flex gap-10 items-start">
           {/* Left — priorities */}
           <div className="flex-1 min-w-0 space-y-4">
             <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
               Current Priorities
             </h2>
-            <div className="space-y-3">
-              {priorities.map((p, i) => (
-                <Card key={i}>
-                  <CardHeader>
-                    <CardTitle>{i + 1}. {p.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">{p.detail}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {prioritiesContent}
           </div>
 
           {/* Right — timeline */}
           <div className="w-80 shrink-0 space-y-2">
             {timelineHeader}
-            <AccordionRoot multiple>
-              {sessions.map((session) => (
-                <AccordionItem key={session.date} value={session.date}>
-                  <AccordionTrigger>
-                    <div className="text-left">
-                      <div className="font-medium">{formatDate(session.date)}</div>
-                      <div className="text-xs text-muted-foreground mt-0.5">{session.context}</div>
-                    </div>
-                  </AccordionTrigger>
-                  <AccordionContent>
-                    {session.corrections.length === 0 ? (
-                      <p className="text-sm text-muted-foreground italic">
-                        No corrections recorded for this session.
-                      </p>
-                    ) : (
-                      <div className="space-y-4">
-                        {groupByExercise(session.corrections, exerciseNames).map((group) => (
-                          <div key={group.code ?? 'general'}>
-                            {group.name && (
-                              <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1.5">
-                                <span className="opacity-50 mr-1.5">{group.code}</span>{group.name}
-                              </p>
-                            )}
-                            <ul className="space-y-1.5">
-                              {group.items.map((text, i) => (
-                                <li key={i} className="text-sm leading-relaxed">{text}</li>
-                              ))}
-                            </ul>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {session.openQuestions.length > 0 && (
-                      <div className="mt-4 pt-4 border-t border-border">
-                        <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-[0.07em]">
-                          Open questions
-                        </p>
-                        <ul className="space-y-1">
-                          {session.openQuestions.map((q, i) => (
-                            <li key={i} className="text-sm text-muted-foreground">{q}</li>
-                          ))}
-                        </ul>
-                      </div>
-                    )}
-                  </AccordionContent>
-                </AccordionItem>
-              ))}
-            </AccordionRoot>
+            {timelineListContent}
           </div>
         </div>
       ) : (
-        <div className="flex gap-10 items-start">
-          {/* Left — priorities (stays visible) */}
+        <div className="hidden md:flex gap-10 items-start">
+          {/* Left — priorities */}
           <div className="flex-1 min-w-0 space-y-4">
             <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
               Current Priorities
             </h2>
-            <div className="space-y-3">
-              {priorities.map((p, i) => (
-                <Card key={i}>
-                  <CardHeader>
-                    <CardTitle>{i + 1}. {p.title}</CardTitle>
-                  </CardHeader>
-                  <CardContent>
-                    <p className="text-sm text-muted-foreground">{p.detail}</p>
-                  </CardContent>
-                </Card>
-              ))}
-            </div>
+            {prioritiesContent}
           </div>
 
           {/* Right — day view */}
           <div className="w-80 shrink-0">
             {timelineHeader}
-            {currentSession ? (
-              <DayView
-                session={currentSession}
-                exerciseNames={exerciseNames}
-                hasPrev={sessionIndex < sessions.length - 1}
-                hasNext={sessionIndex > 0}
-                onPrev={() => setSessionIndex((i) => i + 1)}
-                onNext={() => setSessionIndex((i) => i - 1)}
-              />
-            ) : (
-              <p className="text-sm text-muted-foreground">No sessions recorded yet.</p>
-            )}
+            {timelineDayContent}
           </div>
         </div>
       )}
