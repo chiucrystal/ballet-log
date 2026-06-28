@@ -1,9 +1,17 @@
 'use client'
 
-import { useState, useEffect, Fragment } from 'react'
+import { useState, Fragment } from 'react'
 import { EXERCISES_TREE } from '@/lib/exercises-tree'
 import { cn } from '@/lib/utils'
 import type { Session } from '@/lib/types'
+
+// ── Schedule constants ────────────────────────────────────────────────────────
+
+const SCHEDULE_START = '2026-03-09'  // first class
+const BREAK_START    = '2026-04-03'  // no classes (break)
+const BREAK_END      = '2026-04-20'
+const ABSENCE_START  = '2026-03-19'  // student absent
+const ABSENCE_END    = '2026-05-09'
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -12,10 +20,8 @@ function parseDateLocal(str: string): Date {
   return new Date(y, m - 1, d)
 }
 
-function daysBetween(a: string, b: string): number {
-  return Math.round(
-    (parseDateLocal(b).getTime() - parseDateLocal(a).getTime()) / (1000 * 60 * 60 * 24)
-  )
+function isoDate(d: Date): string {
+  return `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`
 }
 
 function toDDMM(dateStr: string): string {
@@ -23,21 +29,23 @@ function toDDMM(dateStr: string): string {
   return `${d}-${m}`
 }
 
+function daysBetween(a: string, b: string): number {
+  return Math.round(
+    (parseDateLocal(b).getTime() - parseDateLocal(a).getTime()) / (1000 * 60 * 60 * 24)
+  )
+}
+
 function timeAgo(dateStr: string): string {
-  const diff = daysBetween(dateStr, new Date().toISOString().slice(0, 10))
+  const diff = daysBetween(dateStr, isoDate(new Date()))
   if (diff === 0) return 'today'
   if (diff < 7) return `${diff}d ago`
   if (diff < 14) return '1 wk ago'
   return `${Math.floor(diff / 7)} wks ago`
 }
 
-// ── Syllabus exercise order ───────────────────────────────────────────────────
+// ── Syllabus rows ─────────────────────────────────────────────────────────────
 
-type SyllabusRow = {
-  code: string
-  category: string
-  subgroup: string
-}
+type SyllabusRow = { code: string; category: string; subgroup: string }
 
 function buildSyllabusRows(): SyllabusRow[] {
   const rows: SyllabusRow[] = []
@@ -53,24 +61,52 @@ function buildSyllabusRows(): SyllabusRow[] {
 
 const ALL_SYLLABUS_ROWS = buildSyllabusRows()
 
-// ── Mobile hook ──────────────────────────────────────────────────────────────
+// ── Column generation ─────────────────────────────────────────────────────────
 
-function useIsMobile() {
-  const [mobile, setMobile] = useState(false)
-  useEffect(() => {
-    const check = () => setMobile(window.innerWidth < 768)
-    check()
-    window.addEventListener('resize', check)
-    return () => window.removeEventListener('resize', check)
-  }, [])
-  return mobile
+type ClassCol = { kind: 'class'; date: string; session: Session | null; absent: boolean }
+type BreakCol = { kind: 'break' }
+type Col = ClassCol | BreakCol
+
+function buildCols(sessions: Session[]): Col[] {
+  const sessionMap = new Map<string, Session>()
+  for (const s of sessions) sessionMap.set(s.date, s)
+
+  const today  = isoDate(new Date())
+  const start  = parseDateLocal(SCHEDULE_START)
+  const end    = parseDateLocal(today)
+  const bStart = parseDateLocal(BREAK_START)
+  const bEnd   = parseDateLocal(BREAK_END)
+  const aStart = parseDateLocal(ABSENCE_START)
+  const aEnd   = parseDateLocal(ABSENCE_END)
+
+  const cols: Col[] = []
+  let breakInserted = false
+  const d = new Date(start)
+
+  while (d <= end) {
+    const dow = d.getDay() // 1=Mon, 4=Thu, 6=Sat
+    if (dow === 1 || dow === 4 || dow === 6) {
+      if (d >= bStart && d <= bEnd) {
+        if (!breakInserted) {
+          cols.push({ kind: 'break' })
+          breakInserted = true
+        }
+      } else {
+        const dateStr = isoDate(d)
+        cols.push({
+          kind: 'class',
+          date: dateStr,
+          session: sessionMap.get(dateStr) ?? null,
+          absent: d >= aStart && d <= aEnd,
+        })
+      }
+    }
+    d.setDate(d.getDate() + 1)
+  }
+
+  // Newest on the left
+  return cols.reverse()
 }
-
-// ── Column types ──────────────────────────────────────────────────────────────
-
-type SessionCol = { kind: 'session'; session: Session }
-type GapCol = { kind: 'gap'; days: number }
-type Col = SessionCol | GapCol
 
 // ── Main component ────────────────────────────────────────────────────────────
 
@@ -83,37 +119,19 @@ export function ExerciseTracker({
 }) {
   const [sortOrder, setSortOrder] = useState<'syllabus' | 'neglected'>('syllabus')
   const [classFilter, setClassFilter] = useState<'all' | 'advanced' | 'discovering'>('all')
-  const isMobile = useIsMobile()
 
-  // Sessions newest-first for left-to-right reading
-  const chronological = [...sessions].sort((a, b) => b.date.localeCompare(a.date))
+  const cols = buildCols(sessions)
 
-  // Build columns: insert gap markers where there's a >4 week gap between sessions
-  const cols: Col[] = []
-  for (let i = 0; i < chronological.length; i++) {
-    const s = chronological[i]
-    if (i > 0) {
-      const prev = chronological[i - 1]
-      const gap = daysBetween(s.date, prev.date)
-      if (gap > 28) {
-        cols.push({ kind: 'gap', days: gap })
+  // exercise code → set of dates it was covered
+  const sessionExercises = new Map<string, Set<string>>()
+  for (const col of cols) {
+    if (col.kind === 'class' && col.session) {
+      const codes = new Set<string>()
+      for (const c of col.session.corrections) {
+        if (c.exercise) codes.add(c.exercise)
       }
+      sessionExercises.set(col.date, codes)
     }
-    cols.push({ kind: 'session', session: s })
-  }
-
-  // Which exercise codes actually appear in any session
-  const appearedCodes = new Set<string>()
-  const sessionExercises = new Map<string, Set<string>>() // date → set of codes
-  for (const s of chronological) {
-    const codes = new Set<string>()
-    for (const c of s.corrections) {
-      if (c.exercise) {
-        appearedCodes.add(c.exercise)
-        codes.add(c.exercise)
-      }
-    }
-    sessionExercises.set(s.date, codes)
   }
 
   const syllabusRows = ALL_SYLLABUS_ROWS.filter(r => {
@@ -122,11 +140,12 @@ export function ExerciseTracker({
     return true
   })
 
-  // For "neglected" sort: compute last-seen per code, sort ascending
+  // Most-recent date per exercise (for neglected sort)
   const lastSeenMap = new Map<string, string>()
-  for (const s of chronological) {
-    for (const code of sessionExercises.get(s.date) ?? []) {
-      lastSeenMap.set(code, s.date)
+  for (const [date, codes] of sessionExercises) {
+    for (const code of codes) {
+      const prev = lastSeenMap.get(code)
+      if (!prev || date > prev) lastSeenMap.set(code, date)
     }
   }
 
@@ -139,7 +158,6 @@ export function ExerciseTracker({
         })
       : syllabusRows
 
-  // Group display rows by category (only when in syllabus order)
   type CategoryGroup = { category: string; rows: SyllabusRow[] }
   const groups: CategoryGroup[] = []
   if (sortOrder === 'syllabus') {
@@ -155,29 +173,12 @@ export function ExerciseTracker({
     groups.push({ category: '', rows: displayRows })
   }
 
-  // On mobile, cap to 5 most-recent session columns (plus any gap cols between them)
-  const visibleCols = isMobile
-    ? (() => {
-        const result: Col[] = []
-        let sessionCount = 0
-        for (const col of cols) {
-          if (col.kind === 'session') {
-            if (sessionCount >= 5) break
-            sessionCount++
-          }
-          result.push(col)
-        }
-        return result
-      })()
-    : cols
-
-  // Cell width constants
-  const SESSION_COL_W = 28 // px
-  const GAP_COL_W = 36
+  const SESSION_COL_W = 28
+  const BREAK_COL_W  = 20
 
   return (
     <div className="space-y-1">
-      {/* Header row */}
+      {/* Header */}
       <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
         <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
           Exercise Tracker
@@ -185,8 +186,8 @@ export function ExerciseTracker({
         <div className="flex items-center gap-3 flex-wrap">
           <div className="flex flex-wrap gap-0.5">
             {([
-              { value: 'all', label: 'All' },
-              { value: 'advanced', label: 'Advanced Foundation' },
+              { value: 'all',        label: 'All' },
+              { value: 'advanced',   label: 'Advanced Foundation' },
               { value: 'discovering', label: 'Discovering Repertoire' },
             ] as const).map(({ value, label }) => (
               <button
@@ -216,35 +217,40 @@ export function ExerciseTracker({
         <table className="border-separate border-spacing-0">
           <thead>
             <tr>
-              {/* Exercise label column */}
               <th className="w-28 min-w-28 md:w-40 md:min-w-40" />
-              {/* Session / gap columns */}
-              {visibleCols.map((col, i) =>
-                col.kind === 'session' ? (
+              {cols.map((col, i) =>
+                col.kind === 'break' ? (
                   <th
-                    key={col.session.date}
-                    style={{ width: SESSION_COL_W, minWidth: SESSION_COL_W }}
+                    key="break"
+                    style={{ width: BREAK_COL_W, minWidth: BREAK_COL_W }}
                     className="pb-1 align-bottom"
-                    title={col.session.context}
                   >
                     <div
                       style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-                      className="text-[10px] text-muted-foreground font-normal leading-none whitespace-nowrap mx-auto"
+                      className="text-[9px] text-muted-foreground/25 font-normal leading-none whitespace-nowrap mx-auto"
                     >
-                      {toDDMM(col.session.date)}
+                      break
                     </div>
                   </th>
                 ) : (
                   <th
-                    key={`gap-${i}`}
-                    style={{ width: GAP_COL_W, minWidth: GAP_COL_W }}
+                    key={col.date}
+                    style={{ width: SESSION_COL_W, minWidth: SESSION_COL_W }}
                     className="pb-1 align-bottom"
+                    title={col.session?.context ?? undefined}
                   >
                     <div
                       style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-                      className="text-[10px] text-muted-foreground/40 font-normal leading-none whitespace-nowrap mx-auto"
+                      className={cn(
+                        'text-[10px] font-normal leading-none whitespace-nowrap mx-auto',
+                        col.session
+                          ? 'text-muted-foreground'
+                          : col.absent
+                          ? 'text-muted-foreground/20'
+                          : 'text-muted-foreground/40'
+                      )}
                     >
-                      ~{Math.round(col.days / 7)}wk gap
+                      {toDDMM(col.date)}
                     </div>
                   </th>
                 )
@@ -254,11 +260,10 @@ export function ExerciseTracker({
           <tbody>
             {groups.map((group, gi) => (
               <Fragment key={gi}>
-                {/* Category header row (syllabus mode only) */}
                 {sortOrder === 'syllabus' && group.category && (
-                  <tr key={`cat-${gi}`}>
+                  <tr>
                     <td
-                      colSpan={visibleCols.length + 1}
+                      colSpan={cols.length + 1}
                       className="pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground/50"
                     >
                       {group.category}
@@ -269,7 +274,6 @@ export function ExerciseTracker({
                   const lastSeen = lastSeenMap.get(row.code)
                   return (
                     <tr key={row.code} className="group">
-                      {/* Exercise label */}
                       <td className="pr-3 py-0.5">
                         <div className="flex items-baseline gap-2">
                           <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0">
@@ -285,32 +289,33 @@ export function ExerciseTracker({
                           )}
                         </div>
                       </td>
-                      {/* Cells */}
-                      {visibleCols.map((col, ci) => {
-                        if (col.kind === 'gap') {
+                      {cols.map((col, ci) => {
+                        if (col.kind === 'break') {
                           return (
-                            <td key={`gap-${ci}`} className="py-0.5 px-1">
-                              <div className="flex items-center justify-center h-5">
-                                <span className="text-[10px] text-muted-foreground/25 select-none">✕</span>
+                            <td key="break" className="py-0.5">
+                              <div className="flex items-center justify-center h-4">
+                                <div className="w-px h-3 bg-muted-foreground/15 mx-auto" />
                               </div>
                             </td>
                           )
                         }
-                        const done = sessionExercises.get(col.session.date)?.has(row.code) ?? false
+                        const covered = sessionExercises.get(col.date)?.has(row.code) ?? false
                         return (
                           <td
-                            key={col.session.date}
+                            key={col.date}
                             className="py-0.5"
-                            title={done ? col.session.context : undefined}
+                            title={covered ? col.session?.context : undefined}
                           >
                             <div className="flex items-center justify-center">
                               <div
-                                className={[
+                                className={cn(
                                   'w-4 h-4 rounded-sm transition-colors',
-                                  done
+                                  covered
                                     ? 'bg-foreground group-hover:opacity-80'
-                                    : 'bg-muted/60',
-                                ].join(' ')}
+                                    : col.absent
+                                    ? 'bg-muted/30'
+                                    : 'bg-muted/60'
+                                )}
                               />
                             </div>
                           </td>
@@ -326,7 +331,7 @@ export function ExerciseTracker({
       </div>
 
       {/* Legend */}
-      <div className="flex gap-4 pt-2 text-[10px] text-muted-foreground">
+      <div className="flex gap-4 pt-2 text-[10px] text-muted-foreground flex-wrap">
         <span className="flex items-center gap-1.5">
           <span className="w-4 h-4 rounded-sm bg-foreground inline-block" /> Covered
         </span>
@@ -334,7 +339,7 @@ export function ExerciseTracker({
           <span className="w-4 h-4 rounded-sm bg-muted/60 inline-block" /> Not covered
         </span>
         <span className="flex items-center gap-1.5">
-          <span className="text-muted-foreground/25 text-xs">✕</span> Injury gap
+          <span className="w-4 h-4 rounded-sm bg-muted/30 inline-block" /> Absent
         </span>
       </div>
     </div>
