@@ -183,19 +183,22 @@ export function ExerciseTracker({
         })
       : syllabusRows
 
-  type CategoryGroup = { category: string; rows: SyllabusRow[] }
-  const groups: CategoryGroup[] = []
+  // In syllabus order: group by subgroup name (Barre / Centre / Allegro),
+  // except Pointe Work is kept as a single section.
+  type Group = { label: string; rows: SyllabusRow[] }
+  const groups: Group[] = []
   if (sortOrder === 'syllabus') {
     for (const row of displayRows) {
       const last = groups[groups.length - 1]
-      if (last && last.category === row.category) {
+      const label = row.category === 'Pointe Work' ? 'Pointe Work' : row.subgroup
+      if (last && last.label === label) {
         last.rows.push(row)
       } else {
-        groups.push({ category: row.category, rows: [row] })
+        groups.push({ label, rows: [row] })
       }
     }
   } else {
-    groups.push({ category: '', rows: displayRows })
+    groups.push({ label: '', rows: displayRows })
   }
 
   function showTooltip(e: React.MouseEvent, exerciseName: string, date: string, texts: string[]) {
@@ -304,13 +307,13 @@ export function ExerciseTracker({
           <tbody>
             {groups.map((group, gi) => (
               <Fragment key={gi}>
-                {sortOrder === 'syllabus' && group.category && (
+                {sortOrder === 'syllabus' && group.label && (
                   <tr>
                     <td
                       colSpan={visibleCols.length + 1}
                       className="pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground/50"
                     >
-                      {group.category}
+                      {group.label}
                     </td>
                   </tr>
                 )}
