@@ -8,10 +8,10 @@ import type { Session } from '@/lib/types'
 
 // ── Schedule constants ────────────────────────────────────────────────────────
 
-const SCHEDULE_START = '2026-03-09'  // first class
-const BREAK_START    = '2026-04-03'  // no classes (break)
+const SCHEDULE_START = '2026-03-09'
+const BREAK_START    = '2026-04-03'
 const BREAK_END      = '2026-04-20'
-const ABSENCE_START  = '2026-03-19'  // student absent
+const ABSENCE_START  = '2026-03-19'
 const ABSENCE_END    = '2026-05-09'
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
@@ -44,7 +44,7 @@ function timeAgo(dateStr: string): string {
   return `${Math.floor(diff / 7)} wks ago`
 }
 
-// Monday=blue, Thursday=green, Saturday=yellow
+// Monday=#3971B8, Thursday=#C8D69B, Saturday=#F6E6A5
 function getDayColor(dateStr: string): string | null {
   const dow = parseDateLocal(dateStr).getDay()
   if (dow === 1) return '#3971B8'
@@ -94,7 +94,7 @@ function buildCols(sessions: Session[]): Col[] {
   const d = new Date(start)
 
   while (d <= end) {
-    const dow = d.getDay() // 1=Mon, 4=Thu, 6=Sat
+    const dow = d.getDay()
     if (dow === 1 || dow === 4 || dow === 6) {
       if (d >= bStart && d <= bEnd) {
         if (!breakInserted) {
@@ -114,8 +114,7 @@ function buildCols(sessions: Session[]): Col[] {
     d.setDate(d.getDate() + 1)
   }
 
-  // Newest on the left
-  return cols.reverse()
+  return cols.reverse() // newest first
 }
 
 // ── Main component ────────────────────────────────────────────────────────────
@@ -127,14 +126,19 @@ export function ExerciseTracker({
   sessions: Session[]
   exerciseNames: Record<string, string>
 }) {
-  const [sortOrder, setSortOrder] = useState<'syllabus' | 'neglected'>('syllabus')
-  const [classFilter, setClassFilter] = useState<'all' | 'advanced' | 'discovering'>('all')
+  const [sortOrder, setSortOrder]   = useState<'syllabus' | 'neglected'>('syllabus')
+  const [classFilter, setClassFilter] = useState<'advanced' | 'discovering'>('advanced')
+  const [viewMode, setViewMode]     = useState<'attended' | 'all'>('attended')
 
-  const cols = buildCols(sessions)
+  const allCols = buildCols(sessions)
 
-  // exercise code → set of dates it was covered
+  const visibleCols: Col[] = viewMode === 'attended'
+    ? allCols.filter((col): col is ClassCol => col.kind === 'class' && col.session !== null)
+    : allCols
+
+  // exercise code → set of session dates it was covered
   const sessionExercises = new Map<string, Set<string>>()
-  for (const col of cols) {
+  for (const col of allCols) {
     if (col.kind === 'class' && col.session) {
       const codes = new Set<string>()
       for (const c of col.session.corrections) {
@@ -144,13 +148,12 @@ export function ExerciseTracker({
     }
   }
 
-  const syllabusRows = ALL_SYLLABUS_ROWS.filter(r => {
-    if (classFilter === 'advanced') return r.category === 'Advanced Foundation' || r.category === 'Pointe Work'
-    if (classFilter === 'discovering') return r.category === 'Discovering Repertoire'
-    return true
-  })
+  const syllabusRows = ALL_SYLLABUS_ROWS.filter(r =>
+    classFilter === 'advanced'
+      ? r.category === 'Advanced Foundation' || r.category === 'Pointe Work'
+      : r.category === 'Discovering Repertoire'
+  )
 
-  // Most-recent date per exercise (for neglected sort)
   const lastSeenMap = new Map<string, string>()
   for (const [date, codes] of sessionExercises) {
     for (const code of codes) {
@@ -183,86 +186,92 @@ export function ExerciseTracker({
     groups.push({ category: '', rows: displayRows })
   }
 
-  const SESSION_COL_W = 28
-  const BREAK_COL_W  = 20
+  const COL_W    = 28
+  const BREAK_W  = 20
+  const LABEL_W  = 160 // px, matches md:w-40
 
   return (
     <div className="space-y-1">
-      {/* Header */}
-      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-2 mb-4">
-        <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-          Exercise Tracker
-        </h2>
-        <div className="flex items-center gap-3 flex-wrap">
-          <div className="flex flex-wrap gap-0.5">
-            {([
-              { value: 'all',        label: 'All' },
-              { value: 'advanced',   label: 'Advanced Foundation' },
-              { value: 'discovering', label: 'Discovering Repertoire' },
-            ] as const).map(({ value, label }) => (
-              <button
-                key={value}
-                onClick={() => setClassFilter(value)}
-                className={cn(
-                  'text-[11px] px-2 py-0.5 rounded transition-colors',
-                  classFilter === value
-                    ? 'bg-muted text-foreground'
-                    : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
-                )}
-              >
-                {label}
-              </button>
-            ))}
-          </div>
+      {/* ── Header ── */}
+      <div className="flex items-center justify-between gap-4 mb-4">
+        {/* Class tabs — replace heading */}
+        <div className="flex gap-5">
+          {([
+            { value: 'advanced',   label: 'Advanced Foundation' },
+            { value: 'discovering', label: 'Discovering Repertoire' },
+          ] as const).map(({ value, label }) => (
+            <button
+              key={value}
+              onClick={() => setClassFilter(value)}
+              className={cn(
+                'text-xs font-semibold uppercase tracking-[0.07em] transition-colors pb-0.5',
+                classFilter === value
+                  ? 'text-foreground border-b border-foreground'
+                  : 'text-muted-foreground/40 hover:text-muted-foreground'
+              )}
+            >
+              {label}
+            </button>
+          ))}
+        </div>
+
+        {/* Controls */}
+        <div className="flex items-center gap-2 shrink-0">
           <button
             onClick={() => setSortOrder(s => s === 'syllabus' ? 'neglected' : 'syllabus')}
-            className="text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded border border-border hover:border-foreground/30"
+            className="text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded border border-border hover:border-foreground/30 whitespace-nowrap"
           >
-            {sortOrder === 'syllabus' ? 'By syllabus' : 'By frequency'}
+            Sort: {sortOrder === 'syllabus' ? 'By syllabus' : 'By frequency'}
+          </button>
+          <button
+            onClick={() => setViewMode(v => v === 'attended' ? 'all' : 'attended')}
+            className="text-[11px] text-muted-foreground hover:text-foreground transition-colors px-2 py-0.5 rounded border border-border hover:border-foreground/30 whitespace-nowrap"
+          >
+            View: {viewMode === 'attended' ? 'Attended only' : 'All classes'}
           </button>
         </div>
       </div>
 
       <div className="overflow-x-auto">
-        <table className="border-separate border-spacing-0">
+        <table className="border-separate border-spacing-0" style={{ tableLayout: 'fixed' }}>
+          <colgroup>
+            <col style={{ width: LABEL_W }} />
+            {visibleCols.map((col, i) => (
+              <col
+                key={col.kind === 'break' ? 'break' : col.date}
+                style={{ width: col.kind === 'break' ? BREAK_W : COL_W }}
+              />
+            ))}
+          </colgroup>
           <thead>
             <tr>
-              <th className="w-28 min-w-28 md:w-40 md:min-w-40" />
-              {cols.map((col, i) =>
+              <th style={{ width: LABEL_W }} />
+              {visibleCols.map((col) =>
                 col.kind === 'break' ? (
-                  <th
-                    key="break"
-                    style={{ width: BREAK_COL_W, minWidth: BREAK_COL_W }}
-                    className="pb-1 align-bottom"
-                  >
-                    <div className="flex items-end justify-center h-full pb-0.5">
+                  <th key="break" className="pb-1 align-bottom">
+                    <div className="flex justify-center items-end pb-0.5">
                       <X className="size-3 text-muted-foreground/25" />
                     </div>
                   </th>
                 ) : (
-                  <th
-                    key={col.date}
-                    style={{ width: SESSION_COL_W, minWidth: SESSION_COL_W }}
-                    className="pb-1 align-bottom"
-                    title={col.session?.context ?? undefined}
-                  >
-                    <div
-                      style={{
-                        writingMode: 'vertical-rl',
-                        transform: 'rotate(180deg)',
-                        color: col.session
-                          ? (getDayColor(col.date) ?? undefined)
-                          : undefined,
-                      }}
-                      className={cn(
-                        'text-[10px] font-normal leading-none whitespace-nowrap mx-auto',
-                        !col.session && (col.absent
-                          ? 'text-muted-foreground/20'
-                          : 'text-muted-foreground/40'
-                        )
-                      )}
-                    >
-                      {toDDMM(col.date)}
+                  <th key={col.date} className="pb-1 align-bottom" title={col.session?.context ?? undefined}>
+                    <div className="flex justify-center items-end">
+                      <div
+                        style={{
+                          writingMode: 'vertical-rl',
+                          transform: 'rotate(180deg)',
+                          color: col.session ? (getDayColor(col.date) ?? undefined) : undefined,
+                        }}
+                        className={cn(
+                          'text-[10px] font-normal leading-none whitespace-nowrap',
+                          !col.session && (col.absent
+                            ? 'text-muted-foreground/20'
+                            : 'text-muted-foreground/40'
+                          )
+                        )}
+                      >
+                        {toDDMM(col.date)}
+                      </div>
                     </div>
                   </th>
                 )
@@ -275,7 +284,7 @@ export function ExerciseTracker({
                 {sortOrder === 'syllabus' && group.category && (
                   <tr>
                     <td
-                      colSpan={cols.length + 1}
+                      colSpan={visibleCols.length + 1}
                       className="pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground/50"
                     >
                       {group.category}
@@ -301,11 +310,11 @@ export function ExerciseTracker({
                           )}
                         </div>
                       </td>
-                      {cols.map((col, ci) => {
+                      {visibleCols.map((col) => {
                         if (col.kind === 'break') {
                           return (
                             <td key="break" className="py-0.5" title="Injury period">
-                              <div className="flex items-center justify-center h-4">
+                              <div className="flex items-center justify-center">
                                 <X className="size-3 text-muted-foreground/30" />
                               </div>
                             </td>
@@ -314,11 +323,7 @@ export function ExerciseTracker({
                         const covered = sessionExercises.get(col.date)?.has(row.code) ?? false
                         const dayColor = getDayColor(col.date)
                         return (
-                          <td
-                            key={col.date}
-                            className="py-0.5"
-                            title={covered ? col.session?.context : undefined}
-                          >
+                          <td key={col.date} className="py-0.5" title={covered ? col.session?.context : undefined}>
                             <div className="flex items-center justify-center">
                               <div
                                 className={cn(
@@ -352,9 +357,11 @@ export function ExerciseTracker({
         <span className="flex items-center gap-1.5">
           <span className="w-4 h-4 rounded-sm bg-muted/60 inline-block" /> Not covered
         </span>
-        <span className="flex items-center gap-1.5">
-          <span className="w-4 h-4 rounded-sm bg-muted/30 inline-block" /> Absent
-        </span>
+        {viewMode === 'all' && (
+          <span className="flex items-center gap-1.5">
+            <span className="w-4 h-4 rounded-sm bg-muted/30 inline-block" /> Absent
+          </span>
+        )}
       </div>
     </div>
   )

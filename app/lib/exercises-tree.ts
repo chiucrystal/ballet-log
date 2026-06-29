@@ -2,7 +2,7 @@ export const EXERCISES_TREE = [
   {
     category: "Advanced Foundation",
     subgroups: [
-      { name: "Barre", codes: ["AF-01", "AF-02", "AF-05", "AF-06", "AF-08"] },
+      { name: "Barre", codes: ["AF-01", "AF-02", "AF-03", "AF-05", "AF-06", "AF-07", "AF-08"] },
       { name: "Centre", codes: ["AF-09", "AF-10", "AF-11F", "AF-12"] },
       { name: "Allegro", codes: ["AF-13", "AF-14", "AF-15", "AF-16"] },
     ],
