@@ -317,7 +317,7 @@ export function ExerciseTracker({
                 {group.rows.map((row) => {
                   const lastSeen = lastSeenMap.get(row.code)
                   return (
-                    <tr key={row.code} className="group">
+                    <tr key={row.code}>
                       <td className="pr-3 py-0.5">
                         <div className="flex items-baseline gap-2">
                           <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0">
@@ -351,7 +351,7 @@ export function ExerciseTracker({
                                 className={cn(
                                   'w-4 h-4 rounded-sm transition-opacity cursor-default',
                                   covered
-                                    ? 'group-hover:opacity-80'
+                                    ? 'hover:opacity-70'
                                     : col.absent
                                     ? 'bg-muted/30'
                                     : 'bg-muted/60'
