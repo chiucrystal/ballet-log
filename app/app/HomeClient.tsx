@@ -344,8 +344,8 @@ export default function HomeClient({
   )
 
   return (
-    <div className="space-y-8">
-      <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
+    <div>
+      <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em] mb-8">
         Welcome back, Crystal
       </h1>
 
@@ -382,44 +382,25 @@ export default function HomeClient({
         )}
       </div>
 
-      {/* ── Desktop layout (unchanged) ── */}
-      <div className="hidden md:block">
-        <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
+      {/* ── Desktop layout: sticky timeline sidebar ── */}
+      <div className="hidden md:flex gap-10 items-start">
+        {/* Left column: tracker + priorities */}
+        <div className="flex-1 min-w-0 space-y-8">
+          <ExerciseTracker sessions={sessions} exerciseNames={exerciseNames} />
+          <div className="space-y-4">
+            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+              Current Priorities
+            </h2>
+            {prioritiesContent}
+          </div>
+        </div>
+
+        {/* Right column: sticky timeline */}
+        <div className="w-80 shrink-0 sticky top-8 max-h-[calc(100vh-4rem)] overflow-y-auto space-y-2">
+          {timelineHeader}
+          {view === 'list' ? timelineListContent : timelineDayContent}
+        </div>
       </div>
-
-      {view === 'list' ? (
-        <div className="hidden md:flex gap-10 items-start">
-          {/* Left — priorities */}
-          <div className="flex-1 min-w-0 space-y-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-              Current Priorities
-            </h2>
-            {prioritiesContent}
-          </div>
-
-          {/* Right — timeline */}
-          <div className="w-80 shrink-0 space-y-2">
-            {timelineHeader}
-            {timelineListContent}
-          </div>
-        </div>
-      ) : (
-        <div className="hidden md:flex gap-10 items-start">
-          {/* Left — priorities */}
-          <div className="flex-1 min-w-0 space-y-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
-              Current Priorities
-            </h2>
-            {prioritiesContent}
-          </div>
-
-          {/* Right — day view */}
-          <div className="w-80 shrink-0">
-            {timelineHeader}
-            {timelineDayContent}
-          </div>
-        </div>
-      )}
     </div>
   )
 }
