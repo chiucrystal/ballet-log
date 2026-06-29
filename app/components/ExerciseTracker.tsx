@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, Fragment } from 'react'
+import { X } from 'lucide-react'
 import { EXERCISES_TREE } from '@/lib/exercises-tree'
 import { cn } from '@/lib/utils'
 import type { Session } from '@/lib/types'
@@ -41,6 +42,15 @@ function timeAgo(dateStr: string): string {
   if (diff < 7) return `${diff}d ago`
   if (diff < 14) return '1 wk ago'
   return `${Math.floor(diff / 7)} wks ago`
+}
+
+// Monday=blue, Thursday=green, Saturday=yellow
+function getDayColor(dateStr: string): string | null {
+  const dow = parseDateLocal(dateStr).getDay()
+  if (dow === 1) return '#3971B8'
+  if (dow === 4) return '#C8D69B'
+  if (dow === 6) return '#F6E6A5'
+  return null
 }
 
 // ── Syllabus rows ─────────────────────────────────────────────────────────────
@@ -225,11 +235,8 @@ export function ExerciseTracker({
                     style={{ width: BREAK_COL_W, minWidth: BREAK_COL_W }}
                     className="pb-1 align-bottom"
                   >
-                    <div
-                      style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
-                      className="text-[9px] text-muted-foreground/25 font-normal leading-none whitespace-nowrap mx-auto"
-                    >
-                      break
+                    <div className="flex items-end justify-center h-full pb-0.5">
+                      <X className="size-3 text-muted-foreground/25" />
                     </div>
                   </th>
                 ) : (
@@ -240,14 +247,19 @@ export function ExerciseTracker({
                     title={col.session?.context ?? undefined}
                   >
                     <div
-                      style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
+                      style={{
+                        writingMode: 'vertical-rl',
+                        transform: 'rotate(180deg)',
+                        color: col.session
+                          ? (getDayColor(col.date) ?? undefined)
+                          : undefined,
+                      }}
                       className={cn(
                         'text-[10px] font-normal leading-none whitespace-nowrap mx-auto',
-                        col.session
-                          ? 'text-muted-foreground'
-                          : col.absent
+                        !col.session && (col.absent
                           ? 'text-muted-foreground/20'
                           : 'text-muted-foreground/40'
+                        )
                       )}
                     >
                       {toDDMM(col.date)}
@@ -292,14 +304,15 @@ export function ExerciseTracker({
                       {cols.map((col, ci) => {
                         if (col.kind === 'break') {
                           return (
-                            <td key="break" className="py-0.5">
+                            <td key="break" className="py-0.5" title="Injury period">
                               <div className="flex items-center justify-center h-4">
-                                <div className="w-px h-3 bg-muted-foreground/15 mx-auto" />
+                                <X className="size-3 text-muted-foreground/30" />
                               </div>
                             </td>
                           )
                         }
                         const covered = sessionExercises.get(col.date)?.has(row.code) ?? false
+                        const dayColor = getDayColor(col.date)
                         return (
                           <td
                             key={col.date}
@@ -309,13 +322,14 @@ export function ExerciseTracker({
                             <div className="flex items-center justify-center">
                               <div
                                 className={cn(
-                                  'w-4 h-4 rounded-sm transition-colors',
+                                  'w-4 h-4 rounded-sm transition-opacity',
                                   covered
-                                    ? 'bg-foreground group-hover:opacity-80'
+                                    ? 'group-hover:opacity-70'
                                     : col.absent
                                     ? 'bg-muted/30'
                                     : 'bg-muted/60'
                                 )}
+                                style={covered && dayColor ? { backgroundColor: dayColor } : undefined}
                               />
                             </div>
                           </td>
