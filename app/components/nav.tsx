@@ -3,7 +3,7 @@
 import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
-  Home, Layers, ClipboardList, Dumbbell, BookText,
+  Home, Layers, ClipboardList, Dumbbell, BookText, ListMusic,
   ChevronLeft, ChevronRight, ChevronDown, Menu, X,
 } from 'lucide-react'
 import { useState, useRef, useEffect, useCallback } from 'react'
@@ -21,6 +21,7 @@ const navLinks = [
   { href: '/themes', label: 'Themes', icon: Layers, children: undefined },
   { href: '/exercises', label: 'Syllabus', icon: ClipboardList, children: undefined },
   { href: '/training', label: 'Home Exercises', icon: Dumbbell, children: undefined },
+  { href: '/combinations', label: 'Combinations', icon: ListMusic, children: undefined },
   {
     href: '/terminology',
     label: 'Terminology',
