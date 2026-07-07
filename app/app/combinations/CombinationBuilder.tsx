@@ -7,7 +7,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
-import { SelectRoot, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
 import { cn } from '@/lib/utils'
 import type { CombinationWithDetails } from '@/lib/db/combinations'
 
@@ -86,7 +86,7 @@ export function CombinationBuilder({
           </div>
           <div className="space-y-1">
             <Label htmlFor="section">Section</Label>
-            <SelectRoot name="section" required defaultValue={initial?.section}>
+            <Select name="section" required defaultValue={initial?.section}>
               <SelectTrigger id="section">
                 <SelectValue placeholder="Select a section" />
               </SelectTrigger>
@@ -95,7 +95,7 @@ export function CombinationBuilder({
                   <SelectItem key={s} value={s}>{s}</SelectItem>
                 ))}
               </SelectContent>
-            </SelectRoot>
+            </Select>
           </div>
           <div className="space-y-1">
             <Label htmlFor="timeSignature">Time signature</Label>

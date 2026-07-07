@@ -1,6 +1,6 @@
 import { getSessions, getCorrections, formatDate } from '@/lib/data'
 import { Badge } from '@/components/ui/badge'
-import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 
 export default async function ThemesPage() {
   const [sessions, corrections] = await Promise.all([getSessions(), getCorrections()])
@@ -22,7 +22,7 @@ export default async function ThemesPage() {
   return (
     <div className="space-y-6">
       <h1 className="font-heading text-[28px] leading-[1.2]">Themes</h1>
-      <AccordionRoot multiple>
+      <Accordion multiple>
         {corrections.themes.map((theme) => {
           const items = themeCorrections[theme.name] ?? []
           return (
@@ -67,7 +67,7 @@ export default async function ThemesPage() {
             </AccordionItem>
           )
         })}
-      </AccordionRoot>
+      </Accordion>
     </div>
   )
 }

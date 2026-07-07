@@ -2,7 +2,7 @@
 
 import { useState } from 'react'
 import { LayoutList, CalendarDays, ChevronLeft, ChevronRight } from 'lucide-react'
-import { AccordionRoot, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
+import { Accordion, AccordionItem, AccordionTrigger, AccordionContent } from '@/components/ui/accordion'
 import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card'
 import { cn } from '@/lib/utils'
 import { formatDate, formatShortDate } from '@/lib/format'
@@ -280,7 +280,7 @@ export default function HomeClient({
   )
 
   const timelineListContent = (
-    <AccordionRoot multiple>
+    <Accordion multiple>
       {sessions.map((session) => (
         <AccordionItem key={session.date} value={session.date}>
           <AccordionTrigger>
@@ -327,7 +327,7 @@ export default function HomeClient({
           </AccordionContent>
         </AccordionItem>
       ))}
-    </AccordionRoot>
+    </Accordion>
   )
 
   const timelineDayContent = currentSession ? (
