@@ -5,7 +5,7 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { TimelineBlock, TimelineTrack } from '@/lib/timeline-types'
 
-const UNIT_PX = 26
+const UNIT_PX = 28 // px per half-count grid unit, along the vertical (time) axis
 const PICKUP_UNITS = 2 // half-count units before count 1 of the phrase
 const MIN_DURATION = 1
 
@@ -52,7 +52,7 @@ type DragState =
       kind: 'resize'
       track: TimelineTrack
       id: string
-      edge: 'left' | 'right'
+      edge: 'start' | 'end' // 'start' = the edge nearer count 1, 'end' = the edge further away
       anchorUnit: number
       originalStart: number
       originalDuration: number
@@ -89,10 +89,10 @@ export function ExerciseTimeline({
   totalCounts = 16,
 }: ExerciseTimelineProps) {
   const totalUnits = PICKUP_UNITS + totalCounts * 2
-  const gridWidth = totalUnits * UNIT_PX
+  const gridHeight = totalUnits * UNIT_PX
 
-  const legRowRef = useRef<HTMLDivElement>(null)
-  const armRowRef = useRef<HTMLDivElement>(null)
+  const legColRef = useRef<HTMLDivElement>(null)
+  const armColRef = useRef<HTMLDivElement>(null)
 
   const [drag, setDrag] = useState<DragState | null>(null)
   const [pending, setPending] = useState<PendingTerm | null>(null)
@@ -101,16 +101,16 @@ export function ExerciseTimeline({
   const longPress = useRef<{ timer: ReturnType<typeof setTimeout>; moved: boolean } | null>(null)
 
   const tracksOf = (track: TimelineTrack) => (track === 'leg' ? legTrack : armTrack)
-  const rowRefOf = (track: TimelineTrack) => (track === 'leg' ? legRowRef : armRowRef)
+  const colRefOf = (track: TimelineTrack) => (track === 'leg' ? legColRef : armColRef)
 
   function updateTrack(track: TimelineTrack, updater: (blocks: TimelineBlock[]) => TimelineBlock[]) {
     const setter = track === 'leg' ? onLegTrackChange : onArmTrackChange
     setter?.(updater(tracksOf(track)))
   }
 
-  function unitFromClientX(track: TimelineTrack, clientX: number) {
-    const rect = rowRefOf(track).current?.getBoundingClientRect()
-    const raw = rect ? (clientX - rect.left) / UNIT_PX : 0
+  function unitFromClientY(track: TimelineTrack, clientY: number) {
+    const rect = colRefOf(track).current?.getBoundingClientRect()
+    const raw = rect ? (clientY - rect.top) / UNIT_PX : 0
     return clamp(snap(raw), 0, totalUnits)
   }
 
@@ -122,9 +122,9 @@ export function ExerciseTimeline({
   }
 
   // ---- create ----
-  function onRowPointerDown(track: TimelineTrack, e: React.PointerEvent<HTMLDivElement>) {
+  function onColPointerDown(track: TimelineTrack, e: React.PointerEvent<HTMLDivElement>) {
     if (mode !== 'author' || e.button !== 0) return
-    const anchor = unitFromClientX(track, e.clientX)
+    const anchor = unitFromClientY(track, e.clientY)
     if (blockAt(tracksOf(track), anchor)) return // let the block's own handler deal with it
     const { lo, hi } = freeRange(tracksOf(track), undefined, anchor, totalUnits)
     if (hi - lo < MIN_DURATION) return
@@ -133,13 +133,13 @@ export function ExerciseTimeline({
     setDrag({ kind: 'create', track, start: anchor, end: anchor, lo, hi })
   }
 
-  function onRowPointerMove(track: TimelineTrack, e: React.PointerEvent<HTMLDivElement>) {
+  function onColPointerMove(track: TimelineTrack, e: React.PointerEvent<HTMLDivElement>) {
     if (!drag || drag.kind !== 'create' || drag.track !== track) return
-    const raw = unitFromClientX(track, e.clientX)
+    const raw = unitFromClientY(track, e.clientY)
     setDrag({ ...drag, end: clamp(raw, drag.lo, drag.hi) })
   }
 
-  function onRowPointerUp(track: TimelineTrack) {
+  function onColPointerUp(track: TimelineTrack) {
     if (!drag || drag.kind !== 'create' || drag.track !== track) return
     const start = Math.min(drag.start, drag.end)
     const duration = Math.max(MIN_DURATION, Math.abs(drag.end - drag.start) + 1)
@@ -152,7 +152,7 @@ export function ExerciseTimeline({
     e.stopPropagation()
     if (mode !== 'author') return
     const { lo, hi } = freeRange(tracksOf(track), block.id, block.startCount, totalUnits)
-    const anchorUnit = unitFromClientX(track, e.clientX)
+    const anchorUnit = unitFromClientY(track, e.clientY)
     e.currentTarget.setPointerCapture(e.pointerId)
     setDrag({ kind: 'move', track, id: block.id, anchorUnit, originalStart: block.startCount, duration: block.durationCount, lo, hi, start: block.startCount })
     longPress.current = {
@@ -168,7 +168,7 @@ export function ExerciseTimeline({
 
   function onBlockPointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!drag || drag.kind !== 'move') return
-    const raw = unitFromClientX(drag.track, e.clientX)
+    const raw = unitFromClientY(drag.track, e.clientY)
     const delta = raw - drag.anchorUnit
     if (Math.abs(delta) > 0 && longPress.current) longPress.current.moved = true
     const newStart = clamp(drag.originalStart + delta, drag.lo, drag.hi - drag.duration)
@@ -193,12 +193,12 @@ export function ExerciseTimeline({
     )
   }
 
-  function beginResize(track: TimelineTrack, block: TimelineBlock, edge: 'left' | 'right', e: React.PointerEvent<HTMLDivElement>) {
+  function beginResize(track: TimelineTrack, block: TimelineBlock, edge: 'start' | 'end', e: React.PointerEvent<HTMLDivElement>) {
     e.stopPropagation()
     if (mode !== 'author') return
-    const anchor = edge === 'left' ? block.startCount : block.startCount + block.durationCount
+    const anchor = edge === 'start' ? block.startCount : block.startCount + block.durationCount
     const { lo, hi } = freeRange(tracksOf(track), block.id, anchor, totalUnits)
-    const anchorUnit = unitFromClientX(track, e.clientX)
+    const anchorUnit = unitFromClientY(track, e.clientY)
     e.currentTarget.setPointerCapture(e.pointerId)
     setDrag({
       kind: 'resize',
@@ -217,9 +217,9 @@ export function ExerciseTimeline({
 
   function onResizePointerMove(e: React.PointerEvent<HTMLDivElement>) {
     if (!drag || drag.kind !== 'resize') return
-    const raw = unitFromClientX(drag.track, e.clientX)
+    const raw = unitFromClientY(drag.track, e.clientY)
     const delta = raw - drag.anchorUnit
-    if (drag.edge === 'left') {
+    if (drag.edge === 'start') {
       const newStart = clamp(drag.originalStart + delta, drag.lo, drag.originalStart + drag.originalDuration - MIN_DURATION)
       setDrag({ ...drag, start: newStart, duration: drag.originalStart + drag.originalDuration - newStart })
     } else {
@@ -281,192 +281,193 @@ export function ExerciseTimeline({
     }
   }
 
-  function renderTrackRow(track: TimelineTrack, label: string) {
+  function renderTrackColumn(track: TimelineTrack) {
     const blocks = tracksOf(track)
     const previewDrag = drag && drag.track === track ? drag : null
 
     return (
-      <div className="flex items-stretch gap-3">
-        <div className="w-10 shrink-0 self-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">
-          {label}
-        </div>
-        <div
-          ref={rowRefOf(track)}
-          className="relative h-12 rounded-md select-none touch-none"
-          style={{
-            width: gridWidth,
-            backgroundImage: [
-              `repeating-linear-gradient(to right, color-mix(in oklch, var(--border), transparent 25%) 0, color-mix(in oklch, var(--border), transparent 25%) 1px, transparent 1px, transparent ${UNIT_PX * 2}px)`,
-              `repeating-linear-gradient(to right, color-mix(in oklch, var(--border), transparent 65%) 0, color-mix(in oklch, var(--border), transparent 65%) 1px, transparent 1px, transparent ${UNIT_PX}px)`,
-            ].join(', '),
-            backgroundColor: 'var(--muted)',
-          }}
-          onPointerDown={(e) => onRowPointerDown(track, e)}
-          onPointerMove={(e) => onRowPointerMove(track, e)}
-          onPointerUp={() => onRowPointerUp(track)}
-        >
-          {/* count-1 divider */}
-          <div className="absolute inset-y-0 w-px bg-border" style={{ left: PICKUP_UNITS * UNIT_PX }} />
+      <div
+        ref={colRefOf(track)}
+        className="relative flex-1 min-w-0 select-none touch-none"
+        style={{
+          height: gridHeight,
+          backgroundImage: [
+            `repeating-linear-gradient(to bottom, color-mix(in oklch, var(--border), transparent 25%) 0, color-mix(in oklch, var(--border), transparent 25%) 1px, transparent 1px, transparent ${UNIT_PX * 2}px)`,
+            `repeating-linear-gradient(to bottom, color-mix(in oklch, var(--border), transparent 65%) 0, color-mix(in oklch, var(--border), transparent 65%) 1px, transparent 1px, transparent ${UNIT_PX}px)`,
+          ].join(', '),
+          backgroundColor: 'var(--muted)',
+        }}
+        onPointerDown={(e) => onColPointerDown(track, e)}
+        onPointerMove={(e) => onColPointerMove(track, e)}
+        onPointerUp={() => onColPointerUp(track)}
+      >
+        {/* count-1 divider */}
+        <div className="absolute inset-x-0 h-px bg-border" style={{ top: PICKUP_UNITS * UNIT_PX }} />
 
-          {previewDrag && previewDrag.kind === 'create' && (
+        {previewDrag && previewDrag.kind === 'create' && (
+          <div
+            className="absolute left-1 right-1 rounded-md border border-dashed border-primary/60 bg-primary/10"
+            style={{
+              top: Math.min(previewDrag.start, previewDrag.end) * UNIT_PX + 2,
+              height: (Math.abs(previewDrag.end - previewDrag.start) + 1) * UNIT_PX - 4,
+            }}
+          />
+        )}
+
+        {blocks.map((block) => {
+          const activeDrag = drag && 'id' in drag && drag.id === block.id ? drag : null
+          let start = block.startCount
+          let duration = block.durationCount
+          if (activeDrag?.kind === 'move') {
+            start = activeDrag.start
+          } else if (activeDrag?.kind === 'resize') {
+            start = activeDrag.start
+            duration = activeDrag.duration
+          }
+          const isSelected = selected?.track === track && selected.id === block.id
+          const isExpanded = expanded?.track === track && expanded.id === block.id
+          const isEditing = pending?.id === block.id && pending.track === track
+
+          return (
             <div
-              className="absolute top-1 bottom-1 rounded-md border border-dashed border-primary/60 bg-primary/10"
-              style={{
-                left: Math.min(previewDrag.start, previewDrag.end) * UNIT_PX + 2,
-                width: (Math.abs(previewDrag.end - previewDrag.start) + 1) * UNIT_PX - 4,
+              key={block.id}
+              tabIndex={mode === 'author' ? 0 : -1}
+              onKeyDown={(e) => onKeyDownBlock(e, track, block.id)}
+              onPointerDown={(e) => beginMove(track, block, e)}
+              onPointerMove={onBlockPointerMove}
+              onPointerUp={(e) => onBlockPointerUp(e, block)}
+              onClick={(e) => {
+                if (mode !== 'studio') return
+                e.stopPropagation()
+                setExpanded((prev) => (prev && prev.id === block.id ? null : { track, id: block.id }))
               }}
-            />
-          )}
-
-          {blocks.map((block) => {
-            const activeDrag = drag && 'id' in drag && drag.id === block.id ? drag : null
-            let start = block.startCount
-            let duration = block.durationCount
-            if (activeDrag?.kind === 'move') {
-              start = activeDrag.start
-            } else if (activeDrag?.kind === 'resize') {
-              start = activeDrag.start
-              duration = activeDrag.duration
-            }
-            const isSelected = selected?.track === track && selected.id === block.id
-            const isExpanded = expanded?.track === track && expanded.id === block.id
-
-            return (
-              <div
-                key={block.id}
-                tabIndex={mode === 'author' ? 0 : -1}
-                onKeyDown={(e) => onKeyDownBlock(e, track, block.id)}
-                onPointerDown={(e) => beginMove(track, block, e)}
-                onPointerMove={onBlockPointerMove}
-                onPointerUp={(e) => onBlockPointerUp(e, block)}
-                onClick={(e) => {
-                  if (mode !== 'studio') return
-                  e.stopPropagation()
-                  setExpanded((prev) => (prev && prev.id === block.id ? null : { track, id: block.id }))
-                }}
-                onDoubleClick={(e) => {
-                  if (mode !== 'author') return
-                  e.stopPropagation()
-                  setPending({ track, id: block.id, startCount: block.startCount, durationCount: block.durationCount, value: block.term })
-                }}
-                className={cn(
-                  'absolute top-1 bottom-1 rounded-md border px-1.5 flex items-center text-[11px] font-medium leading-tight outline-none select-none touch-none',
-                  'transition-shadow',
-                  block.isPickup
-                    ? 'border-dashed border-accent-foreground/40 text-accent-foreground'
-                    : track === 'leg'
-                      ? 'bg-primary/15 border-primary/40 text-foreground'
-                      : 'bg-accent border-accent-foreground/30 text-accent-foreground',
-                  isSelected && 'ring-2 ring-ring',
-                  mode === 'author' ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
-                )}
-                style={{
-                  left: start * UNIT_PX + 2,
-                  width: duration * UNIT_PX - 4,
-                  backgroundImage: block.isPickup
-                    ? 'repeating-linear-gradient(45deg, color-mix(in oklch, var(--accent-foreground), transparent 85%) 0, color-mix(in oklch, var(--accent-foreground), transparent 85%) 4px, transparent 4px, transparent 8px)'
-                    : undefined,
-                }}
-              >
-                <span className="truncate">{block.term}</span>
-
-                {mode === 'author' && (
-                  <>
-                    <div
-                      onPointerDown={(e) => beginResize(track, block, 'left', e)}
-                      onPointerMove={onResizePointerMove}
-                      onPointerUp={() => onResizePointerUp(block)}
-                      className="absolute inset-y-0 left-0 w-2 cursor-col-resize"
-                    />
-                    <div
-                      onPointerDown={(e) => beginResize(track, block, 'right', e)}
-                      onPointerMove={onResizePointerMove}
-                      onPointerUp={() => onResizePointerUp(block)}
-                      className="absolute inset-y-0 right-0 w-2 cursor-col-resize"
-                    />
-                    {isSelected && (
-                      <button
-                        type="button"
-                        onPointerDown={(e) => e.stopPropagation()}
-                        onClick={(e) => {
-                          e.stopPropagation()
-                          deleteBlock(track, block.id)
-                        }}
-                        className="absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-destructive text-white shadow-sm"
-                        aria-label="Delete block"
-                      >
-                        <X className="size-2.5" />
-                      </button>
-                    )}
-                  </>
-                )}
-
-                {mode === 'studio' && isExpanded && (
-                  <div className="absolute top-full left-0 z-20 mt-1 max-w-56 rounded-md border border-border bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md">
-                    {block.term}
-                  </div>
-                )}
-
-                {pending && pending.id === block.id && pending.track === track && (
-                  <TermEditorPopover pending={pending} setPending={setPending} onCommit={commitPending} />
-                )}
-              </div>
-            )
-          })}
-
-          {pending && pending.id === null && pending.track === track && (
-            <div
-              className="absolute top-1 bottom-1 rounded-md border border-primary/50 bg-primary/10"
-              style={{ left: pending.startCount * UNIT_PX + 2, width: pending.durationCount * UNIT_PX - 4 }}
+              onDoubleClick={(e) => {
+                if (mode !== 'author') return
+                e.stopPropagation()
+                setPending({ track, id: block.id, startCount: block.startCount, durationCount: block.durationCount, value: block.term })
+              }}
+              className={cn(
+                'absolute left-1 right-1 rounded-md border border-l-4 pl-1.5 pr-1 pt-1 pb-0.5 flex items-start text-[11px] font-medium leading-tight outline-none select-none touch-none',
+                'transition-shadow',
+                block.isPickup
+                  ? 'border-dashed border-l-accent-foreground/50 border-accent-foreground/40 text-accent-foreground'
+                  : track === 'leg'
+                    ? 'bg-primary/15 border-primary/40 border-l-primary text-foreground'
+                    : 'bg-accent border-accent-foreground/30 border-l-accent-foreground text-accent-foreground',
+                isSelected && 'ring-2 ring-ring',
+                mode === 'author' ? 'cursor-grab active:cursor-grabbing' : 'cursor-pointer',
+              )}
+              style={{
+                top: start * UNIT_PX + 2,
+                height: duration * UNIT_PX - 4,
+                backgroundImage: block.isPickup
+                  ? 'repeating-linear-gradient(45deg, color-mix(in oklch, var(--accent-foreground), transparent 85%) 0, color-mix(in oklch, var(--accent-foreground), transparent 85%) 4px, transparent 4px, transparent 8px)'
+                  : undefined,
+              }}
             >
-              <TermEditorPopover pending={pending} setPending={setPending} onCommit={commitPending} />
+              {isEditing ? (
+                <InlineTermInput pending={pending} setPending={setPending} onCommit={commitPending} />
+              ) : (
+                <span className="truncate">{block.term}</span>
+              )}
+
+              {mode === 'author' && (
+                <>
+                  <div
+                    onPointerDown={(e) => beginResize(track, block, 'start', e)}
+                    onPointerMove={onResizePointerMove}
+                    onPointerUp={() => onResizePointerUp(block)}
+                    className="absolute inset-x-0 top-0 h-2 cursor-row-resize"
+                  />
+                  <div
+                    onPointerDown={(e) => beginResize(track, block, 'end', e)}
+                    onPointerMove={onResizePointerMove}
+                    onPointerUp={() => onResizePointerUp(block)}
+                    className="absolute inset-x-0 bottom-0 h-2 cursor-row-resize"
+                  />
+                  {isSelected && (
+                    <button
+                      type="button"
+                      onPointerDown={(e) => e.stopPropagation()}
+                      onClick={(e) => {
+                        e.stopPropagation()
+                        deleteBlock(track, block.id)
+                      }}
+                      className="absolute -top-2 -right-2 flex size-4 items-center justify-center rounded-full bg-destructive text-white shadow-sm"
+                      aria-label="Delete block"
+                    >
+                      <X className="size-2.5" />
+                    </button>
+                  )}
+                </>
+              )}
+
+              {mode === 'studio' && isExpanded && (
+                <div className="absolute top-full left-0 z-20 mt-1 max-w-56 rounded-md border border-border bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md">
+                  {block.term}
+                </div>
+              )}
             </div>
-          )}
-        </div>
+          )
+        })}
+
+        {pending && pending.id === null && pending.track === track && (
+          <div
+            className="absolute left-1 right-1 rounded-md border border-primary/50 bg-primary/10 pl-1.5 pr-1 pt-1 pb-0.5 flex items-start"
+            style={{ top: pending.startCount * UNIT_PX + 2, height: pending.durationCount * UNIT_PX - 4 }}
+          >
+            <InlineTermInput pending={pending} setPending={setPending} onCommit={commitPending} />
+          </div>
+        )}
       </div>
     )
   }
 
   return (
-    <div className="space-y-3">
-      <div className="overflow-x-auto pb-2" style={{ overflowY: 'visible' }}>
-        <div style={{ width: gridWidth + 40 }}>
-          <div className="flex items-stretch gap-3 mb-1">
-            <div className="w-10 shrink-0" />
-            <div className="relative h-4" style={{ width: gridWidth }}>
-              {Array.from({ length: totalUnits }).map((_, u) => {
-                const label = unitLabel(u)
-                if (label === null) return null
-                return (
-                  <span
-                    key={u}
-                    className={cn(
-                      'absolute top-0 tabular-nums',
-                      label === '&' ? 'text-[9px] text-muted-foreground/50' : 'text-[10px] text-muted-foreground font-medium',
-                    )}
-                    style={{ left: u * UNIT_PX + 2 }}
-                  >
-                    {label}
-                  </span>
-                )
-              })}
-              <span className="absolute -top-0 text-[8px] uppercase tracking-widest text-muted-foreground/40" style={{ left: 0 }}>
-                pickup
+    <div className="flex items-start gap-2">
+      {/* ruler */}
+      <div className="w-8 shrink-0">
+        <div className="h-6" />
+        <div className="relative" style={{ height: gridHeight }}>
+          {Array.from({ length: totalUnits }).map((_, u) => {
+            const label = unitLabel(u)
+            if (label === null) return null
+            return (
+              <span
+                key={u}
+                className={cn(
+                  'absolute right-0 -translate-y-1/2 tabular-nums',
+                  label === '&' ? 'text-[9px] text-muted-foreground/50' : 'text-[10px] text-muted-foreground font-medium',
+                )}
+                style={{ top: u * UNIT_PX }}
+              >
+                {label}
               </span>
-            </div>
-          </div>
+            )
+          })}
+          <span className="absolute top-0 -translate-y-1/2 text-[7px] uppercase tracking-widest text-muted-foreground/40">
+            pickup
+          </span>
+        </div>
+      </div>
 
-          <div className="space-y-2">
-            {renderTrackRow('leg', 'Leg')}
-            {renderTrackRow('arm', 'Arm')}
-          </div>
+      {/* track columns */}
+      <div className="flex-1 min-w-0">
+        <div className="flex h-6 items-end pb-1">
+          <div className="flex-1 text-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">Leg</div>
+          <div className="flex-1 text-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">Arm</div>
+        </div>
+        <div className="flex gap-2">
+          {renderTrackColumn('leg')}
+          {renderTrackColumn('arm')}
         </div>
       </div>
     </div>
   )
 }
 
-function TermEditorPopover({
+/** Edits a block's term in place, in the same slot the label normally occupies. */
+function InlineTermInput({
   pending,
   setPending,
   onCommit,
@@ -476,23 +477,20 @@ function TermEditorPopover({
   onCommit: () => void
 }) {
   return (
-    <div
-      className="absolute top-full left-0 z-30 mt-1 flex w-40 gap-1"
+    <input
+      autoFocus
+      value={pending.value}
+      onChange={(e) => setPending({ ...pending, value: e.target.value })}
       onPointerDown={(e) => e.stopPropagation()}
       onClick={(e) => e.stopPropagation()}
-    >
-      <input
-        autoFocus
-        value={pending.value}
-        onChange={(e) => setPending({ ...pending, value: e.target.value })}
-        onKeyDown={(e) => {
-          if (e.key === 'Enter') onCommit()
-          if (e.key === 'Escape') setPending(null)
-        }}
-        onBlur={onCommit}
-        placeholder="Term…"
-        className="h-6 w-full min-w-0 rounded-md border border-ring bg-popover px-1.5 text-xs text-popover-foreground shadow-md outline-none"
-      />
-    </div>
+      onKeyDown={(e) => {
+        e.stopPropagation()
+        if (e.key === 'Enter') onCommit()
+        if (e.key === 'Escape') setPending(null)
+      }}
+      onBlur={onCommit}
+      placeholder="Term…"
+      className="w-full min-w-0 bg-transparent text-[11px] font-medium leading-tight outline-none placeholder:text-muted-foreground"
+    />
   )
 }
