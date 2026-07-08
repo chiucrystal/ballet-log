@@ -5,9 +5,10 @@ import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import type { TimelineBlock, TimelineTrack } from '@/lib/timeline-types'
 
-const UNIT_PX = 28 // px per half-count grid unit, along the vertical (time) axis
+const UNIT_PX = 34 // px per half-count grid unit, along the vertical (time) axis
 const PICKUP_UNITS = 2 // half-count units before count 1 of the phrase
 const MIN_DURATION = 1
+const DEFAULT_PHRASE_LENGTH = 8 // counts per phrase, when phraseBreaks isn't given explicitly
 
 function snap(raw: number) {
   return Math.round(raw)
@@ -21,10 +22,28 @@ function isPickupRange(start: number, duration: number) {
   return start + duration <= PICKUP_UNITS
 }
 
-function unitLabel(u: number): string | null {
-  if (u < PICKUP_UNITS) return null
-  const n = Math.floor(u / 2)
-  return u % 2 === 0 ? String(n) : '&'
+/** Unit positions where the on-screen count resets to 1 (e.g. every 8 counts). Always starts at PICKUP_UNITS. */
+function defaultPhraseBreaks(totalUnits: number, phraseLength: number) {
+  const breaks: number[] = []
+  const step = phraseLength * 2
+  for (let b = PICKUP_UNITS; b < totalUnits; b += step) breaks.push(b)
+  return breaks
+}
+
+function phraseStartFor(u: number, breaks: number[]) {
+  let b = breaks[0]
+  for (const brk of breaks) {
+    if (brk <= u) b = brk
+    else break
+  }
+  return b
+}
+
+function unitLabel(u: number, breaks: number[]): string | null {
+  if (u < breaks[0]) return null
+  const b = phraseStartFor(u, breaks)
+  const n = Math.floor((u - b) / 2) + 1
+  return (u - b) % 2 === 0 ? String(n) : '&'
 }
 
 /** Free gap in `blocks` (a single track) that contains `anchor`, excluding `excludeId`. */
@@ -78,6 +97,13 @@ export interface ExerciseTimelineProps {
   onArmTrackChange?: (blocks: TimelineBlock[]) => void
   /** Length of the danced phrase in whole counts (excludes the pickup lead-in). */
   totalCounts?: number
+  /** Counts per on-screen phrase, for the common case where every phrase is the same length. Default 8. */
+  phraseLength?: number
+  /**
+   * Explicit unit positions where the displayed count resets to 1, for exercises whose phrases
+   * aren't a uniform length (e.g. a 4-count intro before the first 8-count phrase). Overrides phraseLength.
+   */
+  phraseBreaks?: number[]
 }
 
 export function ExerciseTimeline({
@@ -87,9 +113,12 @@ export function ExerciseTimeline({
   onLegTrackChange,
   onArmTrackChange,
   totalCounts = 16,
+  phraseLength = DEFAULT_PHRASE_LENGTH,
+  phraseBreaks,
 }: ExerciseTimelineProps) {
   const totalUnits = PICKUP_UNITS + totalCounts * 2
   const gridHeight = totalUnits * UNIT_PX
+  const breaks = phraseBreaks ?? defaultPhraseBreaks(totalUnits, phraseLength)
 
   const legColRef = useRef<HTMLDivElement>(null)
   const armColRef = useRef<HTMLDivElement>(null)
@@ -301,12 +330,18 @@ export function ExerciseTimeline({
         onPointerMove={(e) => onColPointerMove(track, e)}
         onPointerUp={() => onColPointerUp(track)}
       >
-        {/* count-1 divider */}
-        <div className="absolute inset-x-0 h-px bg-border" style={{ top: PICKUP_UNITS * UNIT_PX }} />
+        {/* phrase dividers — the first marks count 1, later ones mark where the next phrase starts */}
+        {breaks.map((b, i) => (
+          <div
+            key={b}
+            className={i === 0 ? 'absolute inset-x-0 h-px bg-border' : 'absolute inset-x-0 h-0.5 bg-foreground/30'}
+            style={{ top: b * UNIT_PX }}
+          />
+        ))}
 
         {previewDrag && previewDrag.kind === 'create' && (
           <div
-            className="absolute left-1 right-1 rounded-md border border-dashed border-primary/60 bg-primary/10"
+            className="absolute left-1 right-1 rounded-sm border border-dashed border-primary/60 bg-primary/10"
             style={{
               top: Math.min(previewDrag.start, previewDrag.end) * UNIT_PX + 2,
               height: (Math.abs(previewDrag.end - previewDrag.start) + 1) * UNIT_PX - 4,
@@ -347,7 +382,7 @@ export function ExerciseTimeline({
                 setPending({ track, id: block.id, startCount: block.startCount, durationCount: block.durationCount, value: block.term })
               }}
               className={cn(
-                'absolute left-1 right-1 rounded-md border border-l-4 pl-1.5 pr-1 pt-1 pb-0.5 flex items-start text-[11px] font-medium leading-tight outline-none select-none touch-none',
+                'absolute left-1 right-1 rounded-sm border border-l-4 pl-2 pr-1.5 pt-1.5 pb-1 flex items-start text-sm font-semibold leading-tight outline-none select-none touch-none',
                 'transition-shadow',
                 block.isPickup
                   ? 'border-dashed border-l-accent-foreground/50 border-accent-foreground/40 text-accent-foreground'
@@ -403,7 +438,7 @@ export function ExerciseTimeline({
               )}
 
               {mode === 'studio' && isExpanded && (
-                <div className="absolute top-full left-0 z-20 mt-1 max-w-56 rounded-md border border-border bg-popover px-2 py-1 text-xs text-popover-foreground shadow-md">
+                <div className="absolute top-full left-0 z-20 mt-1 max-w-56 rounded-sm border border-border bg-popover px-2 py-1 text-sm text-popover-foreground shadow-md">
                   {block.term}
                 </div>
               )}
@@ -413,7 +448,7 @@ export function ExerciseTimeline({
 
         {pending && pending.id === null && pending.track === track && (
           <div
-            className="absolute left-1 right-1 rounded-md border border-primary/50 bg-primary/10 pl-1.5 pr-1 pt-1 pb-0.5 flex items-start"
+            className="absolute left-1 right-1 rounded-sm border border-primary/50 bg-primary/10 pl-2 pr-1.5 pt-1.5 pb-1 flex items-start"
             style={{ top: pending.startCount * UNIT_PX + 2, height: pending.durationCount * UNIT_PX - 4 }}
           >
             <InlineTermInput pending={pending} setPending={setPending} onCommit={commitPending} />
@@ -426,18 +461,24 @@ export function ExerciseTimeline({
   return (
     <div className="flex items-start gap-2">
       {/* ruler */}
-      <div className="w-8 shrink-0">
-        <div className="h-6" />
+      <div className="w-9 shrink-0">
+        <div className="h-7" />
         <div className="relative" style={{ height: gridHeight }}>
+          {breaks.map((b, i) => i > 0 && <div key={b} className="absolute inset-x-0 h-0.5 bg-foreground/30" style={{ top: b * UNIT_PX }} />)}
           {Array.from({ length: totalUnits }).map((_, u) => {
-            const label = unitLabel(u)
+            const label = unitLabel(u, breaks)
             if (label === null) return null
+            const isPhraseStart = label === '1'
             return (
               <span
                 key={u}
                 className={cn(
                   'absolute right-0 -translate-y-1/2 tabular-nums',
-                  label === '&' ? 'text-[9px] text-muted-foreground/50' : 'text-[10px] text-muted-foreground font-medium',
+                  label === '&'
+                    ? 'text-xs text-muted-foreground/60'
+                    : isPhraseStart
+                      ? 'text-sm font-bold text-foreground'
+                      : 'text-sm font-semibold text-muted-foreground',
                 )}
                 style={{ top: u * UNIT_PX }}
               >
@@ -445,7 +486,7 @@ export function ExerciseTimeline({
               </span>
             )
           })}
-          <span className="absolute top-0 -translate-y-1/2 text-[7px] uppercase tracking-widest text-muted-foreground/40">
+          <span className="absolute top-0 -translate-y-1/2 text-[8px] uppercase tracking-widest text-muted-foreground/40">
             pickup
           </span>
         </div>
@@ -453,9 +494,9 @@ export function ExerciseTimeline({
 
       {/* track columns */}
       <div className="flex-1 min-w-0">
-        <div className="flex h-6 items-end pb-1">
-          <div className="flex-1 text-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">Leg</div>
-          <div className="flex-1 text-center text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">Arm</div>
+        <div className="flex h-7 items-end pb-1">
+          <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Leg</div>
+          <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Arm</div>
         </div>
         <div className="flex gap-2">
           {renderTrackColumn('leg')}
@@ -490,7 +531,7 @@ function InlineTermInput({
       }}
       onBlur={onCommit}
       placeholder="Term…"
-      className="w-full min-w-0 bg-transparent text-[11px] font-medium leading-tight outline-none placeholder:text-muted-foreground"
+      className="w-full min-w-0 bg-transparent text-sm font-semibold leading-tight outline-none placeholder:text-muted-foreground"
     />
   )
 }
