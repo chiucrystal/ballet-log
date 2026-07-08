@@ -3,12 +3,17 @@
 import { useRef, useState } from 'react'
 import { X } from 'lucide-react'
 import { cn } from '@/lib/utils'
-import type { TimelineBlock, TimelineTrack } from '@/lib/timeline-types'
+import {
+  DEFAULT_PHRASE_LENGTH,
+  PICKUP_UNITS,
+  defaultPhraseBreaks,
+  phraseStartFor,
+  type TimelineBlock,
+  type TimelineTrack,
+} from '@/lib/timeline-types'
 
 const UNIT_PX = 34 // px per half-count grid unit, along the vertical (time) axis
-const PICKUP_UNITS = 2 // half-count units before count 1 of the phrase
 const MIN_DURATION = 1
-const DEFAULT_PHRASE_LENGTH = 8 // counts per phrase, when phraseBreaks isn't given explicitly
 
 function snap(raw: number) {
   return Math.round(raw)
@@ -20,23 +25,6 @@ function clamp(v: number, lo: number, hi: number) {
 
 function isPickupRange(start: number, duration: number) {
   return start + duration <= PICKUP_UNITS
-}
-
-/** Unit positions where the on-screen count resets to 1 (e.g. every 8 counts). Always starts at PICKUP_UNITS. */
-function defaultPhraseBreaks(totalUnits: number, phraseLength: number) {
-  const breaks: number[] = []
-  const step = phraseLength * 2
-  for (let b = PICKUP_UNITS; b < totalUnits; b += step) breaks.push(b)
-  return breaks
-}
-
-function phraseStartFor(u: number, breaks: number[]) {
-  let b = breaks[0]
-  for (const brk of breaks) {
-    if (brk <= u) b = brk
-    else break
-  }
-  return b
 }
 
 function unitLabel(u: number, breaks: number[]): string | null {

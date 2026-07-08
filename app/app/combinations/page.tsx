@@ -34,14 +34,6 @@ export default async function CombinationsPage() {
         </Button>
       </div>
 
-      <p className="text-xs text-muted-foreground">
-        Trying a new way to build these —{' '}
-        <Link href="/combinations/timeline-demo" className="underline underline-offset-2 hover:text-foreground">
-          Exercise Timeline demo
-        </Link>
-        .
-      </p>
-
       {combos.length === 0 && (
         <p className="text-sm text-muted-foreground">
           No combinations yet. Build your first one to start drilling specific corrections.
