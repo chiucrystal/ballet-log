@@ -35,14 +35,14 @@ function passesFilters(term: Term, filters: FilterState): boolean {
 // Grade badge config
 // ---------------------------------------------------------------------------
 const GRADE_STYLES: Record<string, string> = {
-  IF: 'bg-muted text-muted-foreground',
+  IF: 'bg-muted text-foreground',
   I:  'bg-accent text-accent-foreground',
   AF: 'bg-primary/10 text-primary',
 }
 
 function GradeBadge({ grade }: { grade: string }) {
   return (
-    <span className={cn('inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide', GRADE_STYLES[grade] ?? 'bg-muted text-muted-foreground')}>
+    <span className={cn('inline-flex items-center rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide', GRADE_STYLES[grade] ?? 'bg-muted text-foreground')}>
       {grade}
     </span>
   )
