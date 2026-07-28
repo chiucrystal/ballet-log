@@ -345,9 +345,15 @@ export default function HomeClient({
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
-        Welcome back, Crystal
-      </h1>
+      <div className="space-y-3">
+        <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
+          Welcome back, Crystal
+        </h1>
+        <div
+          className="h-[3px] w-16"
+          style={{ background: 'linear-gradient(to right, #FC4C02, #EF2CC1, #BDBBFF)' }}
+        />
+      </div>
 
       {/* ── Mobile tab layout ── */}
       <div className="md:hidden space-y-6">
