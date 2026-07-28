@@ -49,7 +49,7 @@ function ExerciseTree({
           <div key={cat.category}>
             <button
               onClick={() => setCollapsed((prev) => ({ ...prev, [cat.category]: !prev[cat.category] }))}
-              className="flex w-full items-center justify-between px-2 py-1 rounded-sm font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="flex w-full items-center justify-between px-2 py-1 rounded-sm font-mono text-[10px] font-medium uppercase tracking-widest text-sidebar-foreground hover:bg-sidebar-accent/60 transition-colors"
             >
               <span>{cat.category}</span>
               <ChevronDown
@@ -67,7 +67,7 @@ function ExerciseTree({
                   return (
                     <div key={sg.name ?? '__flat__'}>
                       {sg.name && (
-                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-muted-foreground">
+                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-sidebar-foreground">
                           {sg.name}
                         </p>
                       )}
@@ -79,8 +79,8 @@ function ExerciseTree({
                           className={cn(
                             'flex w-full items-center gap-1.5 rounded-sm px-2 py-1 text-left text-xs transition-colors',
                             activeCode === ex.code
-                              ? 'bg-accent text-accent-foreground font-medium'
-                              : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                              ? 'bg-sidebar-accent text-sidebar-foreground font-medium'
+                              : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
                           )}
                         >
                           <span className="truncate">{ex.name}</span>
@@ -155,7 +155,7 @@ export function Nav() {
       {/* Sidebar */}
       <aside
         className={cn(
-          'relative fixed inset-y-0 left-0 z-40 flex flex-col bg-background border-r border-border',
+          'relative fixed inset-y-0 left-0 z-40 flex flex-col bg-sidebar border-r border-sidebar-border',
           'transition-transform duration-200 w-64',
           mobileOpen ? 'translate-x-0' : '-translate-x-full',
           'md:sticky md:top-0 md:h-screen md:translate-x-0',
@@ -166,13 +166,13 @@ export function Nav() {
       >
         {/* Header */}
         <div className={cn(
-          'flex h-14 shrink-0 items-center border-b border-border px-3',
+          'flex h-14 shrink-0 items-center border-b border-sidebar-border px-3',
           collapsed ? 'md:justify-center' : 'justify-between'
         )}>
           <Link
             href="/"
             onClick={() => setMobileOpen(false)}
-            className={cn('font-heading text-xl truncate', collapsed && 'md:hidden')}
+            className={cn('font-heading text-xl text-sidebar-foreground truncate', collapsed && 'md:hidden')}
           >
             Ballet Log
           </Link>
@@ -180,7 +180,7 @@ export function Nav() {
           {/* Desktop collapse toggle */}
           <button
             onClick={() => setCollapsed(!collapsed)}
-            className="hidden md:flex items-center justify-center p-1 rounded text-muted-foreground hover:text-foreground hover:bg-muted"
+            className="hidden md:flex items-center justify-center p-1 rounded text-sidebar-foreground/70 hover:text-sidebar-foreground hover:bg-sidebar-accent"
             aria-label="Toggle sidebar"
           >
             {collapsed ? <ChevronRight className="size-4" /> : <ChevronLeft className="size-4" />}
@@ -189,7 +189,7 @@ export function Nav() {
           {/* Mobile close */}
           <button
             onClick={() => setMobileOpen(false)}
-            className="md:hidden p-1 rounded text-muted-foreground hover:text-foreground"
+            className="md:hidden p-1 rounded text-sidebar-foreground/70 hover:text-sidebar-foreground"
             aria-label="Close menu"
           >
             <X className="size-4" />
@@ -214,8 +214,8 @@ export function Nav() {
                     'px-2 py-2',
                     collapsed && 'md:justify-center md:px-0',
                     parentActive
-                      ? 'border-primary bg-muted text-foreground font-medium'
-                      : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                      ? 'border-sidebar-primary bg-sidebar-accent text-sidebar-foreground font-medium'
+                      : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
                   )}
                 >
                   <Icon className="size-4 shrink-0" />
@@ -244,8 +244,8 @@ export function Nav() {
                         className={cn(
                           'flex items-center rounded-sm text-xs px-2 py-1.5 transition-colors',
                           pathname === child.href
-                            ? 'text-foreground font-medium bg-muted'
-                            : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
+                            ? 'text-sidebar-foreground font-medium bg-sidebar-accent'
+                            : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
                         )}
                       >
                         {child.label}
@@ -266,22 +266,22 @@ export function Nav() {
           >
             <div className={cn(
               'w-px transition-colors',
-              isDragging ? 'bg-primary/40' : 'bg-transparent group-hover:bg-primary/30'
+              isDragging ? 'bg-sidebar-primary/40' : 'bg-transparent group-hover:bg-sidebar-primary/30'
             )} />
           </div>
         )}
       </aside>
 
       {/* Mobile top bar */}
-      <div className="fixed top-0 left-0 right-0 z-20 h-14 flex items-center gap-3 px-4 bg-background border-b border-border md:hidden">
+      <div className="fixed top-0 left-0 right-0 z-20 h-14 flex items-center gap-3 px-4 bg-sidebar border-b border-sidebar-border md:hidden">
         <button
           onClick={() => setMobileOpen(true)}
-          className="p-1 -ml-1 rounded text-muted-foreground hover:text-foreground"
+          className="p-1 -ml-1 rounded text-sidebar-foreground/70 hover:text-sidebar-foreground"
           aria-label="Open menu"
         >
           <Menu className="size-5" />
         </button>
-        <Link href="/" className="font-heading text-xl">
+        <Link href="/" className="font-heading text-xl text-sidebar-foreground">
           Ballet Log
         </Link>
       </div>

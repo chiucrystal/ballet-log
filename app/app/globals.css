@@ -83,15 +83,16 @@
   /* Radius base (sm — canonical) */
   --radius: 4px;
 
-  /* Sidebar mirrors page (app-shell: canvas + primary indicator) */
-  --sidebar: #FFFFFF;
-  --sidebar-foreground: #000000;
-  --sidebar-primary: #000000;
-  --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #EBEBEB;
-  --sidebar-accent-foreground: #000000;
-  --sidebar-border: #EBEBEB;
-  --sidebar-ring: #000000;
+  /* Sidebar — the darker "surface" layer (canvas-dark), sitting behind
+     the white canvas content for a sense of depth. */
+  --sidebar: #010120;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FFFFFF;
+  --sidebar-primary-foreground: #010120;
+  --sidebar-accent: #313641;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #313641;
+  --sidebar-ring: #FFFFFF;
 
   /* Charts — brand gradient stops, used discretely */
   --chart-1: #FC4C02;
@@ -129,7 +130,9 @@
   --input: #313641;
   --ring: #FFFFFF;
 
-  --sidebar: #010120;
+  /* Sidebar stays the deeper surface even in dark mode — ink black
+     against the canvas-dark content area, so the depth cue survives. */
+  --sidebar: #000000;
   --sidebar-foreground: #FFFFFF;
   --sidebar-primary: #FFFFFF;
   --sidebar-primary-foreground: #000000;
