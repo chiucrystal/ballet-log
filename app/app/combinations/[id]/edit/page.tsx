@@ -16,7 +16,7 @@ export default async function EditCombinationPage({ params }: { params: Promise<
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-[28px] leading-[1.2]">Edit Combination</h1>
+      <h1 className="font-mono text-[28px] leading-[1.2]">Edit Combination</h1>
       <CombinationBuilder themes={themes} exercises={exercises} action={action} initial={combo} />
     </div>
   )

@@ -24,7 +24,7 @@ export default async function TrainingPage() {
 
   return (
     <div className="space-y-12">
-      <h1 className="font-heading text-[28px] leading-[1.2]">Home Training</h1>
+      <h1 className="font-mono text-[28px] leading-[1.2]">Home Training</h1>
 
       {Object.entries(grouped).map(([category, items]) => (
         <section key={category}>

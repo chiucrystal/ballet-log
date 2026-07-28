@@ -106,7 +106,7 @@ export default function FlashCardsClient({
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-[28px] leading-[1.2]">Flash Cards</h1>
+      <h1 className="font-mono text-[28px] leading-[1.2]">Flash Cards</h1>
 
       {/* Grade toggle */}
       <div className="flex items-center gap-2 flex-wrap">
