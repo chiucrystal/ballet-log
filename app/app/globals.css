@@ -45,6 +45,10 @@
   --radius-lg: 8px;
   --radius-xl: 8px;
   --radius-2xl: 8px;
+
+  /* Base reading text bumped to the doc's body-md size (16px/1.3 line-height) */
+  --text-sm: 1rem;
+  --text-sm--line-height: 1.3;
 }
 
 :root {
