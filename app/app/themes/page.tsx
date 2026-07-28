@@ -73,8 +73,8 @@ export default async function ThemesPage() {
             <AccordionItem key={theme.name} value={theme.name}>
               <AccordionTrigger>
                 <div className="text-left flex-1 pr-4">
-                  <span className="font-medium">{theme.name}</span>
-                  <div className="text-xs text-muted-foreground mt-0.5">
+                  <span className="block text-base font-medium">{theme.name}</span>
+                  <div className="text-xs text-muted-foreground mt-1">
                     {theme.summary}
                   </div>
                 </div>
@@ -86,8 +86,8 @@ export default async function ThemesPage() {
                   <div className="space-y-5">
                     {groupByExercise(items, exerciseNames).map((group) => (
                       <div key={group.code ?? 'general'}>
-                        <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60 mb-2">
-                          {group.code && <span className="mr-1.5 opacity-60">{group.code}</span>}
+                        <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground mb-2">
+                          {group.code && <span className="mr-1.5">{group.code}</span>}
                           {group.name}
                         </p>
                         <ul className="space-y-2.5">

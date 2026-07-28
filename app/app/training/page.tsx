@@ -28,7 +28,7 @@ export default async function TrainingPage() {
 
       {Object.entries(grouped).map(([category, items]) => (
         <section key={category}>
-          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60 mb-6">
+          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground mb-6">
             {category}
           </h2>
           <div className="space-y-8">

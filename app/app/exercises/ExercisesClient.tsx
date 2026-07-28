@@ -65,7 +65,7 @@ export default function ExercisesClient({ exercises }: { exercises: Exercise[] }
       {groups.map((group) => (
         <div key={`${group.category}__${group.subgroup ?? "flat"}`} className="mb-12">
           <div className="mb-6">
-            <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
+            <p className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
               {group.category}
             </p>
             {group.subgroup && (

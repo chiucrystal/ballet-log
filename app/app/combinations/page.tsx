@@ -42,7 +42,7 @@ export default async function CombinationsPage() {
 
       {sections.map((section) => (
         <section key={section}>
-          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60 mb-6">
+          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground mb-6">
             {section}
           </h2>
           <div className="space-y-10">
@@ -79,7 +79,7 @@ export default async function CombinationsPage() {
                 {combo.steps.length > 0 && (
                   <table className="w-full text-sm border-collapse">
                     <thead>
-                      <tr className="text-left font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
+                      <tr className="text-left font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground">
                         <th className="font-semibold pb-2 pr-4 w-20">Counts</th>
                         <th className="font-semibold pb-2 pr-4">Step</th>
                         <th className="font-semibold pb-2">Arms / Head</th>

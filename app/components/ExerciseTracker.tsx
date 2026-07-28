@@ -311,7 +311,7 @@ export function ExerciseTracker({
                   <tr>
                     <td
                       colSpan={visibleCols.length + 1}
-                      className="pt-3 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground/50"
+                      className="pt-3 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground"
                     >
                       {group.label}
                     </td>
@@ -323,7 +323,7 @@ export function ExerciseTracker({
                     <tr key={row.code}>
                       <td className="pr-3 py-0.5">
                         <div className="flex items-baseline gap-2">
-                          <span className="font-mono text-[10px] text-muted-foreground/60 shrink-0">
+                          <span className="font-mono text-[10px] text-muted-foreground shrink-0">
                             {row.code}
                           </span>
                           <span className="text-sm truncate">

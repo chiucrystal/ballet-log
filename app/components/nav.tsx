@@ -67,7 +67,7 @@ function ExerciseTree({
                   return (
                     <div key={sg.name ?? '__flat__'}>
                       {sg.name && (
-                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-muted-foreground/60">
+                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-muted-foreground">
                           {sg.name}
                         </p>
                       )}
