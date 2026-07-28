@@ -69,7 +69,7 @@ export default function ExercisesClient({ exercises }: { exercises: Exercise[] }
               {group.category}
             </p>
             {group.subgroup && (
-              <h2 className="font-mono text-xl text-foreground mt-0.5">
+              <h2 className="font-mono text-2xl text-foreground mt-0.5">
                 {group.subgroup}
               </h2>
             )}
