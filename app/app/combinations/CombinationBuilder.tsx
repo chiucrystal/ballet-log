@@ -109,7 +109,7 @@ export function CombinationBuilder({
             <div key={stepNum} className="flex items-center gap-2">
               <div
                 className={cn(
-                  'flex items-center justify-center w-8 h-8 rounded-full text-xs font-semibold transition-colors',
+                  'flex items-center justify-center w-8 h-8 rounded-sm font-mono text-xs font-medium transition-colors',
                   isActive && 'bg-primary text-primary-foreground',
                   isComplete && 'bg-primary/40 text-primary-foreground',
                   !isActive && !isComplete && 'bg-muted text-muted-foreground'
@@ -175,7 +175,7 @@ export function CombinationBuilder({
         </div>
 
         <div>
-          <h2 className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">
+          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60 mb-3">
             What is this drilling?
           </h2>
           <div className="space-y-3">
@@ -305,7 +305,7 @@ export function CombinationBuilder({
 
         <div>
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60">Steps</h2>
+            <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">Steps</h2>
             <Button type="button" variant="link" size="sm" onClick={addStep} className="h-auto p-0 text-xs">
               + Add step
             </Button>
@@ -379,7 +379,7 @@ export function CombinationBuilder({
           {steps.length > 0 && (
             <table className="w-full text-sm border-collapse">
               <thead>
-                <tr className="text-left text-[10px] uppercase tracking-widest text-muted-foreground/60">
+                <tr className="text-left font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground/60">
                   <th className="font-semibold pb-2 pr-4 w-20">Counts</th>
                   <th className="font-semibold pb-2 pr-4">Step</th>
                   <th className="font-semibold pb-2">Arms / Head</th>

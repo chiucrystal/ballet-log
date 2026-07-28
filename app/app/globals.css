@@ -8,7 +8,7 @@
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-body);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: var(--font-mono);
   --font-heading: var(--font-display);
   --color-sidebar-ring: var(--sidebar-ring);
   --color-sidebar-border: var(--sidebar-border);
@@ -39,99 +39,110 @@
   --color-popover: var(--popover);
   --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
-  --radius-sm: 6px;
-  --radius-md: 10px;
-  --radius-lg: 16px;
-  --radius-xl: 20px;
-  --radius-2xl: 24px;
+  --radius-xs: 3.25px;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 8px;
+  --radius-xl: 8px;
+  --radius-2xl: 8px;
 }
 
 :root {
-  /* Surfaces */
+  /* Surfaces — canvas */
   --background: #FFFFFF;
-  --card: #F2F3F3;
-  --card-foreground: #1E2220;
-  --popover: #F2F3F3;
-  --popover-foreground: #1E2220;
+  --card: #FFFFFF;
+  --card-foreground: #000000;
+  --popover: #FFFFFF;
+  --popover-foreground: #000000;
 
-  /* Text */
-  --foreground: #1E2220;
+  /* Text — ink */
+  --foreground: #000000;
 
-  /* Primary — Viridian */
-  --primary: #344945;
+  /* Primary — ink black, the single CTA color */
+  --primary: #000000;
   --primary-foreground: #FFFFFF;
 
-  /* Secondary / muted — cool sunken surface */
-  --secondary: #E8EAEA;
-  --secondary-foreground: #1E2220;
-  --muted: #E8EAEA;
-  --muted-foreground: #7A7E80;
+  /* Secondary / muted — hairline / canvas-soft */
+  --secondary: #EBEBEB;
+  --secondary-foreground: #000000;
+  --muted: #EBEBEB;
+  --muted-foreground: #959494;
 
-  /* Accent — frosty sky tint */
-  --accent: #D5E3E8;
-  --accent-foreground: #344945;
+  /* Accent — brand mint tint */
+  --accent: #C8F6F9;
+  --accent-foreground: #000000;
 
   /* Semantic */
   --destructive: #B0473F;
 
-  /* Borders & inputs */
-  --border: #DDE0E0;
-  --input: #DDE0E0;
-  --ring: #344945;
+  /* Borders & inputs — hairline */
+  --border: #EBEBEB;
+  --input: #EBEBEB;
+  --ring: #000000;
 
-  /* Radius base (md) */
-  --radius: 10px;
+  /* Radius base (sm — canonical) */
+  --radius: 4px;
 
-  /* Sidebar mirrors page */
+  /* Sidebar mirrors page (app-shell: canvas + primary indicator) */
   --sidebar: #FFFFFF;
-  --sidebar-foreground: #1E2220;
-  --sidebar-primary: #344945;
+  --sidebar-foreground: #000000;
+  --sidebar-primary: #000000;
   --sidebar-primary-foreground: #FFFFFF;
-  --sidebar-accent: #D5E3E8;
-  --sidebar-accent-foreground: #344945;
-  --sidebar-border: #DDE0E0;
-  --sidebar-ring: #344945;
+  --sidebar-accent: #EBEBEB;
+  --sidebar-accent-foreground: #000000;
+  --sidebar-border: #EBEBEB;
+  --sidebar-ring: #000000;
 
-  /* Charts — viridian ramp */
-  --chart-1: #344945;
-  --chart-2: #5E8C82;
-  --chart-3: #7A7E80;
-  --chart-4: #ABABAB;
-  --chart-5: #D4D6D6;
+  /* Charts — brand gradient stops, used discretely */
+  --chart-1: #FC4C02;
+  --chart-2: #EF2CC1;
+  --chart-3: #BDBBFF;
+  --chart-4: #C8F6F9;
+  --chart-5: #959494;
 }
 
 .dark {
-  --background: #181D1C;
-  --foreground: #EDF0EF;
-  --card: #202826;
-  --card-foreground: #EDF0EF;
-  --popover: #202826;
-  --popover-foreground: #EDF0EF;
-  --primary: #6AAE9F;
-  --primary-foreground: #0E1614;
-  --secondary: #283330;
-  --secondary-foreground: #EDF0EF;
-  --muted: #283330;
-  --muted-foreground: #909896;
-  --accent: #1E3530;
-  --accent-foreground: #D5E3E8;
-  --destructive: #B0473F;
-  --border: #2E3D3A;
-  --input: #2E3D3A;
-  --ring: #6AAE9F;
-  --sidebar: #202826;
-  --sidebar-foreground: #EDF0EF;
-  --sidebar-primary: #6AAE9F;
-  --sidebar-primary-foreground: #0E1614;
-  --sidebar-accent: #1E3530;
-  --sidebar-accent-foreground: #D5E3E8;
-  --sidebar-border: #2E3D3A;
-  --sidebar-ring: #6AAE9F;
-  --chart-1: #6AAE9F;
-  --chart-2: #344945;
-  --chart-3: #909896;
-  --chart-4: #5A6462;
-  --chart-5: #2E3D3A;
+  /* Canvas-dark hero surface */
+  --background: #010120;
+  --foreground: #FFFFFF;
+  --card: #010120;
+  --card-foreground: #FFFFFF;
+  --popover: #010120;
+  --popover-foreground: #FFFFFF;
+
+  /* Primary flips polarity on dark canvas */
+  --primary: #FFFFFF;
+  --primary-foreground: #000000;
+
+  --secondary: #313641;
+  --secondary-foreground: #FFFFFF;
+  --muted: #313641;
+  --muted-foreground: #9A9A9A;
+
+  --accent: #BDBBFF;
+  --accent-foreground: #000000;
+
+  --destructive: #D9756C;
+
+  /* Hairline on dark */
+  --border: #313641;
+  --input: #313641;
+  --ring: #FFFFFF;
+
+  --sidebar: #010120;
+  --sidebar-foreground: #FFFFFF;
+  --sidebar-primary: #FFFFFF;
+  --sidebar-primary-foreground: #000000;
+  --sidebar-accent: #313641;
+  --sidebar-accent-foreground: #FFFFFF;
+  --sidebar-border: #313641;
+  --sidebar-ring: #FFFFFF;
+
+  --chart-1: #FC4C02;
+  --chart-2: #EF2CC1;
+  --chart-3: #BDBBFF;
+  --chart-4: #C8F6F9;
+  --chart-5: #9A9A9A;
 }
 
 @layer base {
