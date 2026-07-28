@@ -69,9 +69,9 @@ export default function ExercisesClient({ exercises }: { exercises: Exercise[] }
               {group.category}
             </p>
             {group.subgroup && (
-              <h3 className="text-base font-semibold text-foreground mt-0.5">
+              <h2 className="font-mono text-xl text-foreground mt-0.5">
                 {group.subgroup}
-              </h3>
+              </h2>
             )}
           </div>
 
@@ -82,7 +82,7 @@ export default function ExercisesClient({ exercises }: { exercises: Exercise[] }
               className="mb-10 scroll-mt-[4.5rem] md:scroll-mt-8"
             >
               <div className="flex items-baseline gap-2 mb-3 pb-2 border-b border-border">
-                <h2 className="font-heading text-xl">{exercise.name}</h2>
+                <h3 className="font-heading text-xl">{exercise.name}</h3>
                 <span className="text-sm text-muted-foreground">{exercise.code}</span>
               </div>
               <ul className="space-y-2">
