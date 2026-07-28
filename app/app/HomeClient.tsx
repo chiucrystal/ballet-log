@@ -346,7 +346,7 @@ export default function HomeClient({
   return (
     <div className="space-y-8">
       <div className="space-y-3">
-        <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
+        <h1 className="font-mono text-[40px] leading-[1.1] -tracking-[0.01em]">
           Welcome back, Crystal
         </h1>
         <div

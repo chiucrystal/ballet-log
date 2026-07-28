@@ -210,7 +210,7 @@ export function Nav() {
                   onClick={() => setMobileOpen(false)}
                   title={collapsed ? label : undefined}
                   className={cn(
-                    'flex items-center gap-3 rounded-sm border-l-2 border-transparent text-sm transition-colors',
+                    'flex items-center gap-3 rounded-sm border-l-2 border-transparent font-mono text-sm transition-colors',
                     'px-2 py-2',
                     collapsed && 'md:justify-center md:px-0',
                     parentActive
@@ -242,7 +242,7 @@ export function Nav() {
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
                         className={cn(
-                          'flex items-center rounded-sm text-xs px-2 py-1.5 transition-colors',
+                          'flex items-center rounded-sm font-mono text-xs px-2 py-1.5 transition-colors',
                           pathname === child.href
                             ? 'text-sidebar-foreground font-medium bg-sidebar-accent'
                             : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
