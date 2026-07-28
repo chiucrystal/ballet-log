@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
-import { Inter, JetBrains_Mono } from 'next/font/google'
+import { Inter } from 'next/font/google'
+import { GeistMono } from 'geist/font/mono'
 import './globals.css'
 import { Nav } from '@/components/nav'
 import { ExNavProvider } from '@/context/exercises-nav'
@@ -16,14 +17,8 @@ const bodySans = Inter({
   subsets: ['latin'],
 })
 
-const monoCaps = JetBrains_Mono({
-  weight: ['400', '500'],
-  variable: '--font-mono',
-  subsets: ['latin'],
-})
-
 export const metadata: Metadata = {
-  title: 'Ballet Log',
+  title: 'Logbook',
   description: 'RAD Advanced Foundation — corrections and training log',
 }
 
@@ -33,7 +28,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${displaySans.variable} ${bodySans.variable} ${monoCaps.variable} h-full antialiased`}>
+    <html lang="en" className={`${displaySans.variable} ${bodySans.variable} ${GeistMono.variable} h-full antialiased`}>
       <body className="min-h-screen flex bg-background text-foreground">
         <ExNavProvider>
           <Nav />

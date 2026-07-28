@@ -172,9 +172,9 @@ export function Nav() {
           <Link
             href="/"
             onClick={() => setMobileOpen(false)}
-            className={cn('font-heading text-xl text-sidebar-foreground truncate', collapsed && 'md:hidden')}
+            className={cn('font-mono text-xl text-sidebar-foreground truncate', collapsed && 'md:hidden')}
           >
-            Ballet Log
+            Logbook
           </Link>
 
           {/* Desktop collapse toggle */}
@@ -281,8 +281,8 @@ export function Nav() {
         >
           <Menu className="size-5" />
         </button>
-        <Link href="/" className="font-heading text-xl text-sidebar-foreground">
-          Ballet Log
+        <Link href="/" className="font-mono text-xl text-sidebar-foreground">
+          Logbook
         </Link>
       </div>
     </>
