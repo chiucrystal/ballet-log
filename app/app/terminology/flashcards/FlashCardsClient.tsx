@@ -110,7 +110,7 @@ export default function FlashCardsClient({
 
       {/* Grade toggle */}
       <div className="flex items-center gap-2 flex-wrap">
-        <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground shrink-0 mr-1">
+        <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground shrink-0 mr-1">
           Grade
         </span>
         {gradeOptions.map((opt) => (
@@ -118,7 +118,7 @@ export default function FlashCardsClient({
             key={opt.value}
             onClick={() => changeGrade(opt.value)}
             className={cn(
-              'rounded-full px-3 py-1 text-xs font-medium border transition-colors',
+              'rounded-sm px-3 py-1 text-xs font-medium border transition-colors',
               grade === opt.value
                 ? 'bg-foreground text-background border-foreground'
                 : 'border-border text-muted-foreground hover:text-foreground hover:border-foreground/40'
@@ -143,13 +143,13 @@ export default function FlashCardsClient({
             )}
           >
             {/* Side A — term name */}
-            <div className="absolute inset-0 [backface-visibility:hidden] flex flex-col items-center justify-center gap-5 p-10 rounded-2xl bg-card border border-border shadow-sm">
+            <div className="absolute inset-0 [backface-visibility:hidden] flex flex-col items-center justify-center gap-5 p-10 rounded-sm bg-card border border-border">
               <p className="font-heading text-[2rem] leading-snug text-center">{card.term}</p>
               <p className="text-xs text-muted-foreground/60 tracking-wide">tap to reveal</p>
             </div>
 
             {/* Side B — translation + description */}
-            <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center gap-3 p-10 rounded-2xl bg-card border border-border shadow-sm">
+            <div className="absolute inset-0 [backface-visibility:hidden] [transform:rotateY(180deg)] flex flex-col items-center justify-center gap-3 p-10 rounded-sm bg-card border border-border">
               <p className="text-sm italic text-muted-foreground text-center leading-relaxed">
                 {card.french_translation}
               </p>
@@ -170,14 +170,14 @@ export default function FlashCardsClient({
             <button
               onClick={(e) => { e.stopPropagation(); prev() }}
               disabled={idx === 0}
-              className="flex items-center justify-center rounded-lg p-2 text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+              className="flex items-center justify-center rounded-sm p-2 text-sm font-medium border border-border text-muted-foreground hover:text-foreground hover:border-foreground/40 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
               aria-label="Previous card"
             >
               <ChevronLeft className="size-4" />
             </button>
             <button
               onClick={(e) => { e.stopPropagation(); next() }}
-              className="flex items-center gap-1.5 rounded-lg px-4 py-2 text-sm font-medium bg-foreground text-background hover:opacity-80 transition-opacity"
+              className="flex items-center gap-1.5 rounded-sm px-4 py-2 font-mono text-xs font-medium uppercase tracking-wide bg-foreground text-background hover:opacity-80 transition-opacity"
             >
               Next <ChevronRight className="size-4" />
             </button>

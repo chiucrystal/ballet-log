@@ -1,18 +1,24 @@
 import type { Metadata } from 'next'
-import { Forum, Spline_Sans } from 'next/font/google'
+import { Inter, JetBrains_Mono } from 'next/font/google'
 import './globals.css'
 import { Nav } from '@/components/nav'
 import { ExNavProvider } from '@/context/exercises-nav'
 
-const forum = Forum({
-  weight: '400',
+const displaySans = Inter({
+  weight: '500',
   variable: '--font-display',
   subsets: ['latin'],
 })
 
-const splineSans = Spline_Sans({
+const bodySans = Inter({
   weight: ['400', '500', '600', '700'],
   variable: '--font-body',
+  subsets: ['latin'],
+})
+
+const monoCaps = JetBrains_Mono({
+  weight: ['400', '500'],
+  variable: '--font-mono',
   subsets: ['latin'],
 })
 
@@ -27,7 +33,7 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    <html lang="en" className={`${forum.variable} ${splineSans.variable} h-full antialiased`}>
+    <html lang="en" className={`${displaySans.variable} ${bodySans.variable} ${monoCaps.variable} h-full antialiased`}>
       <body className="min-h-screen flex bg-background text-foreground">
         <ExNavProvider>
           <Nav />

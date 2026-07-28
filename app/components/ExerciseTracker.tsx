@@ -14,7 +14,7 @@ const BREAK_END      = '2026-04-20'
 const ABSENCE_START  = '2026-03-19'
 const ABSENCE_END    = '2026-05-09'
 
-const COVERED_COLOR = '#3971B8'
+const COVERED_COLOR = '#000000'
 
 // ── Helpers ──────────────────────────────────────────────────────────────────
 
@@ -234,7 +234,7 @@ export function ExerciseTracker({
               key={value}
               onClick={() => setClassFilter(value)}
               className={cn(
-                'text-xs font-semibold uppercase tracking-[0.07em] transition-colors pb-0.5',
+                'font-mono text-xs font-medium uppercase tracking-[0.07em] transition-colors pb-0.5',
                 classFilter === value
                   ? 'text-foreground border-b border-foreground'
                   : 'text-muted-foreground/40 hover:text-muted-foreground'
@@ -311,7 +311,7 @@ export function ExerciseTracker({
                   <tr>
                     <td
                       colSpan={visibleCols.length + 1}
-                      className="pt-3 pb-1 text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground/50"
+                      className="pt-3 pb-1 font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground/50"
                     >
                       {group.label}
                     </td>
@@ -401,9 +401,9 @@ export function ExerciseTracker({
           className="fixed z-50 pointer-events-none"
           style={{ top: tooltip.y, left: tooltip.x, transform: 'translateX(-50%)' }}
         >
-          <div className="bg-background border border-border rounded-lg shadow-md px-3.5 py-3 w-64 space-y-2">
+          <div className="bg-background border border-border rounded-sm shadow-md px-3.5 py-3 w-64 space-y-2">
             <div className="flex items-baseline justify-between gap-2">
-              <p className="text-[10px] font-semibold uppercase tracking-[0.07em] text-muted-foreground leading-none">
+              <p className="font-mono text-[10px] font-medium uppercase tracking-[0.07em] text-muted-foreground leading-none">
                 {tooltip.exerciseName}
               </p>
               <p className="text-[10px] text-muted-foreground/50 shrink-0">{toDDMM(tooltip.date)}</p>

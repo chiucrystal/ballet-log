@@ -64,7 +64,7 @@ function FilterChip({
     <button
       onClick={onToggle}
       className={cn(
-        'rounded-full px-3 py-1 text-xs font-medium border transition-colors',
+        'rounded-sm px-3 py-1 text-xs font-medium border transition-colors',
         active
           ? 'bg-foreground text-background border-foreground'
           : 'border-border text-muted-foreground hover:text-foreground hover:border-foreground/40'
@@ -91,7 +91,7 @@ function FilterGroup({
 }) {
   return (
     <div className="flex items-center gap-2 flex-wrap">
-      <span className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground shrink-0">
+      <span className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground shrink-0">
         {label}
       </span>
       {options.map((opt) => (
@@ -175,7 +175,7 @@ export default function TerminologyClient({
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder="Search terms…"
-            className="w-full rounded-lg border border-border bg-background pl-9 pr-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
+            className="w-full rounded-sm border border-border bg-background pl-9 pr-3 py-2 text-sm placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-ring"
           />
         </div>
       </div>

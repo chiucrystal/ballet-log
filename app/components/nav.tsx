@@ -49,7 +49,7 @@ function ExerciseTree({
           <div key={cat.category}>
             <button
               onClick={() => setCollapsed((prev) => ({ ...prev, [cat.category]: !prev[cat.category] }))}
-              className="flex w-full items-center justify-between px-2 py-1 rounded-md text-[10px] font-semibold uppercase tracking-widest text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
+              className="flex w-full items-center justify-between px-2 py-1 rounded-sm font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground hover:text-foreground hover:bg-muted/50 transition-colors"
             >
               <span>{cat.category}</span>
               <ChevronDown
@@ -67,7 +67,7 @@ function ExerciseTree({
                   return (
                     <div key={sg.name ?? '__flat__'}>
                       {sg.name && (
-                        <p className="px-2 pt-1 pb-0.5 text-[9px] font-semibold uppercase tracking-widest text-muted-foreground/60">
+                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-muted-foreground/60">
                           {sg.name}
                         </p>
                       )}
@@ -77,7 +77,7 @@ function ExerciseTree({
                           onClick={() => onSelect(ex.code)}
                           title={`${ex.name} (${ex.code})`}
                           className={cn(
-                            'flex w-full items-center gap-1.5 rounded-md px-2 py-1 text-left text-xs transition-colors',
+                            'flex w-full items-center gap-1.5 rounded-sm px-2 py-1 text-left text-xs transition-colors',
                             activeCode === ex.code
                               ? 'bg-accent text-accent-foreground font-medium'
                               : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
@@ -210,11 +210,11 @@ export function Nav() {
                   onClick={() => setMobileOpen(false)}
                   title={collapsed ? label : undefined}
                   className={cn(
-                    'flex items-center gap-3 rounded-md text-sm transition-colors',
+                    'flex items-center gap-3 rounded-sm border-l-2 border-transparent text-sm transition-colors',
                     'px-2 py-2',
                     collapsed && 'md:justify-center md:px-0',
                     parentActive
-                      ? 'bg-muted text-foreground font-medium'
+                      ? 'border-primary bg-muted text-foreground font-medium'
                       : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'
                   )}
                 >
@@ -242,7 +242,7 @@ export function Nav() {
                         href={child.href}
                         onClick={() => setMobileOpen(false)}
                         className={cn(
-                          'flex items-center rounded-md text-xs px-2 py-1.5 transition-colors',
+                          'flex items-center rounded-sm text-xs px-2 py-1.5 transition-colors',
                           pathname === child.href
                             ? 'text-foreground font-medium bg-muted'
                             : 'text-muted-foreground hover:text-foreground hover:bg-muted/50'

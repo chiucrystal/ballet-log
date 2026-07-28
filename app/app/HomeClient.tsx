@@ -137,7 +137,7 @@ function DayView({
       {/* General / key themes */}
       {general.length > 0 && (
         <div className="mb-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground mb-2">
             Key themes
           </p>
           <ul className="space-y-1.5">
@@ -154,7 +154,7 @@ function DayView({
       {/* Exercise sections */}
       {sections.map((section) => (
         <div key={`${section.category}__${section.subgroup ?? ''}`} className="mb-6">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground mb-3">
             {section.category}{section.subgroup && ` — ${section.subgroup}`}
           </p>
           <div className="space-y-4">
@@ -181,7 +181,7 @@ function DayView({
       {/* Home exercises */}
       {session.homeExercises.length > 0 && (
         <div className="mb-6 pt-4 border-t border-border">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-3">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground mb-3">
             Home exercises
           </p>
           <div className="space-y-3">
@@ -199,7 +199,7 @@ function DayView({
       {/* Open questions */}
       {session.openQuestions.length > 0 && (
         <div className="pt-4 border-t border-border">
-          <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-2">
+          <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground mb-2">
             Open questions
           </p>
           <ul className="space-y-1.5">
@@ -232,7 +232,7 @@ export default function HomeClient({
 
   const timelineHeader = (
     <div className="flex items-center justify-between mb-2">
-      <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+      <h2 className="font-mono text-xs font-medium uppercase tracking-[0.07em] text-muted-foreground">
         Session Timeline
       </h2>
       <div className="flex gap-0.5">
@@ -299,7 +299,7 @@ export default function HomeClient({
                 {groupByExercise(session.corrections, exerciseNames).map((group) => (
                   <div key={group.code ?? 'general'}>
                     {group.name && (
-                      <p className="text-[10px] font-semibold uppercase tracking-[0.08em] text-muted-foreground mb-1.5">
+                      <p className="font-mono text-[10px] font-medium uppercase tracking-[0.08em] text-muted-foreground mb-1.5">
                         <span className="opacity-50 mr-1.5">{group.code}</span>{group.name}
                       </p>
                     )}
@@ -314,7 +314,7 @@ export default function HomeClient({
             )}
             {session.openQuestions.length > 0 && (
               <div className="mt-4 pt-4 border-t border-border">
-                <p className="text-xs font-semibold text-muted-foreground mb-2 uppercase tracking-[0.07em]">
+                <p className="font-mono text-xs font-medium text-muted-foreground mb-2 uppercase tracking-[0.07em]">
                   Open questions
                 </p>
                 <ul className="space-y-1">
@@ -345,9 +345,15 @@ export default function HomeClient({
 
   return (
     <div className="space-y-8">
-      <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
-        Welcome back, Crystal
-      </h1>
+      <div className="space-y-3">
+        <h1 className="font-heading text-[40px] leading-[1.1] -tracking-[0.01em]">
+          Welcome back, Crystal
+        </h1>
+        <div
+          className="h-[3px] w-16"
+          style={{ background: 'linear-gradient(to right, #FC4C02, #EF2CC1, #BDBBFF)' }}
+        />
+      </div>
 
       {/* ── Mobile tab layout ── */}
       <div className="md:hidden space-y-6">
@@ -357,7 +363,7 @@ export default function HomeClient({
               key={tab}
               onClick={() => setMobileTab(tab)}
               className={cn(
-                'flex-1 pb-2 text-xs font-semibold uppercase tracking-[0.07em] transition-colors',
+                'flex-1 pb-2 font-mono text-xs font-medium uppercase tracking-[0.07em] transition-colors',
                 mobileTab === tab
                   ? 'border-b-2 border-foreground text-foreground -mb-px'
                   : 'text-muted-foreground hover:text-foreground'
@@ -391,7 +397,7 @@ export default function HomeClient({
         <div className="hidden md:flex gap-10 items-start">
           {/* Left — priorities */}
           <div className="flex-1 min-w-0 space-y-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+            <h2 className="font-mono text-xs font-medium uppercase tracking-[0.07em] text-muted-foreground">
               Current Priorities
             </h2>
             {prioritiesContent}
@@ -407,7 +413,7 @@ export default function HomeClient({
         <div className="hidden md:flex gap-10 items-start">
           {/* Left — priorities */}
           <div className="flex-1 min-w-0 space-y-4">
-            <h2 className="text-xs font-semibold uppercase tracking-[0.07em] text-muted-foreground">
+            <h2 className="font-mono text-xs font-medium uppercase tracking-[0.07em] text-muted-foreground">
               Current Priorities
             </h2>
             {prioritiesContent}
