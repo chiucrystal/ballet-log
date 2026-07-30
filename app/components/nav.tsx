@@ -4,13 +4,11 @@ import Link from 'next/link'
 import { usePathname } from 'next/navigation'
 import {
   Home, Layers, ClipboardList, Dumbbell, BookText, ListMusic,
-  ChevronLeft, ChevronRight, ChevronDown, Menu, X,
+  ChevronLeft, ChevronRight, Menu, X,
 } from 'lucide-react'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { cn } from '@/lib/utils'
-import { useExNav } from '@/context/exercises-nav'
-import { EXERCISES_TREE } from '@/lib/exercises-tree'
-import type { Exercise } from '@/lib/types'
+import { EXERCISES_TREE, getClassBySlug, slugify } from '@/lib/exercises-tree'
 
 const NAV_WIDTH_DEFAULT = 224
 const NAV_WIDTH_MIN = 160
@@ -30,88 +28,101 @@ const navLinks = [
   },
 ]
 
-function ExerciseTree({
+// Drill-down nav: shows only the children of wherever the user currently is
+// in the syllabus (classes → sections → exercises), mirroring the page
+// breadcrumbs (Syllabus > Class > Section > Exercise) instead of one long tree.
+function SyllabusNav({
+  pathname,
   exercises,
-  activeCode,
-  onSelect,
+  onNavigate,
 }: {
-  exercises: Exercise[]
-  activeCode: string
-  onSelect: (code: string) => void
+  pathname: string
+  exercises: { code: string; name: string }[]
+  onNavigate: () => void
 }) {
-  const [collapsed, setCollapsed] = useState<Record<string, boolean>>({})
+  const segments = pathname.slice('/exercises'.length).split('/').filter(Boolean)
+
+  const linkClass = (active: boolean) =>
+    cn(
+      'flex items-center gap-1.5 rounded-sm px-2 py-1.5 text-xs transition-colors',
+      active
+        ? 'bg-sidebar-accent text-sidebar-foreground font-medium'
+        : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
+    )
+
+  if (segments.length === 0) {
+    return (
+      <div className="mt-1 space-y-0.5">
+        {EXERCISES_TREE.map((cat) => (
+          <Link
+            key={cat.category}
+            href={`/exercises/${slugify(cat.category)}`}
+            onClick={onNavigate}
+            className={linkClass(false)}
+          >
+            <span className="truncate">{cat.category}</span>
+          </Link>
+        ))}
+      </div>
+    )
+  }
+
+  const cls = getClassBySlug(segments[0])
+  if (!cls) return null
+
+  if (segments.length === 1) {
+    return (
+      <div className="mt-1 space-y-0.5">
+        {cls.subgroups.map((sg) => (
+          <Link
+            key={sg.name}
+            href={`/exercises/${segments[0]}/${slugify(sg.name)}`}
+            onClick={onNavigate}
+            className={linkClass(false)}
+          >
+            <span className="truncate">{sg.name}</span>
+          </Link>
+        ))}
+      </div>
+    )
+  }
+
+  const section = cls.subgroups.find((sg) => slugify(sg.name) === segments[1])
+  if (!section) return null
+
+  const activeCode = segments[2]
 
   return (
-    <div className="mt-1 space-y-2">
-      {EXERCISES_TREE.map((cat) => {
-        const isCollapsed = collapsed[cat.category]
+    <div className="mt-1 space-y-0.5">
+      <p className="px-2 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-sidebar-foreground/50">
+        {section.name}
+      </p>
+      {section.codes.map((code) => {
+        const ex = exercises.find((e) => e.code === code)
         return (
-          <div key={cat.category}>
-            <button
-              onClick={() => setCollapsed((prev) => ({ ...prev, [cat.category]: !prev[cat.category] }))}
-              className="flex w-full items-center justify-between px-2 py-1 rounded-sm font-mono text-[10px] font-medium uppercase tracking-widest text-sidebar-foreground hover:bg-sidebar-accent/60 transition-colors"
-            >
-              <span>{cat.category}</span>
-              <ChevronDown
-                className={cn('size-3 shrink-0 transition-transform', isCollapsed && '-rotate-90')}
-              />
-            </button>
-
-            {!isCollapsed && (
-              <div className="ml-2 space-y-2">
-                {cat.subgroups.map((sg) => {
-                  const sgExercises = sg.codes
-                    .map((code) => exercises.find((e) => e.code === code))
-                    .filter(Boolean) as Exercise[]
-
-                  return (
-                    <div key={sg.name ?? '__flat__'}>
-                      {sg.name && (
-                        <p className="px-2 pt-1 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-sidebar-foreground">
-                          {sg.name}
-                        </p>
-                      )}
-                      {sgExercises.map((ex) => (
-                        <button
-                          key={ex.code}
-                          onClick={() => onSelect(ex.code)}
-                          title={`${ex.name} (${ex.code})`}
-                          className={cn(
-                            'flex w-full items-center gap-1.5 rounded-sm px-2 py-1 text-left text-xs transition-colors',
-                            activeCode === ex.code
-                              ? 'bg-sidebar-accent text-sidebar-foreground font-medium'
-                              : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
-                          )}
-                        >
-                          <span className="truncate">{ex.name}</span>
-                          <span className="shrink-0 text-[10px] opacity-50">{ex.code}</span>
-                        </button>
-                      ))}
-                    </div>
-                  )
-                })}
-              </div>
-            )}
-          </div>
+          <Link
+            key={code}
+            href={`/exercises/${segments[0]}/${segments[1]}/${code}`}
+            onClick={onNavigate}
+            title={`${ex?.name ?? code} (${code})`}
+            className={linkClass(activeCode === code)}
+          >
+            <span className="truncate">{ex?.name ?? code}</span>
+            <span className="shrink-0 text-[10px] opacity-50">{code}</span>
+          </Link>
         )
       })}
     </div>
   )
 }
 
-export function Nav() {
+export function Nav({ exercises }: { exercises: { code: string; name: string }[] }) {
   const [collapsed, setCollapsed] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [navWidth, setNavWidth] = useState(NAV_WIDTH_DEFAULT)
   const [isDragging, setIsDragging] = useState(false)
   const dragStart = useRef<{ x: number; width: number } | null>(null)
   const pathname = usePathname()
-  const { exercises, activeCode, scrollTo } = useExNav()
-
-  const onExerciseSelect = (code: string) => {
-    scrollTo(code)
-    setMobileOpen(false)
-  }
 
   const onResizeStart = useCallback((e: React.MouseEvent) => {
     e.preventDefault()
@@ -199,9 +210,9 @@ export function Nav() {
         {/* Nav links */}
         <nav className="flex-1 px-2 py-3 space-y-0.5 overflow-y-auto">
           {navLinks.map(({ href, label, icon: Icon, children }) => {
-            const parentActive = pathname === href || (!!children && pathname.startsWith(href + '/'))
+            const parentActive = pathname === href || pathname.startsWith(href + '/')
             const isExercisesLink = href === '/exercises'
-            const showExerciseTree = isExercisesLink && parentActive && exercises.length > 0
+            const showSyllabusNav = isExercisesLink && parentActive
 
             return (
               <div key={href}>
@@ -222,13 +233,13 @@ export function Nav() {
                   <span className={cn(collapsed && 'md:hidden')}>{label}</span>
                 </Link>
 
-                {/* Exercise tree — shown in nav when on Syllabus page */}
-                {showExerciseTree && (
+                {/* Syllabus drill-down — shown in nav when on the Syllabus pages */}
+                {showSyllabusNav && (
                   <div className={cn('ml-7 mt-1', collapsed && 'md:hidden')}>
-                    <ExerciseTree
+                    <SyllabusNav
+                      pathname={pathname}
                       exercises={exercises}
-                      activeCode={activeCode}
-                      onSelect={onExerciseSelect}
+                      onNavigate={() => setMobileOpen(false)}
                     />
                   </div>
                 )}
