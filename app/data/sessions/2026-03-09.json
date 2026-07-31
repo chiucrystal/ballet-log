@@ -1,31 +1,132 @@
 {
   "date": "2026-03-09",
-  "context": "Pointe and Discovering Rep class — poses, grand jeté, allegro, brisé",
+  "context": "Pointe class and Discovering Repertoire — rises, poses at barre, pointe pirouettes (en dehors and en dedans), soutenus, chaînes, adage",
   "corrections": [
     {
-      "text": "Posterior weight bias appearing across poses en arrière, grand jeté landings, allegro beats, retirés",
+      "text": "Rises: roll all the way through demi-pointe to a clear ¾ pointe, pressing the toes into the shank rather than arriving passively",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Pose en arrière: step in with more confidence, working leg needs to fondu and push off faster",
       "theme": "Weight placement and balance",
       "exercise": null
     },
     {
-      "text": "Left lateral chain weakness noted in relevé lent in second",
+      "text": "Pose to arabesque: arrive in one count, not a gradual build",
+      "theme": "Arabesque mechanics",
+      "exercise": null
+    },
+    {
+      "text": "Petite coupé: position is below the calf and above the ankle",
+      "theme": "Foot intrinsics and arch",
+      "exercise": null
+    },
+    {
+      "text": "Arabesque fondu: build tension and length before snapping into the pas de bourrée to full-height retiré — don't collapse into the fondu",
+      "theme": "Arabesque mechanics",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dehors from fifth on pointe: weight over the working retiré leg should be close to 60% before push-off, not jumped onto relevé",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dehors: turnout momentum should come from the deep hip rotators, not muscled through",
+      "theme": "Pirouette axis and preparation",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dehors: support the arms from the back, not the shoulders",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dehors turning left: right side back must snap inward so shoulders and hips square together",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dehors: more weight forward overall",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dedans on pointe: faster relevé",
+      "theme": "Pirouette axis and preparation",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dedans: relevé foot should scoop under the body into retiré, not swing wide around",
+      "theme": "Pirouette axis and preparation",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dedans: right side back weak and lacking strength — same side as the en dehors turning-left correction",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Pirouette en dedans: left foot unstable on pointe specifically in this turn — stable in regular retiré passé, so the instability is turn-specific, not a base retiré problem",
       "theme": "Outer hip and ankle stability",
       "exercise": null
     },
     {
-      "text": "Right pointe shoe potentially not getting over the box — equipment fit concern, not purely technique",
+      "text": "Soutenu: weight forward, don't jump onto pointe — it's a spring and snatch, not a jump",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire — chaînes: rhythm not clean, should read as two distinct actions — half-turn, half-turn",
+      "theme": "Pirouette axis and preparation",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire — chaînes: heels need to stay close, ankles touching in first, weight forward",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire — chaînes: faster spot, hold core — currently leaning back",
+      "theme": "Weight placement and balance",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire poses: fine overall, could get around faster using the back and spot better",
+      "theme": "Pirouette axis and preparation",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire poses: don't sickle the foot in retiré",
+      "theme": "Retiré and passé mechanics",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire: close in tight fifth when finishing the exercise",
       "theme": "Outer hip and ankle stability",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire: lift the eyeline up and over when finishing",
+      "theme": "Shoulder girdle and épaulement",
+      "exercise": null
+    },
+    {
+      "text": "Discovering repertoire adage: relevé lent and battement need to be much higher — currently well below active capacity",
+      "theme": "Opposition and length under load",
       "exercise": null
     }
   ],
   "homeExercises": [
     {
-      "name": "Leg on barre in second",
-      "notes": "Active hamstring contraction at end range — slow and controlled, no momentum",
+      "name": "Leg on barre in second — active extension protocol",
+      "notes": "Plié with leg on barre, then relevé with leg on barre, then lift the leg off the barre using the hamstring (not momentum) — repeat holding the leg to the side. Go slowly; the discomfort at end range is the point. This builds active height for relevé lent/battement in the Discovering Rep adage, distinguishing active flexibility from passive, momentum-assisted extension.",
       "use": "Class prep"
     }
   ],
   "openQuestions": [
-    "Right pointe shoe potentially not getting over the box — check shoe fit at next opportunity"
+    "Pirouette en dedans: ask for a physical drill or cue to feel the retiré foot 'scooping under the body' rather than swinging wide — currently can't isolate this sensation",
+    "Right side back weakness is showing up in both en dehors (turning left) and en dedans pirouettes on pointe — is this recognised as a strength gap that needs targeted conditioning outside class?"
   ]
 }
