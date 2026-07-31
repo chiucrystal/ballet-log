@@ -1,11 +1,9 @@
 import Link from 'next/link'
 import { EXERCISES_TREE, slugify } from '@/lib/exercises-tree'
-import { Breadcrumbs } from '@/components/breadcrumbs'
 
 export default function ExercisesPage() {
   return (
     <div>
-      <Breadcrumbs items={[{ label: 'Syllabus' }]} />
       <h1 className="font-mono text-[28px] leading-[1.2] mb-6">Syllabus</h1>
       <div className="space-y-3">
         {EXERCISES_TREE.map((cat) => (
