@@ -427,35 +427,9 @@
       ]
     },
     {
-      "code": "AF-25",
-      "name": "Variation 2 (currently restricted — no pointe)",
-      "corrections": [
-        "Poses: posterior weight bias, not getting over the box; outer ankle not firing before weight transfer",
-        "Poses: retiré not getting up fast enough",
-        "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
-        "Eyeline: up and over, not throwing the head back",
-        "Épaulement: more upper back twist",
-        "Pose en arrière: step in with confidence, fondu and push off faster",
-        "Pose to arabesque: arrive in one count",
-        "Petite coupé: position below the calf, above the ankle",
-        "Arabesque fondu: build tension and length before the pas de bourrée snap into full-height retiré"
-      ]
-    },
-    {
-      "code": "DR",
-      "name": "Discovering Repertoire",
-      "corrections": [
-        "Clearer heads on croix",
-        "Listen to the music, don't rush",
-        "Chaînes: half-turn half-turn rhythmic clarity; heels close; don't lean back; spot faster",
-        "Grand jetés: better battement; look up and over not at the ground",
-        "Développé devant: square shoulders and hips",
-        "Musicality is the main priority across the class",
-        "Projection: look beyond the arms and shoulders",
-        "Fourth arms: shoulders straight, not tilted to either side — including in développé écarté",
-        "Jeté passé: compact and directional, doesn't travel",
-        "À la seconde extension: active flexibility not just passive stretch"
-      ]
+      "code": "AF-16",
+      "name": "Allegro 4",
+      "corrections": []
     },
     {
       "code": "ALLEGRO",
@@ -466,11 +440,6 @@
         "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch",
         "Stamina collapse across allegro sections — conditioning gap, not purely technique"
       ]
-    },
-    {
-      "code": "AF-16",
-      "name": "Allegro 4",
-      "corrections": []
     },
     {
       "code": "AF-19",
@@ -511,9 +480,40 @@
       ]
     },
     {
+      "code": "AF-25",
+      "name": "Variation 2 (currently restricted — no pointe)",
+      "corrections": [
+        "Poses: posterior weight bias, not getting over the box; outer ankle not firing before weight transfer",
+        "Poses: retiré not getting up fast enough",
+        "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
+        "Eyeline: up and over, not throwing the head back",
+        "Épaulement: more upper back twist",
+        "Pose en arrière: step in with confidence, fondu and push off faster",
+        "Pose to arabesque: arrive in one count",
+        "Petite coupé: position below the calf, above the ankle",
+        "Arabesque fondu: build tension and length before the pas de bourrée snap into full-height retiré"
+      ]
+    },
+    {
       "code": "AF-28",
       "name": "Révérence",
       "corrections": []
+    },
+    {
+      "code": "DR",
+      "name": "Discovering Repertoire",
+      "corrections": [
+        "Clearer heads on croix",
+        "Listen to the music, don't rush",
+        "Chaînes: half-turn half-turn rhythmic clarity; heels close; don't lean back; spot faster",
+        "Grand jetés: better battement; look up and over not at the ground",
+        "Développé devant: square shoulders and hips",
+        "Musicality is the main priority across the class",
+        "Projection: look beyond the arms and shoulders",
+        "Fourth arms: shoulders straight, not tilted to either side — including in développé écarté",
+        "Jeté passé: compact and directional, doesn't travel",
+        "À la seconde extension: active flexibility not just passive stretch"
+      ]
     },
     {
       "code": "DR-B01",
