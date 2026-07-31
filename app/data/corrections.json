@@ -1,5 +1,5 @@
 {
-  "lastUpdated": "2026-06-27",
+  "lastUpdated": "2026-07-31",
   "priorities": [
     {
       "title": "Weight placement and demi-pointe proprioception",
@@ -33,7 +33,8 @@
         "AF-09",
         "AF-10",
         "AF-13",
-        "AF-25"
+        "AF-25",
+        "AF-23"
       ],
       "resolvedDate": null
     },
@@ -89,15 +90,16 @@
       ],
       "exercises": [
         "AF-10",
-        "AF-11F"
+        "AF-11F",
+        "AF-23"
       ],
       "resolvedDate": null
     },
     {
       "name": "Shoulder girdle and épaulement",
-      "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and in développé écarté.",
-      "firstNoted": "2026-03-12",
-      "sessionCount": 6,
+      "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and in développé écarté. Right side back weakness confirmed on pointe as early as March 2026 — appears in pirouette en dehors turning left (right side back must snap inward to square) and en dedans (lacking strength generally); cross-exercise pattern, not isolated to one turn direction.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 7,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -115,15 +117,16 @@
         "DR-B08",
         "DR-C01",
         "DR-C02",
-        "DR-C03"
+        "DR-C03",
+        "AF-23"
       ],
       "resolvedDate": null
     },
     {
       "name": "Arabesque mechanics",
-      "summary": "Second shoulder hiking; eyeline down; back gripping at end range. In adage barre (AF-07): posé arabesque — shoulders down and square.",
-      "firstNoted": "2026-03-14",
-      "sessionCount": 5,
+      "summary": "Second shoulder hiking; eyeline down; back gripping at end range. In adage barre (AF-07): posé arabesque — shoulders down and square. Earliest noted in pointe class (March 2026): pose to arabesque needs to arrive in one count, and fondu needs tension/length built before releasing into pas de bourrée rather than collapsing.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 6,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -132,15 +135,16 @@
       ],
       "exercises": [
         "AF-07",
-        "AF-12"
+        "AF-12",
+        "AF-25"
       ],
       "resolvedDate": null
     },
     {
       "name": "Opposition and length under load",
-      "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional.",
-      "firstNoted": "2026-06-04",
-      "sessionCount": 3,
+      "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional. Earliest noted in Discovering Rep adage (March 2026): relevé lent/battement height well below active capacity, addressed with active-flexibility barre stretch (leg on barre in second, lift with hamstring, not momentum).",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 4,
       "examImpact": true,
       "markCriteria": [
         "dynamic values",
@@ -197,9 +201,9 @@
     },
     {
       "name": "Foot intrinsics and arch",
-      "summary": "Arches lifting more (June 25 progress) but weight still in heels. Articulation through demi-pointe lacking across tendus, grand battement, and allegro. Bilateral winging on demi-pointe confirmed by physio.",
-      "firstNoted": "2026-05-23",
-      "sessionCount": 7,
+      "summary": "Arches lifting more (June 25 progress) but weight still in heels. Articulation through demi-pointe lacking across tendus, grand battement, and allegro. Bilateral winging on demi-pointe confirmed by physio. Earliest noted on pointe (March 2026): rises need active toe press into the shank for a clear ¾ pointe rather than a passive arrival.",
+      "firstNoted": "2026-03-09",
+      "sessionCount": 8,
       "examImpact": true,
       "markCriteria": [
         "correct posture and weight placement",
@@ -212,7 +216,8 @@
         "AF-08",
         "AF-09",
         "AF-15",
-        "ALLEGRO"
+        "ALLEGRO",
+        "AF-19"
       ],
       "resolvedDate": null
     },
@@ -432,7 +437,11 @@
         "Poses: retiré not getting up fast enough",
         "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
         "Eyeline: up and over, not throwing the head back",
-        "Épaulement: more upper back twist"
+        "Épaulement: more upper back twist",
+        "Pose en arrière: step in with confidence, fondu and push off faster",
+        "Pose to arabesque: arrive in one count",
+        "Petite coupé: position below the calf, above the ankle",
+        "Arabesque fondu: build tension and length before the pas de bourrée snap into full-height retiré"
       ]
     },
     {
@@ -469,7 +478,9 @@
     {
       "code": "AF-19",
       "name": "Rises",
-      "corrections": []
+      "corrections": [
+        "Rises: roll through demi-pointe to a clear ¾ pointe — press toes into the shank, don't arrive passively"
+      ]
     },
     {
       "code": "AF-20",
@@ -489,7 +500,18 @@
     {
       "code": "AF-23",
       "name": "Pirouettes",
-      "corrections": []
+      "corrections": [
+        "En dehors from fifth on pointe: weight ~60% over working retiré leg before push-off, not jumped onto relevé",
+        "En dehors: turnout momentum from deep hip rotators, not muscled through",
+        "En dehors: support arms from the back, not the shoulders",
+        "En dehors turning left: right side back snaps inward to square shoulders and hips",
+        "En dehors: more weight forward overall",
+        "En dedans: faster relevé",
+        "En dedans: relevé foot scoops under the body into retiré, not a wide swing",
+        "En dedans: right side back weak — same weakness as en dehors turning left",
+        "En dedans: left foot unstable on pointe specifically in this turn, stable in regular retiré passé",
+        "Soutenu: weight forward, spring and snatch onto pointe, not a jump"
+      ]
     },
     {
       "code": "AF-28",

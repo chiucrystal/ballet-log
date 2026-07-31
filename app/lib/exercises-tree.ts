@@ -28,3 +28,19 @@ export const EXERCISES_TREE = [
     ],
   },
 ]
+
+export function slugify(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
+export function getClassBySlug(classSlug: string) {
+  return EXERCISES_TREE.find((cat) => slugify(cat.category) === classSlug)
+}
+
+export function getSectionBySlug(classSlug: string, sectionSlug: string) {
+  const cls = getClassBySlug(classSlug)
+  if (!cls) return undefined
+  const section = cls.subgroups.find((sg) => slugify(sg.name) === sectionSlug)
+  if (!section) return undefined
+  return { cls, section }
+}
