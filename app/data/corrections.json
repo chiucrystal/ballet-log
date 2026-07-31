@@ -55,7 +55,9 @@
         "AF-08",
         "AF-10",
         "AF-12",
-        "AF-25"
+        "AF-25",
+        "AF-04",
+        "AF-19"
       ],
       "resolvedDate": null
     },
@@ -147,7 +149,8 @@
         "DR-C03",
         "DR-C05",
         "AF-12",
-        "AF-03"
+        "AF-03",
+        "AF-16"
       ],
       "resolvedDate": null
     },
@@ -163,7 +166,8 @@
       "exercises": [
         "AF-07",
         "AF-08",
-        "DR"
+        "DR",
+        "DR-B09"
       ],
       "resolvedDate": null
     },
@@ -297,7 +301,9 @@
     {
       "code": "AF-04",
       "name": "Ronds de jambe à terre",
-      "corrections": []
+      "corrections": [
+        "Close in tight fifth and squeeze to stay stable"
+      ]
     },
     {
       "code": "AF-05",
@@ -400,7 +406,8 @@
         "Arabesque: back compresses and grips at end range — hip flexor ceiling, not back strength problem",
         "Fouetté en l'air: deep hip rotators releasing too early before arabesque extension",
         "Arms need continuous movement through adage for fluidity",
-        "Pull up on standing leg; lock standing knee for stability"
+        "Pull up on standing leg; lock standing knee for stability",
+        "Shoulders creeping up when arms go into arabesque — press shoulder down as opposition to the arm rising"
       ]
     },
     {
@@ -430,7 +437,11 @@
     {
       "code": "AF-16",
       "name": "Allegro 4",
-      "corrections": []
+      "corrections": [
+        "Grand jeté en tournant: legs go through first position, not ronde de jambe around",
+        "Grand jeté en tournant: land in fondu — continuous movement, don't drop immediately",
+        "Gallop needs a sense of up"
+      ]
     },
     {
       "code": "ALLEGRO",
@@ -445,7 +456,9 @@
       "code": "AF-19",
       "name": "Rises",
       "corrections": [
-        "Rises: roll through demi-pointe to a clear ¾ pointe — press toes into the shank, don't arrive passively"
+        "Rises: roll through demi-pointe to a clear ¾ pointe — press toes into the shank, don't arrive passively",
+        "Rises at barre: pinky toe down throughout, rise on 1 count, lower on 2",
+        "Pinky toe must stay in contact with the floor throughout rise and lower"
       ]
     },
     {
@@ -570,7 +583,9 @@
     {
       "code": "DR-B09",
       "name": "Grands battements",
-      "corrections": []
+      "corrections": [
+        "Need better battement in grand jetés"
+      ]
     },
     {
       "code": "DR-C01",
