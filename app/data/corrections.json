@@ -19,7 +19,7 @@
       "name": "Weight placement and balance",
       "summary": "Posterior weight bias in every context — barre, centre, pointe, allegro. Arches more lifted in June 25 but heels still anchoring weight backward. Root cause: forcing turnout from heels.",
       "firstNoted": "2026-03-05",
-      "sessionCount": 11,
+      "sessionCount": 9,
       "examImpact": true,
       "markCriteria": [
         "correct posture and weight placement"
@@ -39,7 +39,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Outer hip and ankle stability",
+      "name": "Standing-leg stability",
       "summary": "Standing side collapsing in adage, leaning away from barre in relevé fifth, gripping barre in rond en l'air. Left lateral chain weakness bilateral and confirmed across barre work.",
       "firstNoted": "2026-03-09",
       "sessionCount": 9,
@@ -55,7 +55,9 @@
         "AF-08",
         "AF-10",
         "AF-12",
-        "AF-25"
+        "AF-25",
+        "AF-04",
+        "AF-19"
       ],
       "resolvedDate": null
     },
@@ -63,7 +65,7 @@
       "name": "Retiré and passé mechanics",
       "summary": "Retiré built foot-up rather than hip-down. Glute not activating to hold knee, knee not lifting, right hip rotating forward, working side pulling back.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 5,
       "examImpact": true,
       "markCriteria": [
         "control",
@@ -82,7 +84,7 @@
       "name": "Pirouette axis and preparation",
       "summary": "Axis collapses before pirouette finishes — closing in 3rd; arm-driven rotation; shoulder wind-up; passé dropping at 1.5 turns. Progress: good double May 2026, solid singles June 2026.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 5,
       "examImpact": true,
       "markCriteria": [
         "control",
@@ -96,10 +98,10 @@
       "resolvedDate": null
     },
     {
-      "name": "Shoulder girdle and épaulement",
+      "name": "Shoulders and épaulement",
       "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and in développé écarté. Right side back weakness confirmed on pointe as early as March 2026 — appears in pirouette en dehors turning left (right side back must snap inward to square) and en dedans (lacking strength generally); cross-exercise pattern, not isolated to one turn direction.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 7,
+      "sessionCount": 8,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -118,33 +120,16 @@
         "DR-C01",
         "DR-C02",
         "DR-C03",
-        "AF-23"
+        "AF-23",
+        "AF-12"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Arabesque mechanics",
-      "summary": "Second shoulder hiking; eyeline down; back gripping at end range. In adage barre (AF-07): posé arabesque — shoulders down and square. Earliest noted in pointe class (March 2026): pose to arabesque needs to arrive in one count, and fondu needs tension/length built before releasing into pas de bourrée rather than collapsing.",
-      "firstNoted": "2026-03-09",
-      "sessionCount": 6,
-      "examImpact": true,
-      "markCriteria": [
-        "line",
-        "expression",
-        "dynamic values"
-      ],
-      "exercises": [
-        "AF-07",
-        "AF-12",
-        "AF-25"
-      ],
-      "resolvedDate": null
-    },
-    {
-      "name": "Opposition and length under load",
+      "name": "Dynamic quality and accent",
       "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional. Earliest noted in Discovering Rep adage (March 2026): relevé lent/battement height well below active capacity, addressed with active-flexibility barre stretch (leg on barre in second, lift with hamstring, not momentum).",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 6,
       "examImpact": true,
       "markCriteria": [
         "dynamic values",
@@ -162,12 +147,15 @@
         "AF-15",
         "AF-25",
         "DR-C03",
-        "DR-C05"
+        "DR-C05",
+        "AF-12",
+        "AF-03",
+        "AF-16"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Hip hiking in développés and battement",
+      "name": "Hip lifting in développé/battement",
       "summary": "Working hip lifting in développé devant, à la seconde, and grand battement to the side. Connects to pelvic alignment and left lateral chain.",
       "firstNoted": "2026-06-04",
       "sessionCount": 2,
@@ -178,15 +166,16 @@
       "exercises": [
         "AF-07",
         "AF-08",
-        "DR"
+        "DR",
+        "DR-B09"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Pelvic alignment",
+      "name": "Pelvic tilt and core engagement",
       "summary": "Posterior pelvic tilt mistaken for neutral — glutes and rotators not pre-engaged before exercises (notably batterie preparation June 25). Improving but proprioceptive sense still unreliable.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 9,
+      "sessionCount": 4,
       "examImpact": true,
       "markCriteria": [
         "correct posture and weight placement"
@@ -200,7 +189,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Foot intrinsics and arch",
+      "name": "Feet and arch strength",
       "summary": "Arches lifting more (June 25 progress) but weight still in heels. Articulation through demi-pointe lacking across tendus, grand battement, and allegro. Bilateral winging on demi-pointe confirmed by physio. Earliest noted on pointe (March 2026): rises need active toe press into the shank for a clear ¾ pointe rather than a passive arrival.",
       "firstNoted": "2026-03-09",
       "sessionCount": 8,
@@ -216,16 +205,16 @@
         "AF-08",
         "AF-09",
         "AF-15",
-        "ALLEGRO",
-        "AF-19"
+        "AF-19",
+        "DR-C05"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Thoracic stiffness and shoulder mobility",
+      "name": "Upper back and shoulder mobility",
       "summary": "Thoracic extension restricted — lumbar compensates in arabesques and backbends. Shoulder mobility affecting arms to fifth. Only starting to find back engagement in arms second this year.",
       "firstNoted": "2026-03-10",
-      "sessionCount": 3,
+      "sessionCount": 1,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -265,358 +254,184 @@
         "DR-C06"
       ],
       "resolvedDate": null
+    },
+    {
+      "name": "Technique",
+      "summary": "Correct-placement and basic technique corrections that do not tie to a recurring root-cause pattern — kept for completeness, not tracked as an exam-risk theme.",
+      "firstNoted": "2026-03-14",
+      "sessionCount": 1,
+      "examImpact": false,
+      "markCriteria": [],
+      "exercises": [
+        "AF-12"
+      ],
+      "resolvedDate": null
     }
   ],
   "exercises": [
     {
       "code": "AF-01",
-      "name": "Pliés",
-      "corrections": [
-        "Arms and legs must arrive together",
-        "More resistance at the bottom of the plié",
-        "Lower heels earlier in grand plié",
-        "Engage glutes and hamstrings in cambré back",
-        "Grand plié: don't go so low",
-        "Shoulders don't come forward in grand plié",
-        "Core engaged, don't collapse forward",
-        "Weight even in plié in fourth"
-      ]
+      "name": "Pliés"
     },
     {
       "code": "AF-02",
-      "name": "Battements tendus",
-      "corrections": [
-        "Toes stay completely on the floor when returning to fifth — lifting noted"
-      ]
+      "name": "Battements tendus"
     },
     {
       "code": "AF-03",
-      "name": "Battements jetés / glissés",
-      "corrections": [
-        "More push off the floor and hold at 45 — stronger accent throughout",
-        "Right elbow drops in second — engage lats and back to keep it placed"
-      ]
+      "name": "Battements jetés / glissés"
+    },
+    {
+      "code": "AF-04",
+      "name": "Ronds de jambe à terre"
     },
     {
       "code": "AF-05",
-      "name": "Battements fondus / ronds de jambe en l'air",
-      "corrections": [
-        "Thigh leads — not heel or foot",
-        "Coupé low on top of ankle",
-        "Find resistance at the fondu to demi-pointe",
-        "More resistance in the fondu extends en croix",
-        "Lengthen supporting side especially in second and derrière",
-        "Leg directly behind hip in derrière",
-        "Sequence: fondu supporting leg + attitude before demi-pointe",
-        "Right foot not fully up on demi-pointe — push up and over the toes",
-        "Gripping the barre during rond en l'air in second on demi-pointe",
-        "Back leg more behind and more pulled up",
-        "Hand on barre more light outside of rond en l'air"
-      ]
+      "name": "Battements fondus / ronds de jambe en l'air"
     },
     {
       "code": "AF-06",
-      "name": "Battements frappés / petits battements",
-      "corrections": [
-        "Accent out on frappé en croix needs to be stronger",
-        "Frappé exercise pattern still not fully clear",
-        "Point second foot in the opening glissade",
-        "Losing accent and dynamic on the en dedans",
-        "Coupé under and over: both feet must point fully"
-      ]
+      "name": "Battements frappés / petits battements"
     },
     {
       "code": "AF-07",
-      "name": "Adage (barre)",
-      "corrections": [
-        "Chassé en arrière: keep back heel down",
-        "Posé arabesque en avant: keep shoulders down and square",
-        "Grand rond de jambe: keep working leg at even height from side to back",
-        "Lift up standing side — don't let it collapse or lean onto the barre",
-        "Attitude: thigh higher, angle greater than 90 degrees",
-        "Rotate working side ribcage forward"
-      ]
+      "name": "Adage (barre)"
     },
     {
       "code": "AF-08",
-      "name": "Grands battements",
-      "corrections": [
-        "Weight forward — don't sit back in hip for battement devant",
-        "Highest demi-pointe on retiré",
-        "Back leg more square in derrière",
-        "Less lifting of working hip to the side",
-        "More floor pressure and articulate through demi-pointe",
-        "Don't curl toes",
-        "Don't twist shoulders — square with hips",
-        "Passé sickled — glute not activating, knee not lifting",
-        "Think knee lifting not foot leading"
-      ]
+      "name": "Grands battements"
     },
     {
       "code": "AF-09",
-      "name": "Port de bras",
-      "corrections": [
-        "Weight forward on the pivot",
-        "Arms to first then open to fourth faster to get around",
-        "Bottom leg turns out fully",
-        "Glissade: point second foot especially devant; barely elevate but have a sense of lift",
-        "Eyeline: wider fourth position; follows the hands; more peripheral space",
-        "Back heel down in the back bend",
-        "Move upper body over the toes in derrière",
-        "Don't contract the neck"
-      ]
+      "name": "Port de bras"
     },
     {
       "code": "AF-10",
-      "name": "Centre practice and pirouettes",
-      "corrections": [
-        "Pirouettes closing in 3rd not 5th — axis collapses before rotation completes",
-        "Arm-driven rotation rather than hip-initiated; shoulder wind-up especially in en dedans",
-        "Pirouette preparation: weight not fully forward in fondu",
-        "Passé dropping at 1.5 turns mid-rotation — anchor failing on transition to second turn",
-        "Heels landing at same time rather than dropping into closed fifth",
-        "Think going up in the turn; lock standing knee and pull up"
-      ]
+      "name": "Centre practice and pirouettes"
     },
     {
       "code": "AF-11F",
-      "name": "Pirouette enchaînement",
-      "corrections": [
-        "Same pirouette axis and arm-compensation issues as AF-10",
-        "Lame duck: compact fourth under the body not fifth; hips to the corner — pelvis rotating with arms not staying square",
-        "Lame ducks: not tight, weight back",
-        "En dedans: back leg not coming in fast enough — passé retiré delay",
-        "Left pose turns too slow"
-      ]
+      "name": "Pirouette enchaînement"
     },
     {
       "code": "AF-12",
-      "name": "Adage (centre)",
-      "corrections": [
-        "Arabesque: second shoulder hiking — outer hip and side body not stabilising torso",
-        "Arabesque: eyeline down toward floor",
-        "Arabesque: back compresses and grips at end range — hip flexor ceiling, not back strength problem",
-        "Fouetté en l'air: deep hip rotators releasing too early before arabesque extension",
-        "Arms need continuous movement through adage for fluidity",
-        "Pull up on standing leg; lock standing knee for stability"
-      ]
+      "name": "Adage (centre)"
     },
     {
       "code": "AF-13",
-      "name": "Allegro 1",
-      "corrections": [
-        "Heels down"
-      ]
+      "name": "Allegro 1"
     },
     {
       "code": "AF-14",
-      "name": "Allegro 2",
-      "corrections": [
-        "Working on batterie — entrechat trois devant and derrière; need to build stamina when cleared to jump"
-      ]
+      "name": "Allegro 2"
     },
     {
       "code": "AF-15",
-      "name": "Allegro 3",
-      "corrections": [
-        "Greater sense of going up — use the plié to push upwards",
-        "Point second foot in glissades",
-        "Arms before legs — use arms to gain momentum"
-      ]
-    },
-    {
-      "code": "AF-25",
-      "name": "Variation 2 (currently restricted — no pointe)",
-      "corrections": [
-        "Poses: posterior weight bias, not getting over the box; outer ankle not firing before weight transfer",
-        "Poses: retiré not getting up fast enough",
-        "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
-        "Eyeline: up and over, not throwing the head back",
-        "Épaulement: more upper back twist",
-        "Pose en arrière: step in with confidence, fondu and push off faster",
-        "Pose to arabesque: arrive in one count",
-        "Petite coupé: position below the calf, above the ankle",
-        "Arabesque fondu: build tension and length before the pas de bourrée snap into full-height retiré"
-      ]
-    },
-    {
-      "code": "DR",
-      "name": "Discovering Repertoire",
-      "corrections": [
-        "Clearer heads on croix",
-        "Listen to the music, don't rush",
-        "Chaînes: half-turn half-turn rhythmic clarity; heels close; don't lean back; spot faster",
-        "Grand jetés: better battement; look up and over not at the ground",
-        "Développé devant: square shoulders and hips",
-        "Musicality is the main priority across the class",
-        "Projection: look beyond the arms and shoulders",
-        "Fourth arms: shoulders straight, not tilted to either side — including in développé écarté",
-        "Jeté passé: compact and directional, doesn't travel",
-        "À la seconde extension: active flexibility not just passive stretch"
-      ]
-    },
-    {
-      "code": "ALLEGRO",
-      "name": "Allegro (currently restricted — glissades only)",
-      "corrections": [
-        "Sharper beats from top of thighs — turnout collapsing mid-air",
-        "Articulate feet; weight forward at push-off",
-        "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch",
-        "Stamina collapse across allegro sections — conditioning gap, not purely technique"
-      ]
+      "name": "Allegro 3"
     },
     {
       "code": "AF-16",
-      "name": "Allegro 4",
-      "corrections": []
+      "name": "Allegro 4"
+    },
+    {
+      "code": "ALLEGRO",
+      "name": "Allegro (currently restricted — glissades only)"
     },
     {
       "code": "AF-19",
-      "name": "Rises",
-      "corrections": [
-        "Rises: roll through demi-pointe to a clear ¾ pointe — press toes into the shank, don't arrive passively"
-      ]
+      "name": "Rises"
     },
     {
       "code": "AF-20",
-      "name": "Relevés and posés",
-      "corrections": []
+      "name": "Relevés and posés"
     },
     {
       "code": "AF-21",
-      "name": "Échappés relevés and emboîtés",
-      "corrections": []
+      "name": "Échappés relevés and emboîtés"
     },
     {
       "code": "AF-22",
-      "name": "Courus and posés",
-      "corrections": []
+      "name": "Courus and posés"
     },
     {
       "code": "AF-23",
-      "name": "Pirouettes",
-      "corrections": [
-        "En dehors from fifth on pointe: weight ~60% over working retiré leg before push-off, not jumped onto relevé",
-        "En dehors: turnout momentum from deep hip rotators, not muscled through",
-        "En dehors: support arms from the back, not the shoulders",
-        "En dehors turning left: right side back snaps inward to square shoulders and hips",
-        "En dehors: more weight forward overall",
-        "En dedans: faster relevé",
-        "En dedans: relevé foot scoops under the body into retiré, not a wide swing",
-        "En dedans: right side back weak — same weakness as en dehors turning left",
-        "En dedans: left foot unstable on pointe specifically in this turn, stable in regular retiré passé",
-        "Soutenu: weight forward, spring and snatch onto pointe, not a jump"
-      ]
+      "name": "Pirouettes"
+    },
+    {
+      "code": "AF-25",
+      "name": "Variation 2 (currently restricted — no pointe)"
     },
     {
       "code": "AF-28",
-      "name": "Révérence",
-      "corrections": []
+      "name": "Révérence"
+    },
+    {
+      "code": "DR",
+      "name": "Discovering Repertoire"
     },
     {
       "code": "DR-B01",
-      "name": "Warm Up",
-      "corrections": []
+      "name": "Warm Up"
     },
     {
       "code": "DR-B02",
-      "name": "Pliés",
-      "corrections": [
-        "Musicality is the main priority — use the full phrase"
-      ]
+      "name": "Pliés"
     },
     {
       "code": "DR-B03",
-      "name": "Tendus",
-      "corrections": [
-        "Musicality is the main priority — use the full phrase"
-      ]
+      "name": "Tendus"
     },
     {
       "code": "DR-B04",
-      "name": "Jetés",
-      "corrections": []
+      "name": "Jetés"
     },
     {
       "code": "DR-B05",
-      "name": "Ronds de jambe",
-      "corrections": [
-        "Listen to the music, don't rush"
-      ]
+      "name": "Ronds de jambe"
     },
     {
       "code": "DR-B06",
-      "name": "Fondus",
-      "corrections": [
-        "Listen to the music, don't rush"
-      ]
+      "name": "Fondus"
     },
     {
       "code": "DR-B07",
-      "name": "Preparation for batterie",
-      "corrections": [
-        "Listen to the music, don't rush"
-      ]
+      "name": "Preparation for batterie"
     },
     {
       "code": "DR-B08",
-      "name": "Adage",
-      "corrections": [
-        "Développé devant: square shoulders and hips"
-      ]
+      "name": "Adage"
     },
     {
       "code": "DR-B09",
-      "name": "Grands battements",
-      "corrections": []
+      "name": "Grands battements"
     },
     {
       "code": "DR-C01",
-      "name": "Port de bras",
-      "corrections": [
-        "Projection: look beyond the arms and shoulders",
-        "Fourth arms: shoulders straight, not tilted — same applies in développé écarté"
-      ]
+      "name": "Port de bras"
     },
     {
       "code": "DR-C02",
-      "name": "Centre practice",
-      "corrections": [
-        "Fourth arms: shoulders straight, not tilted — same applies in développé écarté"
-      ]
+      "name": "Centre practice"
     },
     {
       "code": "DR-C03",
-      "name": "Adage",
-      "corrections": [
-        "Développé devant: square shoulders and hips",
-        "Projection: look beyond the arms and shoulders",
-        "À la seconde extension: active flexibility, not just passive stretch"
-      ]
+      "name": "Adage"
     },
     {
       "code": "DR-C04",
-      "name": "Allegro 1",
-      "corrections": []
+      "name": "Allegro 1"
     },
     {
       "code": "DR-C05",
-      "name": "Allegro 2",
-      "corrections": [
-        "Jeté passé: compact and directional, doesn't travel"
-      ]
+      "name": "Allegro 2"
     },
     {
       "code": "DR-C06",
-      "name": "Allegro 3",
-      "corrections": [
-        "Projection: look beyond the arms and shoulders"
-      ]
+      "name": "Allegro 3"
     },
     {
       "code": "DR-C07",
-      "name": "Révérence",
-      "corrections": []
+      "name": "Révérence"
     }
   ],
   "physioNotes": {

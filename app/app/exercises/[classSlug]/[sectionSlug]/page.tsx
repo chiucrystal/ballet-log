@@ -1,7 +1,8 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
-import { getCorrections } from '@/lib/data'
+import { getCorrections, getSessions } from '@/lib/data'
 import { getSectionBySlug } from '@/lib/exercises-tree'
+import { getExerciseCorrections } from '@/lib/theme-groups'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 
 export default async function SectionPage({
@@ -14,10 +15,11 @@ export default async function SectionPage({
   if (!located) notFound()
   const { cls, section } = located
 
-  const corrections = await getCorrections()
+  const [corrections, sessions] = await Promise.all([getCorrections(), getSessions()])
   const exercises = section.codes
     .map((code) => corrections.exercises.find((e) => e.code === code))
     .filter((e): e is NonNullable<typeof e> => Boolean(e))
+    .map((e) => ({ ...e, latestCorrection: getExerciseCorrections(sessions, e.code)[0]?.text ?? null }))
 
   return (
     <div>
@@ -39,9 +41,9 @@ export default async function SectionPage({
               <span className="font-heading text-base">{ex.name}</span>
               <span className="font-mono text-xs text-muted-foreground shrink-0">{ex.code}</span>
             </div>
-            {ex.corrections.length > 0 && (
+            {ex.latestCorrection && (
               <p className="mt-1.5 text-sm text-muted-foreground line-clamp-1">
-                {ex.corrections[0]}
+                {ex.latestCorrection}
               </p>
             )}
           </Link>
