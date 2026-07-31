@@ -100,6 +100,18 @@
   --chart-3: #BDBBFF;
   --chart-4: #C8F6F9;
   --chart-5: #959494;
+
+  /* Correction theme dots — one bold, accessible color per tracked theme */
+  --theme-weight: #C2185B;
+  --theme-pelvic: #00796B;
+  --theme-standing: #5E35B1;
+  --theme-retire: #D84315;
+  --theme-hip: #1565C0;
+  --theme-pirouette: #C62828;
+  --theme-feet: #2E7D32;
+  --theme-shoulders: #B8720A;
+  --theme-thoracic: #0097A7;
+  --theme-dynamic: #3949AB;
 }
 
 .dark {
@@ -146,6 +158,17 @@
   --chart-3: #BDBBFF;
   --chart-4: #C8F6F9;
   --chart-5: #9A9A9A;
+
+  --theme-weight: #FF6BAE;
+  --theme-pelvic: #4DD0C4;
+  --theme-standing: #B39DFF;
+  --theme-retire: #FF8A5C;
+  --theme-hip: #6FA8F5;
+  --theme-pirouette: #FF7A7A;
+  --theme-feet: #7DDA85;
+  --theme-shoulders: #FFC24D;
+  --theme-thoracic: #5CD5E6;
+  --theme-dynamic: #9FA8F0;
 }
 
 @layer base {

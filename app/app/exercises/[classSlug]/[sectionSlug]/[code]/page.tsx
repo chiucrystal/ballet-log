@@ -1,8 +1,9 @@
 import Link from 'next/link'
 import { notFound } from 'next/navigation'
 import { ChevronLeft, ChevronRight } from 'lucide-react'
-import { getCorrections } from '@/lib/data'
+import { getCorrections, getSessions } from '@/lib/data'
 import { getSectionBySlug } from '@/lib/exercises-tree'
+import { getExerciseCorrections, groupByTheme } from '@/lib/theme-groups'
 import { Breadcrumbs } from '@/components/breadcrumbs'
 
 export default async function ExercisePage({
@@ -16,9 +17,11 @@ export default async function ExercisePage({
   const { cls, section } = located
   if (!section.codes.includes(code)) notFound()
 
-  const corrections = await getCorrections()
+  const [corrections, sessions] = await Promise.all([getCorrections(), getSessions()])
   const exercise = corrections.exercises.find((e) => e.code === code)
   if (!exercise) notFound()
+
+  const groups = groupByTheme(getExerciseCorrections(sessions, code))
 
   const idx = section.codes.indexOf(code)
   const prevCode = idx > 0 ? section.codes[idx - 1] : null
@@ -44,15 +47,33 @@ export default async function ExercisePage({
         <span className="text-sm text-muted-foreground">{exercise.code}</span>
       </div>
 
-      {exercise.corrections.length > 0 ? (
-        <ul className="space-y-2.5">
-          {exercise.corrections.map((correction, i) => (
-            <li key={i} className="flex gap-2.5 text-sm leading-relaxed">
-              <span className="text-muted-foreground/50 select-none mt-0.5 shrink-0">•</span>
-              <span>{correction}</span>
-            </li>
+      {groups.length > 0 ? (
+        <div className="space-y-8">
+          {groups.map((group) => (
+            <div key={group.theme} className="space-y-2">
+              <div className="flex items-center gap-1.5">
+                <span
+                  className="size-1.5 rounded-full shrink-0"
+                  style={
+                    group.colorVar
+                      ? { backgroundColor: `var(${group.colorVar})` }
+                      : { backgroundColor: 'var(--muted-foreground)', opacity: 0.55 }
+                  }
+                />
+                <span className="font-mono text-[10px] font-medium uppercase tracking-[0.06em]">
+                  {group.theme}
+                </span>
+              </div>
+              <ul className="space-y-1.5 ml-4">
+                {group.items.map((c, i) => (
+                  <li key={i} className="text-sm leading-relaxed">
+                    {c.text}
+                  </li>
+                ))}
+              </ul>
+            </div>
           ))}
-        </ul>
+        </div>
       ) : (
         <p className="text-sm text-muted-foreground italic">No corrections recorded yet.</p>
       )}
