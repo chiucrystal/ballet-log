@@ -8,7 +8,7 @@ import {
 } from 'lucide-react'
 import { useState, useRef, useEffect, useCallback } from 'react'
 import { cn } from '@/lib/utils'
-import { EXERCISES_TREE, getClassBySlug, slugify } from '@/lib/exercises-tree'
+import { EXERCISES_TREE, slugify } from '@/lib/exercises-tree'
 
 const NAV_WIDTH_DEFAULT = 224
 const NAV_WIDTH_MIN = 160
@@ -29,9 +29,9 @@ const navLinks = [
   },
 ]
 
-// Drill-down nav: shows only the children of wherever the user currently is
-// in the syllabus (classes → sections → exercises), mirroring the page
-// breadcrumbs (Syllabus > Class > Section > Exercise) instead of one long tree.
+// Expanding tree nav: always lists every class, and expands in place to
+// surface the next level (sections, then exercises) under whichever class/
+// section the user is currently in — it never swaps out the levels above.
 function SyllabusNav({
   pathname,
   exercises,
@@ -42,6 +42,7 @@ function SyllabusNav({
   onNavigate: () => void
 }) {
   const segments = pathname.slice('/exercises'.length).split('/').filter(Boolean)
+  const [activeClassSlug, activeSectionSlug, activeCode] = segments
 
   const linkClass = (active: boolean) =>
     cn(
@@ -51,66 +52,63 @@ function SyllabusNav({
         : 'text-sidebar-foreground/60 hover:text-sidebar-foreground hover:bg-sidebar-accent/50'
     )
 
-  if (segments.length === 0) {
-    return (
-      <div className="mt-1 space-y-0.5">
-        {EXERCISES_TREE.map((cat) => (
-          <Link
-            key={cat.category}
-            href={`/exercises/${slugify(cat.category)}`}
-            onClick={onNavigate}
-            className={linkClass(false)}
-          >
-            <span className="truncate">{cat.category}</span>
-          </Link>
-        ))}
-      </div>
-    )
-  }
-
-  const cls = getClassBySlug(segments[0])
-  if (!cls) return null
-
-  if (segments.length === 1) {
-    return (
-      <div className="mt-1 space-y-0.5">
-        {cls.subgroups.map((sg) => (
-          <Link
-            key={sg.name}
-            href={`/exercises/${segments[0]}/${slugify(sg.name)}`}
-            onClick={onNavigate}
-            className={linkClass(false)}
-          >
-            <span className="truncate">{sg.name}</span>
-          </Link>
-        ))}
-      </div>
-    )
-  }
-
-  const section = cls.subgroups.find((sg) => slugify(sg.name) === segments[1])
-  if (!section) return null
-
-  const activeCode = segments[2]
-
   return (
     <div className="mt-1 space-y-0.5">
-      <p className="px-2 pb-0.5 font-mono text-[9px] font-medium uppercase tracking-widest text-sidebar-foreground/50">
-        {section.name}
-      </p>
-      {section.codes.map((code) => {
-        const ex = exercises.find((e) => e.code === code)
+      {EXERCISES_TREE.map((cat) => {
+        const catSlug = slugify(cat.category)
+        const isActiveClass = catSlug === activeClassSlug
+
         return (
-          <Link
-            key={code}
-            href={`/exercises/${segments[0]}/${segments[1]}/${code}`}
-            onClick={onNavigate}
-            title={`${ex?.name ?? code} (${code})`}
-            className={linkClass(activeCode === code)}
-          >
-            <span className="truncate">{ex?.name ?? code}</span>
-            <span className="shrink-0 text-[10px] opacity-50">{code}</span>
-          </Link>
+          <div key={cat.category}>
+            <Link
+              href={`/exercises/${catSlug}`}
+              onClick={onNavigate}
+              className={linkClass(isActiveClass && !activeSectionSlug)}
+            >
+              <span className="truncate">{cat.category}</span>
+            </Link>
+
+            {isActiveClass && (
+              <div className="ml-3 mt-0.5 space-y-0.5">
+                {cat.subgroups.map((sg) => {
+                  const sgSlug = slugify(sg.name)
+                  const isActiveSection = sgSlug === activeSectionSlug
+
+                  return (
+                    <div key={sg.name}>
+                      <Link
+                        href={`/exercises/${catSlug}/${sgSlug}`}
+                        onClick={onNavigate}
+                        className={linkClass(isActiveSection && !activeCode)}
+                      >
+                        <span className="truncate">{sg.name}</span>
+                      </Link>
+
+                      {isActiveSection && (
+                        <div className="ml-3 mt-0.5 space-y-0.5">
+                          {sg.codes.map((code) => {
+                            const ex = exercises.find((e) => e.code === code)
+                            return (
+                              <Link
+                                key={code}
+                                href={`/exercises/${catSlug}/${sgSlug}/${code}`}
+                                onClick={onNavigate}
+                                title={`${ex?.name ?? code} (${code})`}
+                                className={linkClass(activeCode === code)}
+                              >
+                                <span className="truncate">{ex?.name ?? code}</span>
+                                <span className="shrink-0 text-[10px] opacity-50">{code}</span>
+                              </Link>
+                            )
+                          })}
+                        </div>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            )}
+          </div>
         )
       })}
     </div>

@@ -14,12 +14,7 @@ export default async function ClassPage({
 
   return (
     <div>
-      <Breadcrumbs
-        items={[
-          { label: 'Syllabus', href: '/exercises' },
-          { label: cls.category },
-        ]}
-      />
+      <Breadcrumbs items={[{ label: cls.category }]} />
       <h1 className="font-mono text-[28px] leading-[1.2] mb-6">{cls.category}</h1>
       <div className="space-y-3">
         {cls.subgroups.map((sg) => (

@@ -23,7 +23,6 @@ export default async function SectionPage({
     <div>
       <Breadcrumbs
         items={[
-          { label: 'Syllabus', href: '/exercises' },
           { label: cls.category, href: `/exercises/${classSlug}` },
           { label: section.name },
         ]}
