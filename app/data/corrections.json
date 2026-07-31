@@ -39,7 +39,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Outer hip and ankle stability",
+      "name": "Standing-leg stability",
       "summary": "Standing side collapsing in adage, leaning away from barre in relevé fifth, gripping barre in rond en l'air. Left lateral chain weakness bilateral and confirmed across barre work.",
       "firstNoted": "2026-03-09",
       "sessionCount": 9,
@@ -96,7 +96,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Shoulder girdle and épaulement",
+      "name": "Shoulders and épaulement",
       "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and in développé écarté. Right side back weakness confirmed on pointe as early as March 2026 — appears in pirouette en dehors turning left (right side back must snap inward to square) and en dedans (lacking strength generally); cross-exercise pattern, not isolated to one turn direction.",
       "firstNoted": "2026-03-09",
       "sessionCount": 7,
@@ -118,30 +118,13 @@
         "DR-C01",
         "DR-C02",
         "DR-C03",
-        "AF-23"
+        "AF-23",
+        "AF-12"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Arabesque mechanics",
-      "summary": "Second shoulder hiking; eyeline down; back gripping at end range. In adage barre (AF-07): posé arabesque — shoulders down and square. Earliest noted in pointe class (March 2026): pose to arabesque needs to arrive in one count, and fondu needs tension/length built before releasing into pas de bourrée rather than collapsing.",
-      "firstNoted": "2026-03-09",
-      "sessionCount": 6,
-      "examImpact": true,
-      "markCriteria": [
-        "line",
-        "expression",
-        "dynamic values"
-      ],
-      "exercises": [
-        "AF-07",
-        "AF-12",
-        "AF-25"
-      ],
-      "resolvedDate": null
-    },
-    {
-      "name": "Opposition and length under load",
+      "name": "Dynamic quality and accent",
       "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional. Earliest noted in Discovering Rep adage (March 2026): relevé lent/battement height well below active capacity, addressed with active-flexibility barre stretch (leg on barre in second, lift with hamstring, not momentum).",
       "firstNoted": "2026-03-09",
       "sessionCount": 4,
@@ -162,12 +145,14 @@
         "AF-15",
         "AF-25",
         "DR-C03",
-        "DR-C05"
+        "DR-C05",
+        "AF-12",
+        "AF-03"
       ],
       "resolvedDate": null
     },
     {
-      "name": "Hip hiking in développés and battement",
+      "name": "Hip lifting in développé/battement",
       "summary": "Working hip lifting in développé devant, à la seconde, and grand battement to the side. Connects to pelvic alignment and left lateral chain.",
       "firstNoted": "2026-06-04",
       "sessionCount": 2,
@@ -183,7 +168,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Pelvic alignment",
+      "name": "Pelvic tilt and core engagement",
       "summary": "Posterior pelvic tilt mistaken for neutral — glutes and rotators not pre-engaged before exercises (notably batterie preparation June 25). Improving but proprioceptive sense still unreliable.",
       "firstNoted": "2026-03-09",
       "sessionCount": 9,
@@ -200,7 +185,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Foot intrinsics and arch",
+      "name": "Feet and arch strength",
       "summary": "Arches lifting more (June 25 progress) but weight still in heels. Articulation through demi-pointe lacking across tendus, grand battement, and allegro. Bilateral winging on demi-pointe confirmed by physio. Earliest noted on pointe (March 2026): rises need active toe press into the shank for a clear ¾ pointe rather than a passive arrival.",
       "firstNoted": "2026-03-09",
       "sessionCount": 8,
@@ -222,7 +207,7 @@
       "resolvedDate": null
     },
     {
-      "name": "Thoracic stiffness and shoulder mobility",
+      "name": "Upper back and shoulder mobility",
       "summary": "Thoracic extension restricted — lumbar compensates in arabesques and backbends. Shoulder mobility affecting arms to fifth. Only starting to find back engagement in arms second this year.",
       "firstNoted": "2026-03-10",
       "sessionCount": 3,
