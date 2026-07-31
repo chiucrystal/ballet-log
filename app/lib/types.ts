@@ -178,3 +178,14 @@ export interface TerminologyDoc {
   terms: Term[]
   open_questions: string[]
 }
+
+export interface PointeShoe {
+  id: string
+  date: string
+  brand: string
+  model: string
+  pros: string[]
+  cons: string[]
+  fitNotes: string | null
+  current: boolean
+}
