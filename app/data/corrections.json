@@ -19,7 +19,7 @@
       "name": "Weight placement and balance",
       "summary": "Posterior weight bias in every context — barre, centre, pointe, allegro. Arches more lifted in June 25 but heels still anchoring weight backward. Root cause: forcing turnout from heels.",
       "firstNoted": "2026-03-05",
-      "sessionCount": 11,
+      "sessionCount": 9,
       "examImpact": true,
       "markCriteria": [
         "correct posture and weight placement"
@@ -63,7 +63,7 @@
       "name": "Retiré and passé mechanics",
       "summary": "Retiré built foot-up rather than hip-down. Glute not activating to hold knee, knee not lifting, right hip rotating forward, working side pulling back.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 5,
       "examImpact": true,
       "markCriteria": [
         "control",
@@ -82,7 +82,7 @@
       "name": "Pirouette axis and preparation",
       "summary": "Axis collapses before pirouette finishes — closing in 3rd; arm-driven rotation; shoulder wind-up; passé dropping at 1.5 turns. Progress: good double May 2026, solid singles June 2026.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 5,
       "examImpact": true,
       "markCriteria": [
         "control",
@@ -99,7 +99,7 @@
       "name": "Shoulders and épaulement",
       "summary": "Trap dominance and shoulder blades riding up. Right elbow drops in second. Shoulder comes up in relevé. Ribcage needs to rotate forward in adage. Arms before legs in allegro. Shoulders tilting in fourth arms and in développé écarté. Right side back weakness confirmed on pointe as early as March 2026 — appears in pirouette en dehors turning left (right side back must snap inward to square) and en dedans (lacking strength generally); cross-exercise pattern, not isolated to one turn direction.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 7,
+      "sessionCount": 8,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -127,7 +127,7 @@
       "name": "Dynamic quality and accent",
       "summary": "Passivity in arms-legs coordination, fondu resistance, frappé accent, and allegro drive. Arms and legs not arriving together in pliés. À la seconde extension needs active flexibility not passive stretch. Jeté passé must be compact and directional. Earliest noted in Discovering Rep adage (March 2026): relevé lent/battement height well below active capacity, addressed with active-flexibility barre stretch (leg on barre in second, lift with hamstring, not momentum).",
       "firstNoted": "2026-03-09",
-      "sessionCount": 4,
+      "sessionCount": 6,
       "examImpact": true,
       "markCriteria": [
         "dynamic values",
@@ -171,7 +171,7 @@
       "name": "Pelvic tilt and core engagement",
       "summary": "Posterior pelvic tilt mistaken for neutral — glutes and rotators not pre-engaged before exercises (notably batterie preparation June 25). Improving but proprioceptive sense still unreliable.",
       "firstNoted": "2026-03-09",
-      "sessionCount": 9,
+      "sessionCount": 4,
       "examImpact": true,
       "markCriteria": [
         "correct posture and weight placement"
@@ -210,7 +210,7 @@
       "name": "Upper back and shoulder mobility",
       "summary": "Thoracic extension restricted — lumbar compensates in arabesques and backbends. Shoulder mobility affecting arms to fifth. Only starting to find back engagement in arms second this year.",
       "firstNoted": "2026-03-10",
-      "sessionCount": 3,
+      "sessionCount": 1,
       "examImpact": true,
       "markCriteria": [
         "line",
@@ -248,6 +248,18 @@
         "DR-C01",
         "DR-C03",
         "DR-C06"
+      ],
+      "resolvedDate": null
+    },
+    {
+      "name": "Technique",
+      "summary": "Correct-placement and basic technique corrections that do not tie to a recurring root-cause pattern — kept for completeness, not tracked as an exam-risk theme.",
+      "firstNoted": "2026-03-14",
+      "sessionCount": 1,
+      "examImpact": false,
+      "markCriteria": [],
+      "exercises": [
+        "AF-12"
       ],
       "resolvedDate": null
     }
