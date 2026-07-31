@@ -33,7 +33,8 @@
         "AF-09",
         "AF-10",
         "AF-13",
-        "AF-25"
+        "AF-25",
+        "AF-23"
       ],
       "resolvedDate": null
     },
@@ -89,7 +90,8 @@
       ],
       "exercises": [
         "AF-10",
-        "AF-11F"
+        "AF-11F",
+        "AF-23"
       ],
       "resolvedDate": null
     },
@@ -115,7 +117,8 @@
         "DR-B08",
         "DR-C01",
         "DR-C02",
-        "DR-C03"
+        "DR-C03",
+        "AF-23"
       ],
       "resolvedDate": null
     },
@@ -132,7 +135,8 @@
       ],
       "exercises": [
         "AF-07",
-        "AF-12"
+        "AF-12",
+        "AF-25"
       ],
       "resolvedDate": null
     },
@@ -212,7 +216,8 @@
         "AF-08",
         "AF-09",
         "AF-15",
-        "ALLEGRO"
+        "ALLEGRO",
+        "AF-19"
       ],
       "resolvedDate": null
     },
@@ -427,7 +432,11 @@
         "Poses: retiré not getting up fast enough",
         "Pas de bourrées: traveling rather than turning on the spot — retiré not at full height",
         "Eyeline: up and over, not throwing the head back",
-        "Épaulement: more upper back twist"
+        "Épaulement: more upper back twist",
+        "Pose en arrière: step in with confidence, fondu and push off faster",
+        "Pose to arabesque: arrive in one count",
+        "Petite coupé: position below the calf, above the ankle",
+        "Arabesque fondu: build tension and length before the pas de bourrée snap into full-height retiré"
       ]
     },
     {
@@ -464,7 +473,9 @@
     {
       "code": "AF-19",
       "name": "Rises",
-      "corrections": []
+      "corrections": [
+        "Rises: roll through demi-pointe to a clear ¾ pointe — press toes into the shank, don't arrive passively"
+      ]
     },
     {
       "code": "AF-20",
@@ -484,7 +495,18 @@
     {
       "code": "AF-23",
       "name": "Pirouettes",
-      "corrections": []
+      "corrections": [
+        "En dehors from fifth on pointe: weight ~60% over working retiré leg before push-off, not jumped onto relevé",
+        "En dehors: turnout momentum from deep hip rotators, not muscled through",
+        "En dehors: support arms from the back, not the shoulders",
+        "En dehors turning left: right side back snaps inward to square shoulders and hips",
+        "En dehors: more weight forward overall",
+        "En dedans: faster relevé",
+        "En dedans: relevé foot scoops under the body into retiré, not a wide swing",
+        "En dedans: right side back weak — same weakness as en dehors turning left",
+        "En dedans: left foot unstable on pointe specifically in this turn, stable in regular retiré passé",
+        "Soutenu: weight forward, spring and snatch onto pointe, not a jump"
+      ]
     },
     {
       "code": "AF-28",
