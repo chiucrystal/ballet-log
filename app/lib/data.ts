@@ -37,5 +37,5 @@ export async function getHomeExercises(): Promise<LibraryExercise[]> {
 export async function getPointeShoes(): Promise<PointeShoe[]> {
   const content = await fs.readFile(path.join(dataDir, 'pointe-shoes.json'), 'utf-8')
   const shoes = JSON.parse(content) as PointeShoe[]
-  return shoes.sort((a, b) => a.date.localeCompare(b.date))
+  return shoes.sort((a, b) => b.date.localeCompare(a.date))
 }

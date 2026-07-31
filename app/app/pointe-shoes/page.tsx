@@ -9,7 +9,7 @@ export default async function PointeShoesPage() {
   return (
     <div className="space-y-8">
       <div className="space-y-3">
-        <h1 className="font-mono text-[28px] leading-[1.2]">Pointe Shoe Journey</h1>
+        <h1 className="font-mono text-[28px] leading-[1.2]">Pointe shoe journey</h1>
         <div
           className="h-[3px] w-16"
           style={{ background: 'linear-gradient(to right, #FC4C02, #EF2CC1, #BDBBFF)' }}
