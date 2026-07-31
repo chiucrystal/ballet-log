@@ -201,8 +201,8 @@
         "AF-08",
         "AF-09",
         "AF-15",
-        "ALLEGRO",
-        "AF-19"
+        "AF-19",
+        "DR-C05"
       ],
       "resolvedDate": null
     },
@@ -423,7 +423,8 @@
       "corrections": [
         "Greater sense of going up — use the plié to push upwards",
         "Point second foot in glissades",
-        "Arms before legs — use arms to gain momentum"
+        "Arms before legs — use arms to gain momentum",
+        "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch"
       ]
     },
     {
@@ -437,7 +438,6 @@
       "corrections": [
         "Sharper beats from top of thighs — turnout collapsing mid-air",
         "Articulate feet; weight forward at push-off",
-        "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch",
         "Stamina collapse across allegro sections — conditioning gap, not purely technique"
       ]
     },
@@ -605,7 +605,8 @@
       "code": "DR-C05",
       "name": "Allegro 2",
       "corrections": [
-        "Jeté passé: compact and directional, doesn't travel"
+        "Jeté passé: compact and directional, doesn't travel",
+        "Ballonné: gesture foot not snapping to full point at apex — active pointing, not passive stretch"
       ]
     },
     {
