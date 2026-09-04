@@ -1,7 +1,7 @@
 import { promises as fs } from 'fs'
 import path from 'path'
-import type { Session, CorrectionsDoc, TerminologyDoc, LibraryExercise } from './types'
-export { formatDate, formatShortDate } from './format'
+import type { Session, CorrectionsDoc, TerminologyDoc, LibraryExercise, PointeShoe } from './types'
+export { formatDate, formatShortDate, formatMonthYear } from './format'
 
 const dataDir = path.join(process.cwd(), 'data')
 
@@ -32,4 +32,10 @@ export async function getTerminology(): Promise<TerminologyDoc> {
 export async function getHomeExercises(): Promise<LibraryExercise[]> {
   const content = await fs.readFile(path.join(dataDir, 'home-exercises.json'), 'utf-8')
   return JSON.parse(content) as LibraryExercise[]
+}
+
+export async function getPointeShoes(): Promise<PointeShoe[]> {
+  const content = await fs.readFile(path.join(dataDir, 'pointe-shoes.json'), 'utf-8')
+  const shoes = JSON.parse(content) as PointeShoe[]
+  return shoes.sort((a, b) => b.date.localeCompare(a.date))
 }

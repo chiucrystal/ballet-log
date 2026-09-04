@@ -2,7 +2,7 @@ export const EXERCISES_TREE = [
   {
     category: "Advanced Foundation",
     subgroups: [
-      { name: "Barre", codes: ["AF-01", "AF-02", "AF-03", "AF-05", "AF-06", "AF-07", "AF-08"] },
+      { name: "Barre", codes: ["AF-01", "AF-02", "AF-03", "AF-04", "AF-05", "AF-06", "AF-07", "AF-08"] },
       { name: "Centre", codes: ["AF-09", "AF-10", "AF-11F", "AF-12"] },
       { name: "Allegro", codes: ["AF-13", "AF-14", "AF-15", "AF-16"] },
     ],
@@ -28,3 +28,19 @@ export const EXERCISES_TREE = [
     ],
   },
 ]
+
+export function slugify(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
+}
+
+export function getClassBySlug(classSlug: string) {
+  return EXERCISES_TREE.find((cat) => slugify(cat.category) === classSlug)
+}
+
+export function getSectionBySlug(classSlug: string, sectionSlug: string) {
+  const cls = getClassBySlug(classSlug)
+  if (!cls) return undefined
+  const section = cls.subgroups.find((sg) => slugify(sg.name) === sectionSlug)
+  if (!section) return undefined
+  return { cls, section }
+}

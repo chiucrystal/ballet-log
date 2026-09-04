@@ -1,0 +1,67 @@
+[
+  {
+    "id": "grishko-nova",
+    "date": "2024-02",
+    "brand": "Grishko",
+    "model": "Nova",
+    "pros": [],
+    "cons": [
+      "Twisting on the foot",
+      "Couldn't get fully over the box",
+      "Pain in the big toe",
+      "Sinking"
+    ],
+    "fitNotes": null,
+    "current": false
+  },
+  {
+    "id": "gaynor-minden-lyra",
+    "date": "2024-08",
+    "brand": "Gaynor Minden",
+    "model": "Lyra",
+    "pros": [],
+    "cons": [
+      "Shank too soft",
+      "Knuckling"
+    ],
+    "fitNotes": null,
+    "current": false
+  },
+  {
+    "id": "bloch-heritage",
+    "date": "2025-06",
+    "brand": "Bloch",
+    "model": "Heritage / Heritage Strong",
+    "pros": [
+      "Everything else about the shoe was 10/10"
+    ],
+    "cons": [
+      "Wings sit too low"
+    ],
+    "fitNotes": null,
+    "current": false
+  },
+  {
+    "id": "grishko-3007-pro-flex",
+    "date": "2026-03",
+    "brand": "Grishko",
+    "model": "3007 Pro Flex",
+    "pros": [],
+    "cons": [
+      "Sinking",
+      "Pain in the big toe"
+    ],
+    "fitNotes": "Vamp slightly too long in 4XX width. 3XX width runs slightly short but is generally fine.",
+    "current": false
+  },
+  {
+    "id": "bloch-raffine-heritage",
+    "date": "2026-07",
+    "brand": "Bloch",
+    "model": "Raffine / Heritage",
+    "pros": [],
+    "cons": [],
+    "fitNotes": null,
+    "current": true
+  }
+]

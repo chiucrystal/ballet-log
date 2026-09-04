@@ -24,11 +24,11 @@ export default async function TrainingPage() {
 
   return (
     <div className="space-y-12">
-      <h1 className="font-heading text-[28px] leading-[1.2]">Home Training</h1>
+      <h1 className="font-mono text-[28px] leading-[1.2]">Home Training</h1>
 
       {Object.entries(grouped).map(([category, items]) => (
         <section key={category}>
-          <h2 className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-6">
+          <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground mb-6">
             {category}
           </h2>
           <div className="space-y-8">
