@@ -298,8 +298,9 @@ export function CombinationBuilder({
           <h2 className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">Steps</h2>
           <p className="text-xs text-muted-foreground leading-relaxed mb-4 max-w-2xl">
             Drag on an empty grid cell to draw a block, release to name it. Drag a block&apos;s body to move it, its
-            edges to resize it. Click a block to select it (× appears), long-press to delete, double-click to
-            rename. Counts restart at 1 every 8 counts.
+            edges to resize it. Click a block to select it (× appears), shift/cmd-click to select more, long-press
+            to delete, double-click to rename. Counts restart at 1 every 8 counts. Ctrl/Cmd+Z to undo, Ctrl/Cmd+D
+            to duplicate the selection.
           </p>
           <ExerciseTimeline
             mode="author"

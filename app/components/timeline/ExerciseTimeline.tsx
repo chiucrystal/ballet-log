@@ -1,7 +1,8 @@
 'use client'
 
-import { useRef, useState } from 'react'
-import { X } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
+import { Copy, Undo2, X } from 'lucide-react'
+import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import {
   DEFAULT_PHRASE_LENGTH,
@@ -50,6 +51,10 @@ function freeRange(blocks: TimelineBlock[], excludeId: string | undefined, ancho
 
 function blockAt(blocks: TimelineBlock[], unit: number) {
   return blocks.find((b) => unit >= b.startCount && unit < b.startCount + b.durationCount)
+}
+
+function selKey(track: TimelineTrack, id: string) {
+  return `${track}:${id}`
 }
 
 type DragState =
@@ -113,17 +118,120 @@ export function ExerciseTimeline({
 
   const [drag, setDrag] = useState<DragState | null>(null)
   const [pending, setPending] = useState<PendingTerm | null>(null)
-  const [selected, setSelected] = useState<{ track: TimelineTrack; id: string } | null>(null)
+  const [selected, setSelected] = useState<Set<string>>(new Set())
   const [expanded, setExpanded] = useState<{ track: TimelineTrack; id: string } | null>(null)
   const longPress = useRef<{ timer: ReturnType<typeof setTimeout>; moved: boolean } | null>(null)
+  const history = useRef<{ legTrack: TimelineBlock[]; armTrack: TimelineBlock[] }[]>([])
+  const [historyLength, setHistoryLength] = useState(0)
 
   const tracksOf = (track: TimelineTrack) => (track === 'leg' ? legTrack : armTrack)
   const colRefOf = (track: TimelineTrack) => (track === 'leg' ? legColRef : armColRef)
 
+  /** Snapshot both tracks onto the undo stack. Call before any committing mutation. */
+  function pushHistory() {
+    history.current = [...history.current, { legTrack, armTrack }].slice(-100)
+    setHistoryLength(history.current.length)
+  }
+
+  function undo() {
+    const prev = history.current[history.current.length - 1]
+    if (!prev) return
+    history.current = history.current.slice(0, -1)
+    setHistoryLength(history.current.length)
+    onLegTrackChange?.(prev.legTrack)
+    onArmTrackChange?.(prev.armTrack)
+    setSelected(new Set())
+  }
+
   function updateTrack(track: TimelineTrack, updater: (blocks: TimelineBlock[]) => TimelineBlock[]) {
+    pushHistory()
     const setter = track === 'leg' ? onLegTrackChange : onArmTrackChange
     setter?.(updater(tracksOf(track)))
   }
+
+  function deleteSelected() {
+    if (selected.size === 0) return
+    const legIds = new Set<string>()
+    const armIds = new Set<string>()
+    for (const k of selected) {
+      const [track, id] = k.split(':') as [TimelineTrack, string]
+      ;(track === 'leg' ? legIds : armIds).add(id)
+    }
+    pushHistory()
+    onLegTrackChange?.(legTrack.filter((b) => !legIds.has(b.id)))
+    onArmTrackChange?.(armTrack.filter((b) => !armIds.has(b.id)))
+    setSelected(new Set())
+  }
+
+  /** Clone the selected blocks, placed contiguously right after the selection, preserving relative timing across tracks. */
+  function duplicateSelected() {
+    if (selected.size === 0) return
+    const legIds = new Set<string>()
+    const armIds = new Set<string>()
+    for (const k of selected) {
+      const [track, id] = k.split(':') as [TimelineTrack, string]
+      ;(track === 'leg' ? legIds : armIds).add(id)
+    }
+    const legSel = legTrack.filter((b) => legIds.has(b.id))
+    const armSel = armTrack.filter((b) => armIds.has(b.id))
+    const all = [...legSel, ...armSel]
+    if (all.length === 0) return
+
+    const minStart = Math.min(...all.map((b) => b.startCount))
+    const maxEnd = Math.max(...all.map((b) => b.startCount + b.durationCount))
+    const shift = maxEnd - minStart
+
+    function shiftBlocks(blocks: TimelineBlock[], others: TimelineBlock[]): TimelineBlock[] | null {
+      const clones: TimelineBlock[] = []
+      for (const b of blocks) {
+        const newStart = b.startCount + shift
+        if (newStart + b.durationCount > totalUnits) return null
+        const overlaps = others.some(
+          (o) => newStart < o.startCount + o.durationCount && newStart + b.durationCount > o.startCount
+        )
+        if (overlaps) return null
+        clones.push({ ...b, id: crypto.randomUUID(), startCount: newStart, isPickup: isPickupRange(newStart, b.durationCount) })
+      }
+      return clones
+    }
+
+    const newLegBlocks = shiftBlocks(legSel, legTrack.filter((b) => !legIds.has(b.id)))
+    const newArmBlocks = shiftBlocks(armSel, armTrack.filter((b) => !armIds.has(b.id)))
+    if (newLegBlocks === null || newArmBlocks === null) return // no room right after the selection
+
+    pushHistory()
+    onLegTrackChange?.([...legTrack, ...newLegBlocks])
+    onArmTrackChange?.([...armTrack, ...newArmBlocks])
+    setSelected(new Set([...newLegBlocks.map((b) => selKey('leg', b.id)), ...newArmBlocks.map((b) => selKey('arm', b.id))]))
+  }
+
+  const latest = useRef({ undo, duplicateSelected, deleteSelected, hasSelection: selected.size > 0 })
+  useEffect(() => {
+    latest.current = { undo, duplicateSelected, deleteSelected, hasSelection: selected.size > 0 }
+  })
+
+  useEffect(() => {
+    if (mode !== 'author') return
+    function onWindowKeyDown(e: KeyboardEvent) {
+      const target = e.target as HTMLElement | null
+      if (target?.tagName === 'INPUT' || target?.tagName === 'TEXTAREA' || target?.isContentEditable) return
+      const mod = e.metaKey || e.ctrlKey
+      if (mod && !e.shiftKey && e.key.toLowerCase() === 'z') {
+        e.preventDefault()
+        latest.current.undo()
+      } else if (mod && e.key.toLowerCase() === 'd') {
+        e.preventDefault()
+        latest.current.duplicateSelected()
+      } else if ((e.key === 'Delete' || e.key === 'Backspace') && latest.current.hasSelection) {
+        e.preventDefault()
+        latest.current.deleteSelected()
+      } else if (e.key === 'Escape' && latest.current.hasSelection) {
+        setSelected(new Set())
+      }
+    }
+    window.addEventListener('keydown', onWindowKeyDown)
+    return () => window.removeEventListener('keydown', onWindowKeyDown)
+  }, [mode])
 
   function unitFromClientY(track: TimelineTrack, clientY: number) {
     const rect = colRefOf(track).current?.getBoundingClientRect()
@@ -146,7 +254,7 @@ export function ExerciseTimeline({
     const { lo, hi } = freeRange(tracksOf(track), undefined, anchor, totalUnits)
     if (hi - lo < MIN_DURATION) return
     e.currentTarget.setPointerCapture(e.pointerId)
-    setSelected(null)
+    setSelected(new Set())
     setDrag({ kind: 'create', track, start: anchor, end: anchor, lo, hi })
   }
 
@@ -200,8 +308,15 @@ export function ExerciseTimeline({
     const finalStart = drag.start
     setDrag(null)
     if (!moved) {
-      // quick tap: toggle selection instead of committing a move
-      setSelected((prev) => (prev && prev.id === block.id ? null : { track, id: block.id }))
+      // quick tap: toggle selection instead of committing a move. Shift/Cmd/Ctrl adds to the selection.
+      const k = selKey(track, block.id)
+      const additive = e.shiftKey || e.metaKey || e.ctrlKey
+      setSelected((prev) => {
+        const next = additive ? new Set(prev) : new Set<string>()
+        if (next.has(k)) next.delete(k)
+        else next.add(k)
+        return next
+      })
       return
     }
     if (finalStart === drag.originalStart) return
@@ -284,15 +399,16 @@ export function ExerciseTimeline({
 
   function deleteBlock(track: TimelineTrack, id: string) {
     updateTrack(track, (blocks) => blocks.filter((b) => b.id !== id))
-    setSelected(null)
+    setSelected((prev) => {
+      const next = new Set(prev)
+      next.delete(selKey(track, id))
+      return next
+    })
   }
 
   function onKeyDownBlock(e: React.KeyboardEvent, track: TimelineTrack, id: string) {
     if (mode !== 'author') return
-    if (e.key === 'Delete' || e.key === 'Backspace') {
-      e.preventDefault()
-      deleteBlock(track, id)
-    } else if (e.key === 'Enter') {
+    if (e.key === 'Enter') {
       const block = tracksOf(track).find((b) => b.id === id)
       if (block) setPending({ track, id, startCount: block.startCount, durationCount: block.durationCount, value: block.term })
     }
@@ -347,7 +463,7 @@ export function ExerciseTimeline({
             start = activeDrag.start
             duration = activeDrag.duration
           }
-          const isSelected = selected?.track === track && selected.id === block.id
+          const isSelected = selected.has(selKey(track, block.id))
           const isExpanded = expanded?.track === track && expanded.id === block.id
           const isEditing = pending?.id === block.id && pending.track === track
 
@@ -447,48 +563,83 @@ export function ExerciseTimeline({
   }
 
   return (
-    <div className="flex items-start gap-2">
-      {/* ruler */}
-      <div className="w-9 shrink-0">
-        <div className="h-7" />
-        <div className="relative" style={{ height: gridHeight }}>
-          {breaks.map((b, i) => i > 0 && <div key={b} className="absolute inset-x-0 h-0.5 bg-foreground/30" style={{ top: b * UNIT_PX }} />)}
-          {Array.from({ length: totalUnits }).map((_, u) => {
-            const label = unitLabel(u, breaks)
-            if (label === null) return null
-            const isPhraseStart = label === '1'
-            return (
-              <span
-                key={u}
-                className={cn(
-                  'absolute right-0 -translate-y-1/2 tabular-nums',
-                  label === '&'
-                    ? 'text-xs text-muted-foreground/60'
-                    : isPhraseStart
-                      ? 'text-sm font-bold text-foreground'
-                      : 'text-sm font-semibold text-muted-foreground',
-                )}
-                style={{ top: u * UNIT_PX }}
-              >
-                {label}
-              </span>
-            )
-          })}
-          <span className="absolute top-0 -translate-y-1/2 text-[8px] uppercase tracking-widest text-muted-foreground/40">
-            pickup
-          </span>
+    <div className="space-y-2">
+      {mode === 'author' && (
+        <div className="flex items-center gap-2">
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={undo}
+            disabled={historyLength === 0}
+            className="gap-1.5"
+          >
+            <Undo2 /> Undo
+          </Button>
+          <Button
+            type="button"
+            variant="outline"
+            size="sm"
+            onClick={duplicateSelected}
+            disabled={selected.size === 0}
+            className="gap-1.5"
+          >
+            <Copy /> Duplicate{selected.size > 1 ? ` (${selected.size})` : ''}
+          </Button>
+          {selected.size > 0 && (
+            <button
+              type="button"
+              onClick={() => setSelected(new Set())}
+              className="text-xs text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Clear selection
+            </button>
+          )}
         </div>
-      </div>
+      )}
+      <div className="flex items-start gap-2">
+        {/* ruler */}
+        <div className="w-9 shrink-0">
+          <div className="h-7" />
+          <div className="relative" style={{ height: gridHeight }}>
+            {breaks.map((b, i) => i > 0 && <div key={b} className="absolute inset-x-0 h-0.5 bg-foreground/30" style={{ top: b * UNIT_PX }} />)}
+            {Array.from({ length: totalUnits }).map((_, u) => {
+              const label = unitLabel(u, breaks)
+              if (label === null) return null
+              const isPhraseStart = label === '1'
+              return (
+                <span
+                  key={u}
+                  className={cn(
+                    'absolute right-0 -translate-y-1/2 tabular-nums',
+                    label === '&'
+                      ? 'text-xs text-muted-foreground/60'
+                      : isPhraseStart
+                        ? 'text-sm font-bold text-foreground'
+                        : 'text-sm font-semibold text-muted-foreground',
+                  )}
+                  style={{ top: u * UNIT_PX }}
+                >
+                  {label}
+                </span>
+              )
+            })}
+            <span className="absolute top-0 -translate-y-1/2 text-[8px] uppercase tracking-widest text-muted-foreground/40">
+              pickup
+            </span>
+          </div>
+        </div>
 
-      {/* track columns */}
-      <div className="flex-1 min-w-0">
-        <div className="flex h-7 items-end pb-1">
-          <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Leg</div>
-          <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Arm</div>
-        </div>
-        <div className="flex gap-2">
-          {renderTrackColumn('leg')}
-          {renderTrackColumn('arm')}
+        {/* track columns */}
+        <div className="flex-1 min-w-0">
+          <div className="flex h-7 items-end pb-1">
+            <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Leg</div>
+            <div className="flex-1 text-center text-xs font-semibold uppercase tracking-widest text-muted-foreground/60">Arm</div>
+          </div>
+          <div className="flex gap-2">
+            {renderTrackColumn('leg')}
+            {renderTrackColumn('arm')}
+          </div>
         </div>
       </div>
     </div>
