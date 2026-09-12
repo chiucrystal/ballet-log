@@ -1,6 +1,6 @@
 'use client'
 
-import { useRef, useState } from 'react'
+import { Fragment, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
@@ -9,21 +9,17 @@ import { Checkbox } from '@/components/ui/checkbox'
 import { Label } from '@/components/ui/label'
 import { Badge } from '@/components/ui/badge'
 import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import { ExerciseTimeline } from '@/components/timeline/ExerciseTimeline'
 import { cn } from '@/lib/utils'
 import type { CombinationWithDetails } from '@/lib/db/combinations'
+import { DEFAULT_PHRASE_LENGTH, TIME_SIGNATURES, unitsPerCountFor, type TimelineBlock } from '@/lib/timeline-types'
+import { blocksToStepRows, fitTotalCounts, stepRowsToBlocks } from '@/lib/timeline-steps'
 
 const SECTIONS = ['Barre', 'Centre', 'Adage', 'Allegro', 'Pointe', 'Variation', 'Free Enchaînement', 'Other']
 const STEPS_INFO = ['Setup', 'Add steps', 'Preview']
 
 function slug(s: string) {
   return s.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '')
-}
-
-interface StepRow {
-  key: number
-  counts: string
-  step: string
-  armsHead: string
 }
 
 export function CombinationBuilder({
@@ -37,17 +33,6 @@ export function CombinationBuilder({
   action: (formData: FormData) => void
   initial?: CombinationWithDetails
 }) {
-  const [steps, setSteps] = useState<StepRow[]>(() =>
-    initial && initial.steps.length > 0
-      ? initial.steps.map((s, i) => ({ key: i, counts: s.counts ?? '', step: s.step, armsHead: s.armsHead ?? '' }))
-      : [{ key: 0, counts: '', step: '', armsHead: '' }]
-  )
-  const nextKey = useRef(steps.length)
-  const [page, setPage] = useState<1 | 2 | 3>(1)
-  const formRef = useRef<HTMLFormElement>(null)
-  const [selectedTargets, setSelectedTargets] = useState<Set<string>>(() => {
-    return new Set(initial?.targets.map((t) => `${t.type}:${t.value}`) ?? [])
-  })
   const [formValues, setFormValues] = useState({
     name: initial?.name ?? '',
     section: initial?.section ?? '',
@@ -57,17 +42,33 @@ export function CombinationBuilder({
     intro: initial?.intro ?? '',
     notes: initial?.notes ?? '',
   })
+  const unitsPerCount = unitsPerCountFor(formValues.timeSignature)
 
-  function addStep() {
-    setSteps((prev) => [...prev, { key: nextKey.current++, counts: '', step: '', armsHead: '' }])
+  const [{ legTrack, armTrack }, setTracks] = useState(() =>
+    initial && initial.steps.length > 0
+      ? stepRowsToBlocks(initial.steps, DEFAULT_PHRASE_LENGTH, unitsPerCountFor(initial.timeSignature))
+      : { legTrack: [] as TimelineBlock[], armTrack: [] as TimelineBlock[] }
+  )
+  const steps = useMemo(
+    () => blocksToStepRows(legTrack, armTrack, DEFAULT_PHRASE_LENGTH, unitsPerCount),
+    [legTrack, armTrack, unitsPerCount]
+  )
+  const totalCounts = useMemo(
+    () => fitTotalCounts(legTrack, armTrack, DEFAULT_PHRASE_LENGTH, unitsPerCount),
+    [legTrack, armTrack, unitsPerCount]
+  )
+  const [page, setPage] = useState<1 | 2 | 3>(1)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [selectedTargets, setSelectedTargets] = useState<Set<string>>(() => {
+    return new Set(initial?.targets.map((t) => `${t.type}:${t.value}`) ?? [])
+  })
+
+  function setLegTrack(next: TimelineBlock[]) {
+    setTracks((prev) => ({ ...prev, legTrack: next }))
   }
 
-  function removeStep(key: number) {
-    setSteps((prev) => (prev.length > 1 ? prev.filter((s) => s.key !== key) : prev))
-  }
-
-  function updateStep(key: number, field: keyof Omit<StepRow, 'key'>, value: string) {
-    setSteps((prev) => prev.map((s) => (s.key === key ? { ...s, [field]: value } : s)))
+  function setArmTrack(next: TimelineBlock[]) {
+    setTracks((prev) => ({ ...prev, armTrack: next }))
   }
 
   function toggleTarget(target: string) {
@@ -154,13 +155,20 @@ export function CombinationBuilder({
           </div>
           <div className="space-y-1">
             <Label htmlFor="timeSignature">Time signature</Label>
-            <Input
-              id="timeSignature"
+            <Select
               name="timeSignature"
               value={formValues.timeSignature}
-              onChange={(e) => setFormValues((prev) => ({ ...prev, timeSignature: e.target.value }))}
-              placeholder="e.g. 3/4"
-            />
+              onValueChange={(value) => value && setFormValues((prev) => ({ ...prev, timeSignature: value }))}
+            >
+              <SelectTrigger id="timeSignature">
+                <SelectValue placeholder="Select a time signature" />
+              </SelectTrigger>
+              <SelectContent>
+                {TIME_SIGNATURES.map((ts) => (
+                  <SelectItem key={ts} value={ts}>{ts}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-1">
             <Label htmlFor="tempoStyle">Tempo / style</Label>
@@ -304,46 +312,22 @@ export function CombinationBuilder({
         </div>
 
         <div>
-          <div className="flex items-center justify-between mb-3">
-            <h2 className="font-mono text-[10px] font-medium uppercase tracking-widest text-muted-foreground">Steps</h2>
-            <Button type="button" variant="link" size="sm" onClick={addStep} className="h-auto p-0 text-xs">
-              + Add step
-            </Button>
-          </div>
-          <div className="space-y-2">
-            {steps.map((step) => (
-              <div key={step.key} className="grid grid-cols-1 sm:grid-cols-[80px_1fr_1fr_auto] gap-2 items-start">
-                <Input
-                  name="step_counts"
-                  value={step.counts}
-                  onChange={(e) => updateStep(step.key, 'counts', e.target.value)}
-                  placeholder="1-2"
-                />
-                <Input
-                  name="step_text"
-                  value={step.step}
-                  onChange={(e) => updateStep(step.key, 'step', e.target.value)}
-                  placeholder="Step"
-                />
-                <Input
-                  name="step_arms_head"
-                  value={step.armsHead}
-                  onChange={(e) => updateStep(step.key, 'armsHead', e.target.value)}
-                  placeholder="Arms / head"
-                />
-                <Button
-                  type="button"
-                  variant="ghost"
-                  size="sm"
-                  onClick={() => removeStep(step.key)}
-                  disabled={steps.length === 1}
-                  className="justify-self-start text-muted-foreground hover:text-destructive sm:justify-self-auto"
-                >
-                  Remove
-                </Button>
-              </div>
-            ))}
-          </div>
+          <h2 className="text-[10px] font-semibold uppercase tracking-widest text-muted-foreground/60 mb-3">Steps</h2>
+          <p className="text-xs text-muted-foreground leading-relaxed mb-4 max-w-2xl">
+            Drag on an empty grid cell to draw a block, release to name it. Drag a block&apos;s body to move it, its
+            edges to resize it. Click a block to select it (× appears), shift/cmd-click to select more, long-press
+            to delete, double-click to rename. Counts restart at 1 every 8 counts. Ctrl/Cmd+Z to undo, Ctrl/Cmd+D
+            to duplicate the selection.
+          </p>
+          <ExerciseTimeline
+            mode="author"
+            legTrack={legTrack}
+            armTrack={armTrack}
+            onLegTrackChange={setLegTrack}
+            onArmTrackChange={setArmTrack}
+            totalCounts={totalCounts}
+            unitsPerCount={unitsPerCount}
+          />
         </div>
 
         <div className="flex items-center gap-3">
@@ -429,6 +413,13 @@ export function CombinationBuilder({
 
       {Array.from(selectedTargets).map((target) => (
         <input key={target} type="hidden" name="targets" value={target} />
+      ))}
+      {steps.map((step) => (
+        <Fragment key={step.key}>
+          <input type="hidden" name="step_counts" value={step.counts} />
+          <input type="hidden" name="step_text" value={step.step} />
+          <input type="hidden" name="step_arms_head" value={step.armsHead} />
+        </Fragment>
       ))}
     </form>
   )
