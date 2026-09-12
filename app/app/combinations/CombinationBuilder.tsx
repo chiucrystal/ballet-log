@@ -12,7 +12,7 @@ import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@
 import { ExerciseTimeline } from '@/components/timeline/ExerciseTimeline'
 import { cn } from '@/lib/utils'
 import type { CombinationWithDetails } from '@/lib/db/combinations'
-import type { TimelineBlock } from '@/lib/timeline-types'
+import { DEFAULT_PHRASE_LENGTH, TIME_SIGNATURES, unitsPerCountFor, type TimelineBlock } from '@/lib/timeline-types'
 import { blocksToStepRows, fitTotalCounts, stepRowsToBlocks } from '@/lib/timeline-steps'
 
 const SECTIONS = ['Barre', 'Centre', 'Adage', 'Allegro', 'Pointe', 'Variation', 'Free Enchaînement', 'Other']
@@ -33,16 +33,6 @@ export function CombinationBuilder({
   action: (formData: FormData) => void
   initial?: CombinationWithDetails
 }) {
-  const [{ legTrack, armTrack }, setTracks] = useState(() =>
-    initial && initial.steps.length > 0 ? stepRowsToBlocks(initial.steps) : { legTrack: [] as TimelineBlock[], armTrack: [] as TimelineBlock[] }
-  )
-  const steps = useMemo(() => blocksToStepRows(legTrack, armTrack), [legTrack, armTrack])
-  const totalCounts = useMemo(() => fitTotalCounts(legTrack, armTrack), [legTrack, armTrack])
-  const [page, setPage] = useState<1 | 2 | 3>(1)
-  const formRef = useRef<HTMLFormElement>(null)
-  const [selectedTargets, setSelectedTargets] = useState<Set<string>>(() => {
-    return new Set(initial?.targets.map((t) => `${t.type}:${t.value}`) ?? [])
-  })
   const [formValues, setFormValues] = useState({
     name: initial?.name ?? '',
     section: initial?.section ?? '',
@@ -51,6 +41,26 @@ export function CombinationBuilder({
     commence: initial?.commence ?? '',
     intro: initial?.intro ?? '',
     notes: initial?.notes ?? '',
+  })
+  const unitsPerCount = unitsPerCountFor(formValues.timeSignature)
+
+  const [{ legTrack, armTrack }, setTracks] = useState(() =>
+    initial && initial.steps.length > 0
+      ? stepRowsToBlocks(initial.steps, DEFAULT_PHRASE_LENGTH, unitsPerCountFor(initial.timeSignature))
+      : { legTrack: [] as TimelineBlock[], armTrack: [] as TimelineBlock[] }
+  )
+  const steps = useMemo(
+    () => blocksToStepRows(legTrack, armTrack, DEFAULT_PHRASE_LENGTH, unitsPerCount),
+    [legTrack, armTrack, unitsPerCount]
+  )
+  const totalCounts = useMemo(
+    () => fitTotalCounts(legTrack, armTrack, DEFAULT_PHRASE_LENGTH, unitsPerCount),
+    [legTrack, armTrack, unitsPerCount]
+  )
+  const [page, setPage] = useState<1 | 2 | 3>(1)
+  const formRef = useRef<HTMLFormElement>(null)
+  const [selectedTargets, setSelectedTargets] = useState<Set<string>>(() => {
+    return new Set(initial?.targets.map((t) => `${t.type}:${t.value}`) ?? [])
   })
 
   function setLegTrack(next: TimelineBlock[]) {
@@ -145,13 +155,20 @@ export function CombinationBuilder({
           </div>
           <div className="space-y-1">
             <Label htmlFor="timeSignature">Time signature</Label>
-            <Input
-              id="timeSignature"
+            <Select
               name="timeSignature"
               value={formValues.timeSignature}
-              onChange={(e) => setFormValues((prev) => ({ ...prev, timeSignature: e.target.value }))}
-              placeholder="e.g. 3/4"
-            />
+              onValueChange={(value) => value && setFormValues((prev) => ({ ...prev, timeSignature: value }))}
+            >
+              <SelectTrigger id="timeSignature">
+                <SelectValue placeholder="Select a time signature" />
+              </SelectTrigger>
+              <SelectContent>
+                {TIME_SIGNATURES.map((ts) => (
+                  <SelectItem key={ts} value={ts}>{ts}</SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </div>
           <div className="space-y-1">
             <Label htmlFor="tempoStyle">Tempo / style</Label>
@@ -309,6 +326,7 @@ export function CombinationBuilder({
             onLegTrackChange={setLegTrack}
             onArmTrackChange={setArmTrack}
             totalCounts={totalCounts}
+            unitsPerCount={unitsPerCount}
           />
         </div>
 

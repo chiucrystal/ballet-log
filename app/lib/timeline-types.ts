@@ -1,13 +1,24 @@
-export const PICKUP_UNITS = 2 // half-count units reserved before count 1 of the first phrase
+export const DEFAULT_UNITS_PER_COUNT = 2 // grid units per count for simple meters: "1", "1&"
 export const DEFAULT_PHRASE_LENGTH = 8 // counts per phrase, when no explicit phraseBreaks is given
+
+export const TIME_SIGNATURES = ['3/4', '4/4', '6/8'] as const
+export type TimeSignature = (typeof TIME_SIGNATURES)[number]
+
+/**
+ * Grid units per count. Simple meters (3/4, 4/4) split each count into 2 ("1", "1&"). 6/8 is compound
+ * duple — each count is a dotted-quarter pulse split into 3 eighth notes ("1", "1&", "1a").
+ */
+export function unitsPerCountFor(timeSignature?: string | null): number {
+  return timeSignature === '6/8' ? 3 : DEFAULT_UNITS_PER_COUNT
+}
 
 export type TimelineTrack = 'leg' | 'arm'
 
 export interface TimelineBlock {
   id: string
   track: TimelineTrack
-  startCount: number // half-count units. count 3 = 6, count 3& = 7
-  durationCount: number // half-count units, minimum 1
+  startCount: number // grid units (2 or 3 per count depending on meter). count 3 = 6, count 3& = 7 in a simple meter
+  durationCount: number // grid units, minimum 1
   term: string // free text, no vocab-id matching for MVP
   isPickup?: boolean // true if this block precedes count 1 of a phrase
 }
@@ -18,12 +29,17 @@ export interface TimelineExerciseData {
   armTrack: TimelineBlock[]
 }
 
-/** Unit positions where the on-screen count resets to 1 (e.g. every 8 counts). Always starts at PICKUP_UNITS. */
-export function defaultPhraseBreaks(totalUnits: number, phraseLength: number = DEFAULT_PHRASE_LENGTH) {
+/** Unit positions where the on-screen count resets to 1 (e.g. every 8 counts). Always starts at one count's pickup. */
+export function defaultPhraseBreaks(
+  totalUnits: number,
+  phraseLength: number = DEFAULT_PHRASE_LENGTH,
+  unitsPerCount: number = DEFAULT_UNITS_PER_COUNT
+) {
+  const pickup = unitsPerCount // one count's worth of lead-in
   const breaks: number[] = []
-  const step = phraseLength * 2
-  for (let b = PICKUP_UNITS; b < totalUnits; b += step) breaks.push(b)
-  return breaks.length > 0 ? breaks : [PICKUP_UNITS]
+  const step = phraseLength * unitsPerCount
+  for (let b = pickup; b < totalUnits; b += step) breaks.push(b)
+  return breaks.length > 0 ? breaks : [pickup]
 }
 
 export function phraseStartFor(u: number, breaks: number[]) {
@@ -33,4 +49,13 @@ export function phraseStartFor(u: number, breaks: number[]) {
     else break
   }
   return b
+}
+
+/** The on-screen label for a single grid unit: "N", "N&", or (6/8 only) "Na". */
+export function unitLabelFor(offsetInPhrase: number, unitsPerCount: number): string {
+  const n = Math.floor(offsetInPhrase / unitsPerCount) + 1
+  const sub = offsetInPhrase % unitsPerCount
+  if (sub === 0) return String(n)
+  if (unitsPerCount === 3) return sub === 1 ? `${n}&` : `${n}a`
+  return `${n}&`
 }

@@ -6,14 +6,14 @@ import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import {
   DEFAULT_PHRASE_LENGTH,
-  PICKUP_UNITS,
+  DEFAULT_UNITS_PER_COUNT,
   defaultPhraseBreaks,
   phraseStartFor,
   type TimelineBlock,
   type TimelineTrack,
 } from '@/lib/timeline-types'
 
-const UNIT_PX = 34 // px per half-count grid unit, along the vertical (time) axis
+const UNIT_PX = 34 // px per grid unit, along the vertical (time) axis
 const MIN_DURATION = 1
 
 function snap(raw: number) {
@@ -24,15 +24,18 @@ function clamp(v: number, lo: number, hi: number) {
   return Math.min(hi, Math.max(lo, v))
 }
 
-function isPickupRange(start: number, duration: number) {
-  return start + duration <= PICKUP_UNITS
+function isPickupRange(start: number, duration: number, pickupUnits: number) {
+  return start + duration <= pickupUnits
 }
 
-function unitLabel(u: number, breaks: number[]): string | null {
+/** Ruler tick label: the count number at the start of a count, or a bare "&"/"a" for its subdivisions. */
+function unitLabel(u: number, breaks: number[], unitsPerCount: number): string | null {
   if (u < breaks[0]) return null
   const b = phraseStartFor(u, breaks)
-  const n = Math.floor((u - b) / 2) + 1
-  return (u - b) % 2 === 0 ? String(n) : '&'
+  const offset = u - b
+  const sub = offset % unitsPerCount
+  if (sub === 0) return String(Math.floor(offset / unitsPerCount) + 1)
+  return unitsPerCount === 3 && sub === 2 ? 'a' : '&'
 }
 
 /** Free gap in `blocks` (a single track) that contains `anchor`, excluding `excludeId`. */
@@ -97,6 +100,8 @@ export interface ExerciseTimelineProps {
    * aren't a uniform length (e.g. a 4-count intro before the first 8-count phrase). Overrides phraseLength.
    */
   phraseBreaks?: number[]
+  /** Grid units per count: 2 for simple meters ("1", "1&"), 3 for 6/8 ("1", "1&", "1a"). Default 2. */
+  unitsPerCount?: number
 }
 
 export function ExerciseTimeline({
@@ -108,10 +113,12 @@ export function ExerciseTimeline({
   totalCounts = 16,
   phraseLength = DEFAULT_PHRASE_LENGTH,
   phraseBreaks,
+  unitsPerCount = DEFAULT_UNITS_PER_COUNT,
 }: ExerciseTimelineProps) {
-  const totalUnits = PICKUP_UNITS + totalCounts * 2
+  const pickupUnits = unitsPerCount
+  const totalUnits = pickupUnits + totalCounts * unitsPerCount
   const gridHeight = totalUnits * UNIT_PX
-  const breaks = phraseBreaks ?? defaultPhraseBreaks(totalUnits, phraseLength)
+  const breaks = phraseBreaks ?? defaultPhraseBreaks(totalUnits, phraseLength, unitsPerCount)
 
   const legColRef = useRef<HTMLDivElement>(null)
   const armColRef = useRef<HTMLDivElement>(null)
@@ -190,7 +197,7 @@ export function ExerciseTimeline({
           (o) => newStart < o.startCount + o.durationCount && newStart + b.durationCount > o.startCount
         )
         if (overlaps) return null
-        clones.push({ ...b, id: crypto.randomUUID(), startCount: newStart, isPickup: isPickupRange(newStart, b.durationCount) })
+        clones.push({ ...b, id: crypto.randomUUID(), startCount: newStart, isPickup: isPickupRange(newStart, b.durationCount, pickupUnits) })
       }
       return clones
     }
@@ -321,7 +328,7 @@ export function ExerciseTimeline({
     }
     if (finalStart === drag.originalStart) return
     updateTrack(track, (blocks) =>
-      blocks.map((b) => (b.id === block.id ? { ...b, startCount: finalStart, isPickup: isPickupRange(finalStart, b.durationCount) } : b))
+      blocks.map((b) => (b.id === block.id ? { ...b, startCount: finalStart, isPickup: isPickupRange(finalStart, b.durationCount, pickupUnits) } : b))
     )
   }
 
@@ -367,7 +374,7 @@ export function ExerciseTimeline({
     setDrag(null)
     if (start === drag.originalStart && duration === drag.originalDuration) return
     updateTrack(track, (blocks) =>
-      blocks.map((b) => (b.id === block.id ? { ...b, startCount: start, durationCount: duration, isPickup: isPickupRange(start, duration) } : b))
+      blocks.map((b) => (b.id === block.id ? { ...b, startCount: start, durationCount: duration, isPickup: isPickupRange(start, duration, pickupUnits) } : b))
     )
   }
 
@@ -388,7 +395,7 @@ export function ExerciseTimeline({
           startCount: pending.startCount,
           durationCount: pending.durationCount,
           term,
-          isPickup: isPickupRange(pending.startCount, pending.durationCount),
+          isPickup: isPickupRange(pending.startCount, pending.durationCount, pickupUnits),
         },
       ])
     } else {
@@ -604,7 +611,7 @@ export function ExerciseTimeline({
           <div className="relative" style={{ height: gridHeight }}>
             {breaks.map((b, i) => i > 0 && <div key={b} className="absolute inset-x-0 h-0.5 bg-foreground/30" style={{ top: b * UNIT_PX }} />)}
             {Array.from({ length: totalUnits }).map((_, u) => {
-              const label = unitLabel(u, breaks)
+              const label = unitLabel(u, breaks, unitsPerCount)
               if (label === null) return null
               const isPhraseStart = label === '1'
               return (
