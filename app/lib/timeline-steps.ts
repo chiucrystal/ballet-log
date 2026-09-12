@@ -20,23 +20,30 @@ function fullUnitLabel(u: number, breaks: number[], unitsPerCount: number): stri
 }
 
 /**
- * A block that ends on a count's last subdivision (the "&" in a simple meter, or the "a" in 6/8)
- * has danced through the whole count — so the end of its range is just that count's number, not
- * "N&"/"Na". The subdivision is only shown when the block genuinely stops partway through a count.
+ * The label for the END of a range. A block that ends on a count's last subdivision (the "&" in a
+ * simple meter, or the "a" in 6/8) has danced through the whole count — so it's just that count's
+ * number, not "N&"/"Na". The subdivision is only shown when the block genuinely stops partway
+ * through a count. Assumes endU falls at or after breaks[0] (i.e. not in the pickup lead-in).
  */
+function endUnitLabel(endU: number, breaks: number[], unitsPerCount: number): string {
+  const endOffset = endU - phraseStartFor(endU, breaks)
+  const endsOnLastSubdivision = endOffset % unitsPerCount === unitsPerCount - 1
+  return endsOnLastSubdivision ? String(Math.floor(endOffset / unitsPerCount) + 1) : fullUnitLabel(endU, breaks, unitsPerCount)
+}
+
 function blockCountLabel(block: TimelineBlock, breaks: number[], unitsPerCount: number): string {
   if (block.isPickup) return 'pickup'
   const startU = block.startCount
   const endU = block.startCount + block.durationCount - 1
+
+  // Starts in the pickup lead-in (before breaks[0]) but runs past it — phraseStartFor/fullUnitLabel
+  // aren't meaningful back there, so name the start "pickup" instead of computing a bogus count.
+  if (startU < breaks[0]) return `pickup-${endUnitLabel(endU, breaks, unitsPerCount)}`
+
   const startLabel = fullUnitLabel(startU, breaks, unitsPerCount)
   if (startU === endU) return startLabel
 
-  const endOffset = endU - phraseStartFor(endU, breaks)
-  const endsOnLastSubdivision = endOffset % unitsPerCount === unitsPerCount - 1
-  const endLabel = endsOnLastSubdivision
-    ? String(Math.floor(endOffset / unitsPerCount) + 1)
-    : fullUnitLabel(endU, breaks, unitsPerCount)
-
+  const endLabel = endUnitLabel(endU, breaks, unitsPerCount)
   return startLabel === endLabel ? startLabel : `${startLabel}-${endLabel}`
 }
 
